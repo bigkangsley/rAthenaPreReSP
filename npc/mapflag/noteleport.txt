@@ -26,13 +26,13 @@ ayo_in02	mapflag	noteleport
 alb_ship	mapflag	noteleport
 alberta_in	mapflag	noteleport
 aldeba_in	mapflag	noteleport
-ama_dun01	mapflag	noteleport
+//ama_dun01	mapflag	noteleport
 ama_in01	mapflag	noteleport
 ama_in02	mapflag	noteleport
 ama_test	mapflag	noteleport
 cmd_in01	mapflag	noteleport
 cmd_in02	mapflag	noteleport
-gef_dun03	mapflag	noteleport
+//gef_dun03	mapflag	noteleport
 gef_tower	mapflag	noteleport
 geffen_in	mapflag	noteleport
 gon_test	mapflag	noteleport

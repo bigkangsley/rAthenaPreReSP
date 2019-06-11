@@ -27,7 +27,7 @@
 520,Leaflet_Of_Hinal,Hinalle Leaflet,0,150,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(175,235),0; },{},{}
 521,Leaflet_Of_Aloe,Aloe Leaflet,0,360,,20,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(325,405),0; },{},{}
 522,Fruit_Of_Mastela,Mastela Fruit,0,8500,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(400,600),0; },{},{}
-523,Holy_Water,Holy Water,0,20,,30,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Curse; },{},{}
+523,Holy_Water,Holy Water,0,20,,3,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Curse; },{},{}
 525,Panacea,Panacea,0,500,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ sc_end SC_Poison; sc_end SC_Silence; sc_end SC_Blind; sc_end SC_Confusion; sc_end SC_Curse; sc_end SC_Hallucination; },{},{}
 526,Royal_Jelly,Royal Jelly,0,7000,,150,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(325,405),rand(40,60); sc_end SC_Poison; sc_end SC_Silence; sc_end SC_Blind; sc_end SC_Confusion; sc_end SC_Curse; sc_end SC_Hallucination; },{},{}
 528,Monster's_Feed,Monster's Feed,0,60,,150,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(72,108),0; },{},{}
@@ -104,8 +104,8 @@
 599,Light_Orange_Pot,Light Orange Potion,0,200,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ itemheal rand(105,145),0; },{},{}
 // Usable Items
 //===================================================================
-601,Wing_Of_Fly,Fly Wing,11,60,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "AL_TELEPORT",1; },{},{}
-602,Wing_Of_Butterfly,Butterfly Wing,11,300,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "AL_TELEPORT",3; },{},{}
+601,Wing_Of_Fly,Fly Wing,11,60,,5,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "AL_TELEPORT",1; },{},{}
+602,Wing_Of_Butterfly,Butterfly Wing,11,300,,5,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "AL_TELEPORT",3; },{},{}
 603,Old_Blue_Box,Old Blue Box,2,10000,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ getrandgroupitem(IG_BlueBox),1; },{},{}
 604,Branch_Of_Dead_Tree,Dead Branch,2,50,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ monster "this",-1,-1,"--ja--",-1,1,""; },{},{}
 605,Anodyne,Anodyne,11,2000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "SM_ENDURE",1; },{},{}
@@ -114,7 +114,7 @@
 608,Seed_Of_Yggdrasil,Yggdrasil Seed,0,5000,,300,,,,,0xFFFFFFFF,7,2,,,,,,{ percentheal 50,50; },{},{}
 609,Amulet,Amulet,2,100,,100,,,,,0xFFFFFFFF,7,2,,,,,,{},{},{}
 610,Leaf_Of_Yggdrasil,Yggdrasil Leaf,11,4000,,100,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "ALL_RESURRECTION",1; },{},{}
-611,Spectacles,Magnifier,11,40,,50,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "MC_IDENTIFY",1; },{},{}
+611,Spectacles,Magnifier,11,40,,5,,,,,0xFFFFFFFF,7,2,,,,,,{ itemskill "MC_IDENTIFY",1; },{},{}
 612,Portable_Furnace,Mini Furnace,2,150,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ produce 21; },{},{}
 613,Iron_Hammer,Iron Hammer,2,1000,,200,,,,,0xFFFFFFFF,7,2,,,,,,{ produce 1; },{},{}
 614,Golden_Hammer,Golden Hammer,2,3000,,300,,,,,0xFFFFFFFF,7,2,,,,,,{ produce 2; },{},{}

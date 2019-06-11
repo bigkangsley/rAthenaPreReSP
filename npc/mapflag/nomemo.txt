@@ -20,6 +20,7 @@
 //= 2.0 Renewal split. [Euphy]
 //============================================================
 
+/*
 // Towns  ====================
 ayo_in01	mapflag	nomemo
 ayo_in02	mapflag	nomemo
@@ -205,7 +206,7 @@ ve_fild03	mapflag	nomemo
 ve_fild04	mapflag	nomemo
 ve_fild06	mapflag	nomemo
 cave	mapflag	nomemo
-
+*/
 // Job Quests ================
 // First Job Class
 job_sword1	mapflag	nomemo
@@ -242,6 +243,7 @@ que_san04	mapflag	nomemo
 que_thor	mapflag	nomemo
 poring_c01	mapflag	nomemo
 poring_c02	mapflag	nomemo
+/*
 // Dungeons =================
 alde_dun01	mapflag	nomemo
 alde_dun02	mapflag	nomemo
@@ -439,6 +441,7 @@ nameless_n	mapflag	nomemo
 abbey01	mapflag	nomemo
 abbey02	mapflag	nomemo
 abbey03	mapflag	nomemo
+*/
 
 // Guild Castles =============
 //alde_gld	mapflag	nomemo
@@ -713,3 +716,4 @@ bossnia_04	mapflag	nomemo
 2012rwc_06	mapflag	nomemo
 2012rwc_07	mapflag	nomemo
 2012rwc_08	mapflag	nomemo
+

@@ -103,7 +103,7 @@ moc_fild03,200,263,5,5	monster	Green Plant	1080,2,180000,90000
 //==================================================
 // moc_fild07 - Sograt Desert
 //==================================================
-moc_fild07,0,0	monster	Drops	1113,70
+moc_fild07,0,0	monster	Drops	1113,210
 moc_fild07,0,0	monster	Peco Peco Egg	1047,50
 moc_fild07,0,0	monster	Picky	1050,30
 moc_fild07,0,0	monster	Picky	1049,30
@@ -141,7 +141,7 @@ moc_fild07,162,333,12,12	monster	Yellow Plant	1081,5,360000,180000
 // moc_fild10 - Sograt Desert
 //==================================================
 //moc_fild10,0,0	monster	Drops	1113,30
-//moc_fild10,0,0	monster	Peco Peco Egg	1047,70
+//moc_fild10,0,0	monster	Peco Peco Egg	1047,210
 //moc_fild10,0,0	monster	Picky	1049,50
 //moc_fild10,0,0	monster	Picky	1050,50
 //moc_fild10,0,0	monster	Magnolia	1138,1
@@ -220,7 +220,7 @@ moc_fild13,161,273,5,5	monster	Yellow Plant	1081,3,180000,90000
 //==================================================
 // moc_fild15 - Sograt Desert
 //==================================================
-//moc_fild15,0,0	monster	Hode	1127,30
+//moc_fild15,0,0	monster	Hode	1127,60
 //moc_fild15,0,0	monster	Scorpion	1001,10
 //moc_fild15,0,0	monster	Desert Wolf	1106,10
 //moc_fild15,0,0	monster	Magnolia	1138,25
@@ -243,7 +243,7 @@ moc_fild13,161,273,5,5	monster	Yellow Plant	1081,3,180000,90000
 //==================================================
 // moc_fild16 - Sograt Desert
 //==================================================
-moc_fild16,0,0	monster	Sandman	1165,70
+moc_fild16,0,0	monster	Sandman	1165,140
 moc_fild16,0,0	monster	Hode	1127,30
 moc_fild16,0,0	monster	Magnolia	1138,25
 moc_fild16,0,0	monster	Andre	1095,10
@@ -256,7 +256,7 @@ moc_fild16,0,0	monster	Ant Egg	1097,10
 moc_fild17,0,0	monster	Hode	1127,100
 moc_fild17,0,0	monster	Steel Chonchon	1042,30
 moc_fild17,0,0	monster	Magnolia	1138,15
-moc_fild17,0,0	monster	Frilldora	1119,25
+moc_fild17,0,0	monster	Frilldora	1119,75
 moc_fild17,0,0	monster	Ant Egg	1097,10
 moc_fild17,0,0	monster	Scorpion	1001,5
 moc_fild17,0,0,0,0	boss_monster	Phreeoni	1159,1,7200000,600000,1

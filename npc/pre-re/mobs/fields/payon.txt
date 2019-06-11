@@ -83,7 +83,7 @@ pay_fild05,86,90,5,5	monster	Green Plant	1080,4,900000,450000
 //==================================================
 // pay_fild06 - Payon Forest
 //==================================================
-pay_fild06,0,0	monster	Wormtail	1024,90
+pay_fild06,0,0	monster	Wormtail	1024,200
 pay_fild06,0,0	monster	Spore	1014,20
 pay_fild06,0,0	monster	Poporing	1031,20
 pay_fild06,0,0	monster	Thief Bug Female	1053,40
