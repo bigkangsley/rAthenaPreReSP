@@ -126,7 +126,7 @@ mjolnir_04,205,33	monster	Green Plant	1080,1,180000,90000
 mjolnir_05,0,0	monster	Mantis	1139,40
 mjolnir_05,0,0	monster	Poporing	1031,10
 mjolnir_05,0,0	monster	Flora	1118,20
-mjolnir_05,0,0	monster	Argiope	1099,70
+mjolnir_05,0,0	monster	Argiope	1099,100
 mjolnir_05,0,0	monster	Argos	1100,20
 mjolnir_05,200,240,40,40	monster	Blue Plant	1079,3,360000,180000
 mjolnir_05,200,240,40,40	monster	Shining Plant	1083,1,1800000,900000

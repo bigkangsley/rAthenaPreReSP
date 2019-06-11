@@ -11,7 +11,7 @@
 //= 1.2 Update for monster mode and enchants [Lemongrass]
 //============================================================
 
-prontera,155,177,5	script	Card Seller	100,{
+prontera,166,200,6	script	Card Seller	100,{
 	.@menu$ = getvariableofnpc( .alphabet_menu$, "card_seller_creation" );
 	if (.@menu$ == "") {
 		mes "[Card Seller]";

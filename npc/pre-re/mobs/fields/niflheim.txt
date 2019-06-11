@@ -53,6 +53,7 @@ niflheim,0,0	monster	Gibbet	1503,10,1200000,600000
 niflheim,0,0	monster	Heirozoist	1510,10,1200000,600000
 niflheim,0,0	monster	Quve	1508,20,300000,150000
 niflheim,0,0	monster	Lude	1509,20,300000,150000
+niflheim,0,0,0,0	boss_monster	Lord Of Death	1373,1,3600000,1800000,1
 
 niflheim,1,1,0	script	NifInvasion	-1,{
 OnInit:

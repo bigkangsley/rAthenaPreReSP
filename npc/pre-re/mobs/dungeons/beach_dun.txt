@@ -35,6 +35,6 @@ beach_dun2,0,0	monster	Hydra	1068,10
 // beach_dun3 - Mao, the East Cave
 //==================================================
 beach_dun3,0,0	monster	Nereid	1255,1,200000,100000
-beach_dun3,0,0	monster	Thara Frog	1034,50
+beach_dun3,0,0	monster	Thara Frog	1034,150
 beach_dun3,0,0	monster	Hydra	1068,30
 beach_dun3,0,0	monster	Megalodon	1064,30
