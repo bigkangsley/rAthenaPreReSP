@@ -44,9 +44,9 @@ gld_dun03,0,0,0,0	boss_monster	Maya	1147,1,28800000,600000,1
 //==================================================
 // gld_dun04 - Britoniah Guild Dungeon
 //==================================================
-gld_dun04,0,0	monster	Wraith Dead	1291,20
+gld_dun04,0,0	monster	Wraith Dead	1291,40
 gld_dun04,0,0	monster	Mini Demon	1292,20
-gld_dun04,0,0	monster	Zombie Master	1298,20
+gld_dun04,0,0	monster	Zombie Master	1298,40
 gld_dun04,0,0	monster	Dark Illusion	1302,1,1200000
 gld_dun04,0,0,0,0	boss_monster	Dark Lord	1272,1,28800000,600000,1
 gld_dun04,0,0	monster	Ghostring	1120,1,14400000,7200000

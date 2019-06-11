@@ -14,7 +14,7 @@
 //==================================================
 // cmd_fild01 - Papuchicha Forest
 //==================================================
-cmd_fild01,0,0	monster	Alligator	1271,60
+cmd_fild01,0,0	monster	Alligator	1271,80
 cmd_fild01,0,0	monster	Savage	1166,30
 cmd_fild01,0,0	monster	Poporing	1031,30
 cmd_fild01,0,0	monster	Poison Spore	1077,20
@@ -39,7 +39,7 @@ cmd_fild02,279,78,100,20	monster	Cornutus	1067,10,60000
 cmd_fild02,0,0	monster	Shellfish	1074,35
 cmd_fild02,93,82,40,80	monster	Shellfish	1074,5,180000
 cmd_fild02,0,0	monster	Mobster	1313,1
-cmd_fild02,200,130,150,40	monster	Seal	1317,18
+cmd_fild02,200,130,150,40	monster	Seal	1317,40
 cmd_fild02,93,82,40,80	monster	Seal	1317,2,180000
 cmd_fild02,0,0	monster	Galapago	1391,20
 
@@ -49,7 +49,7 @@ cmd_fild02,0,0	monster	Galapago	1391,20
 cmd_fild03,0,0	monster	Mutant Dragonoid	1262,1
 cmd_fild03,0,0	monster	Pest	1256,30
 cmd_fild03,0,0	monster	Poporing	1031,10
-cmd_fild03,0,0	monster	Anolian	1206,90
+cmd_fild03,0,0	monster	Anolian	1206,180
 cmd_fild03,0,0	monster	Toad	1089,1,3600000,1800000
 cmd_fild03,356,232,3,3	monster	Shining Plant	1083,1,1800000,900000
 cmd_fild03,262,289,3,3	monster	Shining Plant	1083,1,1800000,900000
@@ -63,7 +63,7 @@ cmd_fild04,0,0	monster	Alligator	1271,40
 cmd_fild04,0,0	monster	Crab	1073,20
 cmd_fild04,0,0	monster	Raggler	1254,20
 cmd_fild04,0,0	monster	Shellfish	1074,20
-cmd_fild04,221,120,120,40	monster	Sea Otter	1323,20
+cmd_fild04,221,120,120,40	monster	Sea Otter	1323,60
 
 //==================================================
 // cmd_fild05 - Border of Papuchica Forest
@@ -81,8 +81,7 @@ cmd_fild05,0,0	monster	Green Plant	1080,5,1800000,900000
 //==================================================
 // cmd_fild06 - Fortress Saint Darmain (West)
 //==================================================
-cmd_fild06,0,0	monster	Kobold Archer	1282,5
-cmd_fild06,0,0	monster	Kobold Archer	1282,5,300000
+cmd_fild06,0,0	monster	Kobold Archer	1282,20
 cmd_fild06,357,299,80,70	monster	Kobold Archer	1282,2
 cmd_fild06,357,299,80,70	monster	Kobold Archer	1282,2,120000
 cmd_fild06,318,146,120,80	monster	Kobold Archer	1282,4
@@ -92,8 +91,7 @@ cmd_fild06,290,164	monster	Kobold Archer	1282,1,190000
 cmd_fild06,284,197	monster	Kobold Archer	1282,1,180000
 cmd_fild06,286,289	monster	Kobold Archer	1282,1,180000
 cmd_fild06,314,267	monster	Kobold Archer	1282,1,180000
-cmd_fild06,0,0	monster	Goblin Archer	1258,10
-cmd_fild06,0,0	monster	Goblin Archer	1258,10,30000
+cmd_fild06,0,0	monster	Goblin Archer	1258,20
 cmd_fild06,355,294,80,70	monster	Goblin Archer	1258,3
 cmd_fild06,355,294,80,70	monster	Goblin Archer	1258,3,120000
 cmd_fild06,307,97,70,200	monster	Goblin Archer	1258,4

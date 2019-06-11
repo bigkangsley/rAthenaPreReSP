@@ -14,8 +14,8 @@
 //==================================================
 // gon_dun01 - Shrine of Gonryun Queen
 //==================================================
-gon_dun01,0,0	monster	Bloody Butterfly	1408,55,650000,350000
-gon_dun01,0,0	monster	Enchanted Peach Tree	1410,35
+gon_dun01,0,0	monster	Bloody Butterfly	1408,35,650000,350000
+gon_dun01,0,0	monster	Enchanted Peach Tree	1410,60
 gon_dun01,0,0	monster	Zipper Bear	1417,30
 gon_dun01,0,0	monster	Red Plant	1078,5
 gon_dun01,0,0	monster	Yellow Plant	1081,10
@@ -31,7 +31,7 @@ gon_dun02,33,115,10,15	monster	Enchanted Peach Tree	1410,1,300000,150000
 gon_dun02,33,115,10,15	monster	Baby Leopard	1415,2,600000,300000
 gon_dun02,0,0	monster	Taoist Hermit	1412,20,690000,390000
 gon_dun02,0,0	monster	Bloody Butterfly	1408,20
-gon_dun02,0,0	monster	Enchanted Peach Tree	1410,15
+gon_dun02,0,0	monster	Enchanted Peach Tree	1410,30
 gon_dun02,0,0	monster	Yellow Plant	1081,10
 
 //==================================================
