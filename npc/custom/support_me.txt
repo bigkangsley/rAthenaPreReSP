@@ -1,0 +1,25 @@
+prontera,149,184,5	script	Helper	811,{
+
+mes "If you want to run the server and everyone connect to it";
+
+mes "In order for others to join you, you need to rent a server.";
+mes "If you are a beginner, the easiest thing to do is to rent a VPS on Windows 10 Server.";
+next;
+mes "To do this, click on the link and buy a server.";
+mes "You will receive bonus money ($50) if you register below.";
+next;
+mes " ";
+mes "<URL>Buy VPS (50$ bonus)<INFO>https://www.vultr.com/?ref=6802803</INFO></URL>";
+next;
+mes "Short guide how to do it here: ";
+mes "<URL>Read easy Complete Guide!<INFO>https://gist.github.com/anacondaq/3eae8e4afb5d3c3880d08b95b2c54b78</INFO></URL>";
+mes "Is not it easy?";
+next;
+mes "If you need any help, ask for help here: ";
+mes "<URL>Get Support on rAthena Board<INFO>https://rathena.org/board/topic/109823-ragnarok-online-complete-offline-server-client-pack-2019-make-your-ro-server-in-less-than-5-minutes/</INFO></URL>";
+next;
+mes "If you want make a small donation, you can easy to do it by the link below:";
+mes "<URL>Make Donation to Anacondaqq<INFO>https://www.nfoservers.com/donate.pl?force_recipient=1&recipient=anacondaqqq%40gmail.com</INFO></URL>";
+close;
+
+}
