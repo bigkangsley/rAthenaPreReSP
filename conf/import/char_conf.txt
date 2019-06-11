@@ -1,0 +1,94 @@
+// Server Communication username and password.
+userid: s1changemeplease
+passwd: s2changemeplease
+
+// Server name, use alternative character such as ASCII 160 for spaces.
+// NOTE: Do not use spaces or any of these characters which are not allowed in
+//       Windows filenames \/:*?"<>|
+//       ... or else guild emblems won't work client-side!
+server_name: rAthena_RENEWAL_2018
+
+// Login Server IP
+// The character server connects to the login server using this IP address.
+// NOTE: This is useful when you are running behind a firewall or are on
+// a machine with multiple interfaces.
+login_ip: 127.0.0.1
+
+// The character server listens on the interface with this IP address.
+// NOTE: This allows you to run multiple servers on multiple interfaces
+// while using the same ports for each server.
+//bind_ip: 127.0.0.1
+
+// Login Server Port
+login_port: 6900
+
+// Character Server IP
+// The IP address which clients will use to connect.
+// Set this to what your server's public IP address is.
+char_ip: 0.0.0.0
+
+// Character Server Port
+char_port: 6121
+
+//Makes server output more silent by ommitting certain types of messages:
+//1: Hide Information messages
+//2: Hide Status messages
+//4: Hide Notice Messages
+//8: Hide Warning Messages
+//16: Hide Error and SQL Error messages.
+//32: Hide Debug Messages
+//Example: "console_silent: 7" Hides information, status and notice messages (1+2+4)
+console_silent: 0
+
+// Enable or disable creation of new characters.
+// Now it is actually supported [Kevin]
+char_new: 1
+
+// Starting point for new characters
+// Format: <map_name>,<x>,<y>{:<map_name>,<x>,<y>...}
+// Max number of start points is MAX_STARTPOINT in char.h (default 5)
+// Location is randomly picked on character creation.
+// NOTE: For Doram, this requires client 20151001 or newer.
+start_point: iz_int,18,26:iz_int01,18,26:iz_int02,18,26:iz_int03,18,26:iz_int04,18,26
+start_point_pre: new_1-1,53,111:new_2-1,53,111:new_3-1,53,111:new_4-1,53,111:new_5-1,53,111
+start_point_doram: lasa_fild01,48,297
+
+// Starting items for new characters
+// Max number of items is MAX_STARTITEM in char.c (default 32)
+// Format: <id>,<amount>,<position>{:<id>,<amount>,<position>...}
+// To auto-equip an item, include the position where it will be equipped; otherwise, use zero.
+// NOTE: For Doram, this requires client 20151001 or newer.
+start_items: 1201,1,2:2301,1,16
+start_items_doram: 1681,1,2:2301,1,16
+
+// Starting zeny for new characters
+start_zeny: 0
+
+// Restrict character deletion by BaseLevel
+// 0: no restriction (players can delete characters of any level)
+// -X: you can't delete chars with BaseLevel <= X
+// Y: you can't delete chars with BaseLevel >= Y
+// e.g. char_del_level: 80 (players can't delete characters with 80+ BaseLevel)
+char_del_level: 0
+
+// Amount of time in seconds by which the character deletion is delayed.
+// Default: 86400 (24 hours)
+// NOTE: Requires client 2010-08-03aragexeRE or newer.
+char_del_delay: 0
+
+// Restrict character deletion by email address or birthdate.
+// This restricts players from changing the langtype and deleting characters.
+// Defaults based on client date.
+// 1: Email address
+// 2: Birthdate
+// 3: Email address or Birthdate
+// IMPORTANT!
+// - This config only works for clients that send 0x0068 or 0x01fb for delete request.
+// - Use langtype 1 for newer clients (2013+), to use 0x01fb.
+// - Clients that are not using 0x0068 or 0x01fb, only use birthdate (YYMMDD) as default.
+char_del_option: 1
+
+// NOTE: Requires client 2011-03-09aragexeRE or newer.
+// A window is opened before you can select your character and you will have to enter a pincode by using only your mouse.
+// Default: yes
+pincode_enabled: no
