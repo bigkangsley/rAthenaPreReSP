@@ -15,6 +15,18 @@
 
 -	script	Healer	-1,{
 
+	if (Hp == MaxHp && Sp == MaxSp)
+			end; 
+
+	if (Zeny < 1000) {
+	message strcharinfo(0), "Healing costs 1000 Zeny.";
+			end; }
+	specialeffect2 EF_HEAL2;
+	percentheal 100,100;
+	message strcharinfo(0), "Healing costs 1000 Zeny.";
+	Zeny -= 1000;
+
+	/*
 	.@Price = 0;	// Zeny required for heal
 	.@Buffs = 0;	// Also buff players? (1: yes / 0: no)
 	.@Delay = 0;	// Heal delay, in seconds
@@ -40,6 +52,7 @@
 	if (.@Delay)
 		@HD = gettimetick(2) + .@Delay;
 	end;
+	*/
 }
 
 

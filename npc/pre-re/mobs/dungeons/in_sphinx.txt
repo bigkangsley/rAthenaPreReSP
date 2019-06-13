@@ -18,16 +18,16 @@
 //==================================================
 in_sphinx1,0,0	monster	Drainliar	1111,40
 in_sphinx1,0,0	monster	Requiem	1164,20
-in_sphinx1,0,0	monster	Zerom	1178,65
+in_sphinx1,0,0	monster	Zerom	1178,120
 in_sphinx1,0,0	monster	Matyr	1146,10
 
 //==================================================
 // In_sphinx2 - Sphinx F2
 //==================================================
 in_sphinx2,0,0	monster	Drainliar	1111,15
-in_sphinx2,0,0	monster	Requiem	1164,50
+in_sphinx2,0,0	monster	Requiem	1164,60
 in_sphinx2,0,0	monster	Zerom	1178,40
-in_sphinx2,0,0	monster	Matyr	1146,50
+in_sphinx2,0,0	monster	Matyr	1146,60
 
 //==================================================
 // In_sphinx3 - Sphinx F3

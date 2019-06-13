@@ -186,13 +186,13 @@ gef_fild10,300,253,5,5	monster	Green Plant	1080,3,360000,180000
 //==================================================
 // gef_fild11 - Geffen Field
 //==================================================
-gef_fild11,0,0	monster	Goblin Leader	1299,1,1800000,1200000
-gef_fild11,0,0	monster	Goblin	1122,30
-gef_fild11,0,0	monster	Goblin	1123,20
-gef_fild11,0,0	monster	Goblin	1124,20
-gef_fild11,0,0	monster	Goblin	1125,20
-gef_fild11,0,0	monster	Goblin	1126,20
-gef_fild11,0,0	monster	Goblin Archer	1258,20
+gef_fild11,0,0	monster	Goblin Leader	1299,1,180000,120000
+gef_fild11,0,0	monster	Goblin	1122,35
+gef_fild11,0,0	monster	Goblin	1123,25
+gef_fild11,0,0	monster	Goblin	1124,25
+gef_fild11,0,0	monster	Goblin	1125,25
+gef_fild11,0,0	monster	Goblin	1126,25
+gef_fild11,0,0	monster	Goblin Archer	1258,25
 gef_fild11,0,0	monster	Poporing	1031,15
 gef_fild11,0,0	monster	Rotar Zairo	1392,10
 gef_fild11,101,277,4,1	monster	Black Mushroom	1084,3,360000,180000
@@ -206,12 +206,12 @@ gef_fild11,283,100,4,1	monster	Black Mushroom	1084,3,360000,180000
 //==================================================
 // gef_fild12 - Kordt Forest
 //==================================================
-gef_fild12,0,0	monster	Kobold	1133,20
-gef_fild12,0,0	monster	Kobold	1134,30
-gef_fild12,0,0	monster	Kobold	1135,30
-gef_fild12,0,0	monster	Kobold Archer	1282,40
+gef_fild12,0,0	monster	Kobold	1133,25
+gef_fild12,0,0	monster	Kobold	1134,35
+gef_fild12,0,0	monster	Kobold	1135,35
+gef_fild12,0,0	monster	Kobold Archer	1282,45
 gef_fild12,0,0	monster	Poporing	1031,20
-gef_fild12,0,0	monster	Kobold Leader	1296,1,1800000,1200000
+gef_fild12,0,0	monster	Kobold Leader	1296,1,180000,120000
 
 //==================================================
 // gef_fild13 - Britoniah
