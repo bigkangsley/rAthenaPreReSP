@@ -77,16 +77,17 @@ function	script	Q_Warpra	{
 	if(getarg(0) == 0) callfunc "QWS_MMarray",0;
 	if(getarg(0) == 1) callfunc "QWS_MMarray",1;
 	
-	set @MMenu,select(@Mmenulist$[0],@Mmenulist$[1],@Mmenulist$[2],@Mmenulist$[3],@Mmenulist$[4],@Mmenulist$[5],@Mmenulist$[6],@Mmenulist$[7]);
+	set @MMenu,select(@Mmenulist$[0],@Mmenulist$[1],@Mmenulist$[2],@Mmenulist$[3],@Mmenulist$[4],@Mmenulist$[5],@Mmenulist$[6],@Mmenulist$[7],@Mmenulist$[8]);
 
 	switch(@Mmenuref[@MMenu-1]+1){
 	case 1: goto Last_Warp;
 	case 2: goto L_town;
 	case 3: goto L_field;
-	case 4: goto L_dungeon;
-	case 5: goto L_FewWarps;
-	case 6: goto GM_Menu;
-	case 7:
+	case 4: goto L_citydungeon;
+	case 5: goto L_dungeon;
+	case 6: goto L_FewWarps;
+	case 7: goto GM_Menu;
+	case 8:
 	default:
 		goto L_end;
 	}
@@ -97,20 +98,25 @@ GM_Menu:
 	next;
 	mes "Town warping = "+(($QW_TW_OFF)?"^FF0000 Off":"^00FF00 On")+"^000000";
 	mes "Field warping = "+(($QW_FW_OFF)?"^FF0000 Off":"^00FF00 On")+"^000000";
+	mes "City Dungeon warping = "+(($QW_DW_OFF)?"^FF0000 Off":"^00FF00 On")+"^000000";
 	mes "Dungeon warping = "+(($QW_DW_OFF)?"^FF0000 Off":"^00FF00 On")+"^000000";
 	mes "Field Depth limit is "+(($QW_FL)?"^00FF00 On":"^FF0000 Off")+"^000000";
 	mes "If on Field Depth limit is set to ^0000FF"+$QW_FDL+"^000000";
+	mes "City Dungeon Depth limit is "+(($QW_CDL)?"^00FF00 On":"^FF0000 Off")+"^000000";
+	mes "If on City Dungeon Depth limit is set to ^0000FF"+$QW_CDDL+"^000000";
 	mes "Dungeon Depth limit is "+(($QW_DL)?"^00FF00 On":"^FF0000 Off")+"^000000";
 	mes "If on Dungeon Depth limit is set to ^0000FF"+$QW_DDL+"^000000";
 	mes "Show Map Users = "+(($QW_MapUserShow)?"^00FF00 On":"^FF0000 Off")+"^000000";
 
-	switch(select("Town Warping","Field Warping","Dungeon Warping","Field Level Limit","Dungeon Level Limit","Show Map Users","Exit")) {
+	switch(select("Town Warping","Field Warping","City Dungeon Warping","Dungeon Warping","Field Level Limit","Dungeon Level Limit","Show Map Users","Exit")) {
 	case 1: set $QW_TW_OFF,($QW_TW_OFF)?0:1; goto GM_Menu;
 	case 2: set $QW_FW_OFF,($QW_FW_OFF)?0:1; goto GM_Menu;
-	case 3: set $QW_DW_OFF,($QW_DW_OFF)?0:1; goto GM_Menu;
-	case 4: goto FieldLevelLimit;
-	case 5: goto DungeonLevelLimit;
-	case 6: set $QW_MapUserShow,($QW_MapUserShow)?0:1; goto GM_Menu;
+	case 3: set $QW_CDW_OFF,($QW_CDW_OFF)?0:1; goto GM_Menu;
+	case 4: set $QW_DW_OFF,($QW_DW_OFF)?0:1; goto GM_Menu;
+	case 5: goto FieldLevelLimit;
+	case 6: goto CityDungeonLevelLimit;
+	case 7: goto DungeonLevelLimit;
+	case 8: set $QW_MapUserShow,($QW_MapUserShow)?0:1; goto GM_Menu;
 	default:
 		close;
 		end;
@@ -141,7 +147,7 @@ L_town:
 	if (@Tmenuref[@TWMenu-1] == 57005) goto L_end; // 57005='dead' in hex
 
 	set @warpprice, 1000;
-	if(Zeny<@warpprice) callsub L_Short_on_zeny,1;
+	if(Zeny<@warpprice) callsub L_Short_on_zeny,0;
 	set Zeny, Zeny-(@warpprice);
 
 	set lastwarp$, @pTmap$[@Tmenuref[@TWMenu-1]];
@@ -182,7 +188,7 @@ L_field:
 	set @Farrayref, @FWLmenuref[@FWLMenu-1];
 
 	set @warpprice, 1000;
-	if(Zeny<@warpprice) callsub L_Short_on_zeny,2;
+	if(Zeny<@warpprice) callsub L_Short_on_zeny,1;
 	set Zeny, Zeny-(@warpprice);
 
 	set lastwarp$, @FGat$[@Farrayref];
@@ -193,13 +199,54 @@ L_field:
 	close2;
 	end;
 
+//=========================City Dungeons================================
+
+L_citydungeon:
+	callfunc "QWS_CDarray";
+	freeloop(1);
+	set .@menu$,"";
+	for(set .@i,0; .@i<30; set .@i,.@i+1)	// Expected maximum is 30
+		set .@menu$,.@menu$+@CDmenulist$[.@i]+":";
+	freeloop(0);
+	set @CDWMenu,select(.@menu$);
+
+	if (@CDmenuref[@CDWMenu-1] == 57005) goto L_end; // 57005='dead' in hex
+	set @CDwarpMenu, (@CDmenuref[@CDWMenu-1]);
+	callfunc "QWS_CDLarray";
+
+	next;
+	mes "[Warpra]";
+	mes "Please select where you want to go:";
+	freeloop(1);
+	set .@menu$,"";
+	for(set .@i,0; .@i<20; set .@i,.@i+1)	// Expected maximum is 18
+		set .@menu$,.@menu$+@CDWLmenulist$[.@i]+":";
+	freeloop(0);
+	set @CDWLMenu,select(.@menu$);
+
+	if (@CDWLmenuref[@CDWLMenu-1] == 57005) goto L_end; // 57005='dead' in hex
+
+	set @CDarrayref, @CDWLmenuref[@CDWLMenu-1];
+	
+	set @warpprice, 1000;
+	if(Zeny<@warpprice) callsub L_Short_on_zeny,2;
+	set Zeny, Zeny-(@warpprice);
+
+	set lastwarp$, @CDGat$[@CDarrayref];
+	set lastwarpx, @CDXcoords[@CDarrayref];
+	set lastwarpy, @CDYcoords[@CDarrayref];
+	warp @CDGat$[@CDarrayref],@CDXcoords[@CDarrayref],@CDYcoords[@CDarrayref];
+
+	close2;
+	end;
+
 //=========================Dungeons================================
 
 L_dungeon:
 	callfunc "QWS_Darray";
 	freeloop(1);
 	set .@menu$,"";
-	for(set .@i,0; .@i<39; set .@i,.@i+1)	// Expected maximum is 35
+	for(set .@i,0; .@i<30; set .@i,.@i+1)	// Expected maximum is 30
 		set .@menu$,.@menu$+@Dmenulist$[.@i]+":";
 	freeloop(0);
 	set @DWMenu,select(.@menu$);
@@ -223,7 +270,7 @@ L_dungeon:
 	set @Darrayref, @DWLmenuref[@DWLMenu-1];
 	
 	set @warpprice, 1000;
-	if(Zeny<@warpprice) callsub L_Short_on_zeny,1;
+	if(Zeny<@warpprice) callsub L_Short_on_zeny,3;
 	set Zeny, Zeny-(@warpprice);
 
 	set lastwarp$, @DGat$[@Darrayref];
@@ -233,7 +280,6 @@ L_dungeon:
 
 	close2;
 	end;
-
 
 
 //============================L_end=============================
@@ -259,8 +305,9 @@ L_Short_on_zeny:
 	next;
 	switch(getarg(0)) {
 	case 0: mes "You don't seem to have the zeny to pay for the warp to "+@pTmenuitems$[@Tmenuref[@TWMenu-1]]+"."; break;
-	case 1: mes "You don't seem to have the zeny to pay for the warp to "+@DLevelName$[@DWLmenuref[@DWLMenu-1]]+" at "+@pDmenuitems$[@Dmenuref[@DWMenu-1]]+"."; break;
-	case 2: mes "You don't seem to have the zeny to pay for the warp to "+@FLevelName$[@FWLmenuref[@FWLMenu-1]]+" at "+@pFmenuitems$[@Fmenuref[@FWMenu-1]]+"."; break;
+	case 1: mes "You don't seem to have the zeny to pay for the warp to "+@FLevelName$[@FWLmenuref[@FWLMenu-1]]+" at "+@pFmenuitems$[@Fmenuref[@FWMenu-1]]+"."; break;
+	case 2: mes "You don't seem to have the zeny to pay for the warp to "+@CDLevelName$[@CDWLmenuref[@CDWLMenu-1]]+" at "+@pCDmenuitems$[@CDmenuref[@CDWMenu-1]]+"."; break;
+	case 3: mes "You don't seem to have the zeny to pay for the warp to "+@DLevelName$[@DWLmenuref[@DWLMenu-1]]+" at "+@pDmenuitems$[@Dmenuref[@DWMenu-1]]+"."; break;
 	}
 	close;
 	end;
@@ -281,6 +328,12 @@ stampcard:
 	callfunc "QWS_FieldStamps";
 	mes "You collected^00FF00 "+@Fstamp+" of "+@MaxFstamp+" ^000000Fields.";
 	next;
+	mes "Let me check what city dungeons you have.";
+	callfunc "QWS_CityDungeonStamps";
+	mes "You collected^00FF00 "+@CDstamp+" of "+@MaxCDstamp+" ^000000CityDungeons.";
+	mes "To unlock a dungeon, search for my colleagues.";
+	mes "You can usually find them near the middle or end of the dungeon.";
+	next;
 	mes "Let me check what dungeons you have.";
 	callfunc "QWS_DungeonStamps";
 	mes "You collected^00FF00 "+@Dstamp+" of "+@MaxDstamp+" ^000000Dungeons.";
@@ -291,7 +344,7 @@ stampcard:
 
 function	script	QWS_TownStamps	{
 	set @Tstamp,0;
-	set @MaxTstamp,28; //maximum number of towns
+	set @MaxTstamp,30; //maximum number of towns
 	set @binvalue,1;
 	set @Tstamploop,0;
 	do {
@@ -304,7 +357,7 @@ function	script	QWS_TownStamps	{
 
 function	script	QWS_FieldStamps	{
 	set @Fstamp,0;
-	set @MaxFstamp,22; //maximum number of fields
+	set @MaxFstamp,30; //maximum number of fields
 	set @binvalue,1;
 	set @Fstamploop,0;
 	do {
@@ -315,9 +368,22 @@ function	script	QWS_FieldStamps	{
 	return;
 }
 
+function	script	QWS_CityDungeonStamps	{
+	set @CDstamp,0;
+	set @MaxCDstamp,30; //maximum number of dungeons
+	set @binvalue,1;
+	set @CDstamploop,0;
+	do {
+		if ((@binvalue & ##QWS_CD_Unlock) == @binvalue) set @CDstamp,@CDstamp+1;
+		set @binvalue, @binvalue *2;
+		set @CDstamploop, @CDstamploop + 1;
+	} while (@CDstamploop < @MaxCDstamp);
+	return;
+}
+
 function	script	QWS_DungeonStamps	{
 	set @Dstamp,0;
-	set @MaxDstamp,39; //maximum number of dungeons
+	set @MaxDstamp,30; //maximum number of dungeons
 	set @binvalue,1;
 	set @Dstamploop,0;
 	do {
@@ -332,8 +398,8 @@ function	script	QWS_DungeonStamps	{
 
 function	script	QWS_MMarray	{
 
-	// Currently 6 items
-	setarray @pMmenuitems$[0], "Last Warp", "Warp to Towns", "Warp to Fields","Warp to Dungeons", "Why so few warps?", "GameMaster Menu", "Cancel";
+	// Currently ... items
+	setarray @pMmenuitems$[0], "Last Warp", "Warp to Towns", "Warp to Fields","Warp to City Dungeons", "Warp to Dungeons", "Why so few warps?", "GameMaster Menu", "Cancel";
 	set @Mi,0; // loop counter
 	set @Mj,0; // menu line counter
 
@@ -351,6 +417,13 @@ function	script	QWS_MMarray	{
 	set @Mi,@Mi+1;
 //----------------Field-Warp
 	if ($QW_FW_OFF == 0) {
+		set @Mmenulist$[@Mj],@pMmenuitems$[@Mi];
+		set @Mmenuref[@Mj],@Mi;
+		set @Mj,@Mj+1;
+	}
+	set @Mi,@Mi+1;
+//----------------City Dungeon-Warp
+	if ($QW_CDW_OFF == 0) {
 		set @Mmenulist$[@Mj],@pMmenuitems$[@Mi];
 		set @Mmenuref[@Mj],@Mi;
 		set @Mj,@Mj+1;
@@ -1105,6 +1178,415 @@ function	script	QWS_FLarray	{
 }
 
 
+//====================City=Dungeon=Menu=Arrays==========================
+// Adding a dungeon:
+//	setarray @pCDmenuitems$[@CDi], "Abyss Lake";	// Name of Dungeon shown in Dungeon select Menu
+//	setarray @pCDprice[@CDi], 0;		// Warp prices: Basic (0), Advanced (0), Overseas (0)
+//	setarray @pCDfee$[@CDi], 0;		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
+//	setarray @CDLevels[@CDi], 3;			// Number of levels in dungeon
+//
+//	setarray @CDGat$[@CDref], "abyss_01", "abyss_02", "abyss_03";	// Map names of dungeon levels
+//	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3";	// Name of dungeon levels shown in Menu
+//	setarray @CDXcoords[@CDref], 265, 275, 116;			// X warp coords
+//	setarray @CDYcoords[@CDref], 273, 270, 27;			// Y warp coords
+//	setarray @CDDepth[@CDref], 0, 1, 2;				// Relative depth to entrance, to calculate extra warp fee
+//
+//	QWS_Make_CityDungeon_Menu 0;	// Use a free number (last used is 28, Kiel Dungeon)
+//
+// Adding a warpra:
+//	map,x,y,facing	script	Warpra Helper#example	112,{
+//		callfunc "QWS_CityDungeon_Warpra",<city dungeon number>,"Your City Dungeon";
+//		close;
+//	}
+//	City Dungeon number is the same as "QWS_Make_CityDungeon_Menu".
+//==================================================================
+
+function	script	QWS_CDarray	{
+	function QWS_Make_CityDungeon_Menu;
+
+	set @CDi,0;
+	set @CDj,0;
+	set @CDref,0;
+
+
+//----------------AMATSU DUNGEON
+	setarray @pCDmenuitems$[@CDi], "Amatsu Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "ama_dun01", "ama_dun02", "ama_dun03";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3";
+	setarray @CDXcoords[@CDref], 228, 34, 119;
+	setarray @CDYcoords[@CDref], 11, 41, 14;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 0;
+
+//----------------AYOTAYA
+	setarray @pCDmenuitems$[@CDi], "Ayothaya Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 2;
+
+	setarray @CDGat$[@CDref], "ayo_dun01", "ayo_dun02";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2";
+	setarray @CDXcoords[@CDref], 275, 24;
+	setarray @CDYcoords[@CDref], 19, 26;
+	setarray @CDDepth[@CDref], 0, 1;
+
+	QWS_Make_CityDungeon_Menu 1;
+	
+//----------------Baldur Guild Dungeon
+	setarray @pCDmenuitems$[@CDi], "Baldur Guild Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "gld_dun01", "gld_dun01_2", "gld2_pay";
+	setarray @CDLevelName$[@CDref], "Baldur", "Baldur", "Hall of Abyss";
+	setarray @CDXcoords[@CDref], 119, 119, 120;
+	setarray @CDYcoords[@CDref], 93, 93, 130;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 2;
+	
+//----------------Beach Dungeon
+	setarray @pCDmenuitems$[@CDi], "Beach Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "beach_dun", "beach_dun2", "beach_dun3";
+	setarray @CDLevelName$[@CDref], "Beach Dungeon 1", "Beach Dungeon 2", "Beach Dungeon 3";
+	setarray @CDXcoords[@CDref], 266, 255, 23;
+	setarray @CDYcoords[@CDref], 67, 244, 260;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 3;
+	
+//----------------Britoniah Guild Dungeon
+	setarray @pCDmenuitems$[@CDi], "Britoniah Guild Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "gld_dun04", "gld_dun04_2", "gld2_gef";
+	setarray @CDLevelName$[@CDref], "Britoniah", "Britoniah", "Hall of Abyss";
+	setarray @CDXcoords[@CDref], 116, 116, 152;
+	setarray @CDYcoords[@CDref], 45, 45, 118;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 4;
+
+//----------------BYALAN
+	setarray @pCDmenuitems$[@CDi], "Byalan Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 5;
+
+	setarray @CDGat$[@CDref], "iz_dun00", "iz_dun01", "iz_dun02", "iz_dun03", "iz_dun04";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4", "Level 5";
+	setarray @CDXcoords[@CDref], 168, 253, 236, 32, 26;
+	setarray @CDYcoords[@CDref], 168, 252, 204, 63, 27;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3, 4;
+
+	QWS_Make_CityDungeon_Menu 5;
+
+//----------------CLOCK TOWER
+	setarray @pCDmenuitems$[@CDi], "Clock Tower Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 8;
+
+	setarray @CDGat$[@CDref], "c_tower1", "c_tower2", "c_tower3", "c_tower4", "alde_dun01", "alde_dun02", "alde_dun03", "alde_dun04";
+	setarray @CDLevelName$[@CDref], "Clock Tower Level 1", "Clock Tower Level 2", "Clock Tower Level 3", "Clock Tower Level 4", "Basement 1F", "Basement 2F", "Basement 3F", "Basement 4F";
+	setarray @CDXcoords[@CDref], 199, 148, 65, 56, 297, 127, 277, 268;
+	setarray @CDYcoords[@CDref], 159, 283, 147, 155, 25, 169, 178, 74;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3, 1, 2, 3, 4;
+
+	QWS_Make_CityDungeon_Menu 6;
+
+
+//----------------CULVERT
+	setarray @pCDmenuitems$[@CDi], "Culvert Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 4;
+
+	setarray @CDGat$[@CDref], "prt_sewb1", "prt_sewb2", "prt_sewb3", "prt_sewb4";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4";
+	setarray @CDXcoords[@CDref], 131, 19, 180, 100;
+	setarray @CDYcoords[@CDref], 247, 19, 169, 92;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3;
+
+	QWS_Make_CityDungeon_Menu 7;
+	
+//----------------EINBECH DUNGEON
+	setarray @pCDmenuitems$[@CDi], "Einbech Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 2;
+
+	setarray @CDGat$[@CDref], "ein_dun01", "ein_dun02";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2";
+	setarray @CDXcoords[@CDref], 22, 292;
+	setarray @CDYcoords[@CDref], 14, 290;
+	setarray @CDDepth[@CDref], 0, 1;
+
+	QWS_Make_CityDungeon_Menu 8;
+
+
+//----------------GEFFEN DUNGEON
+	setarray @pCDmenuitems$[@CDi], "Geffen Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 4;
+
+	setarray @CDGat$[@CDref], "gef_dun00", "gef_dun01", "gef_dun02", "gef_dun03";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4";
+	setarray @CDXcoords[@CDref], 104, 115, 106, 203;
+	setarray @CDYcoords[@CDref], 99, 236, 132, 200;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3;
+
+	QWS_Make_CityDungeon_Menu 9;
+
+
+//----------------GONRYUN DUNGEON
+	setarray @pCDmenuitems$[@CDi], "Gonryun Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "gon_dun01", "gon_dun02", "gon_dun03";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3";
+	setarray @CDXcoords[@CDref], 153, 28, 68;
+	setarray @CDYcoords[@CDref], 53, 113, 16;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 10;
+
+
+//----------------LIGHTHALZEN BIO LAB
+	setarray @pCDmenuitems$[@CDi], "Lighthalzen Bio Lab";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 4;
+
+	setarray @CDGat$[@CDref], "lhz_dun01", "lhz_dun02", "lhz_dun03", "lhz_dun04";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4";
+	setarray @CDXcoords[@CDref], 150, 150, 140, 244;
+	setarray @CDYcoords[@CDref], 288, 18, 134, 52;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3;
+
+	QWS_Make_CityDungeon_Menu 11;
+
+//----------------LOUYANG DUNGEON
+	setarray @pCDmenuitems$[@CDi], "Louyang Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "lou_dun01", "lou_dun02", "lou_dun03";
+	setarray @CDLevelName$[@CDref], "Royal Tomb Level 1", "Royal Tomb Level 2", "Royal Tomb Level 3";
+	setarray @CDXcoords[@CDref], 218, 282, 165;
+	setarray @CDYcoords[@CDref], 196, 20, 38;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 12;
+	
+//----------------Luina Guild Dungeon
+	setarray @pCDmenuitems$[@CDi], "Luina Guild Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "gld_dun02", "gld_dun02_2", "gld2_ald";
+	setarray @CDLevelName$[@CDref], "Luina", "Luina", "Hall of Abyss";
+	setarray @CDXcoords[@CDref], 39, 39, 147;
+	setarray @CDYcoords[@CDref], 161, 161, 155;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 13;
+
+//----------------PAYON DUNGEON
+	setarray @pCDmenuitems$[@CDi], "Payon Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 5;
+
+	setarray @CDGat$[@CDref], "pay_dun00", "pay_dun01", "pay_dun02", "pay_dun03", "pay_dun04";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4", "Level 5";
+	setarray @CDXcoords[@CDref], 21, 19, 19, 155, 201;
+	setarray @CDYcoords[@CDref], 183, 33, 63, 159, 204;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3, 4;
+
+	QWS_Make_CityDungeon_Menu 14;
+
+//----------------PYRAMIDS
+	setarray @pCDmenuitems$[@CDi], "Pyramids Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 6;
+
+	setarray @CDGat$[@CDref], "moc_pryd01", "moc_pryd02", "moc_pryd03", "moc_pryd04", "moc_pryd05", "moc_pryd06";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4", "Basement 1", "Basement 2";
+	setarray @CDXcoords[@CDref], 192, 10, 100, 181, 94, 192;
+	setarray @CDYcoords[@CDref], 9, 192, 92, 11, 96, 8;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 15;
+	
+//----------------Rachel Sanctuary
+	setarray @pCDmenuitems$[@CDi], "Rachel Sanctuary";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 5;
+
+	setarray @CDGat$[@CDref], "ra_san01", "ra_san02", "ra_san03", "ra_san04", "ra_san05";
+	setarray @CDLevelName$[@CDref], "Rachel Sanctuary 1", "Rachel Sanctuary 2", "Rachel Sanctuary 3", "Rachel Sanctuary 4", "Rachel Sanctuary 5";
+	setarray @CDXcoords[@CDref], 140, 32, 8, 204, 150;
+	setarray @CDYcoords[@CDref], 11, 21, 149, 218, 9;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3, 4;
+
+	QWS_Make_CityDungeon_Menu 16;
+
+//----------------SPHINX
+	setarray @pCDmenuitems$[@CDi], "Sphinx Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 5;
+
+	setarray @CDGat$[@CDref], "in_sphinx1", "in_sphinx2", "in_sphinx3", "in_sphinx4", "in_sphinx5";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4", "Level 5";
+	setarray @CDXcoords[@CDref], 288, 149, 210, 10, 100;
+	setarray @CDYcoords[@CDref], 9, 81, 54, 222, 99;
+	setarray @CDDepth[@CDref], 0, 1, 2, 3, 4;
+
+	QWS_Make_CityDungeon_Menu 17;
+
+
+//----------------TOY FACTORY
+	setarray @pCDmenuitems$[@CDi], "Toy Factory Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 2;
+
+	setarray @CDGat$[@CDref], "xmas_dun01", "xmas_dun02";
+	setarray @CDLevelName$[@CDref], "Factory Warehouse", "Classifying Room";
+	setarray @CDXcoords[@CDref], 205, 129;
+	setarray @CDYcoords[@CDref], 15, 133;
+	setarray @CDDepth[@CDref], 0, 1;
+
+	QWS_Make_CityDungeon_Menu 18;
+
+//----------------UMBALA
+	setarray @pCDmenuitems$[@CDi], "Umbala Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "um_dun01", "um_dun02", "yggdrasil01";;
+	setarray @CDLevelName$[@CDref], "Carpenter's Shop in The Tree", "Passage to a Foreign World", "Hvergelmir's Fountain";
+	setarray @CDXcoords[@CDref], 42, 48, 204;
+	setarray @CDYcoords[@CDref], 31, 30, 78;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 19;
+	
+//----------------Valkyrie Guild Dungeon
+	setarray @pCDmenuitems$[@CDi], "Valkyrie Guild Dungeon";
+	setarray @pCDprice[@CDi], 0;
+	setarray @pCDfee$[@CDi], 0;
+	setarray @CDLevels[@CDi], 3;
+
+	setarray @CDGat$[@CDref], "gld_dun03", "gld_dun03_2", "gld2_prt";
+	setarray @CDLevelName$[@CDref], "Valkyrie", "Valkyrie", "Hall of Abyss";
+	setarray @CDXcoords[@CDref], 50, 50, 140;
+	setarray @CDYcoords[@CDref], 44, 44, 132;
+	setarray @CDDepth[@CDref], 0, 1, 2;
+
+	QWS_Make_CityDungeon_Menu 20;
+
+//----------------Cancel
+	setarray @pCDmenuitems$[@CDi], "Cancel";
+	setarray @pCDprice[@CDi], 0;
+
+	set @CDmenulist$[@CDj],@pCDmenuitems$[@CDi];
+	set @CDmenuref[@CDj],57005; // 57005='dead' in hex
+	return;
+
+
+//----------------Make City Dungeon Menu Function
+
+function	QWS_Make_CityDungeon_Menu	{
+	set @tempcitydungeonmenubin,1;
+	if (getarg(0) == 0) goto menu_item;
+	set @temploopcitydungeonmenu,0;
+	do {
+		set @tempcitydungeonmenubin, @tempcitydungeonmenubin * 2;
+		set @temploopcitydungeonmenu, @temploopcitydungeonmenu + 1;
+		}while (getarg(0) > @temploopcitydungeonmenu);
+// check marker and make menu item
+menu_item:
+	if ((@tempcitydungeonmenubin & ##QWS_CD_Unlock) != @tempcitydungeonmenubin) {
+		setarray @CDLocRef[@CDi], @CDref;
+		set @CDref, @CDref+@CDLevels[@CDi];
+		set @CDi,@CDi+1;
+		return;
+	}
+	if ($QW_MapUserShow == 1) {
+		set @tempmapusers,0;
+		set @mapusersloop,0;
+		do {
+			set @tempmapusers,(getmapusers(@CDGat$[@CDref+@mapusersloop]) + @tempmapusers);
+			set @mapusersloop, (@mapusersloop + 1);
+		} while (@CDLevels[@CDi] > @mapusersloop);
+		if (@pCDprice[@CDi] != 0) set @CDmenulist$[@CDj], @pCDmenuitems$[@CDi]+" ["+@tempmapusers+"] -> "+@pCDprice[@CDi];
+		if (@pCDprice[@CDi] == 0) set @CDmenulist$[@CDj], @pCDmenuitems$[@CDi]+" ["+@tempmapusers+"]";
+		set @CDmenuref[@CDj],@CDi;
+		set @CDj,@CDj+1;
+		setarray @CDLocRef[@CDi], @CDref;
+		set @CDref, @CDref+@CDLevels[@CDi];
+		set @CDi,@CDi+1;
+		return;
+	}
+	if (@pCDprice[@CDi] != 0) set @CDmenulist$[@CDj], @pCDmenuitems$[@CDi]+" -> "+@pCDprice[@CDi];
+	if (@pCDprice[@CDi] == 0) set @CDmenulist$[@CDj], @pCDmenuitems$[@CDi];
+	set @CDmenuref[@CDj],@CDi;
+	set @CDj,@CDj+1;
+	setarray @CDLocRef[@CDi], @CDref;
+	set @CDref, @CDref+@CDLevels[@CDi];
+	set @CDi,@CDi+1;
+	return;
+}
+}
+
+function	script	QWS_CDLarray	{
+//----------------Start building Menu
+	set @CDWref,@CDLocRef[@CDwarpMenu]; // reference to the arrays with leveldata
+	set @CDWi,0;  // loop counter
+	set @CDWj,0; // menu lines counter
+	cleararray @CDWLmenulist$[0],"",15; // Clearing the array to get rid off ghost items in menu
+	do {
+		if ($QW_CDL == 0)||($QW_CDDL >= @CDDepth[@CDWref]) {
+			set @warpprice, (@pCDprice[@CDwarpMenu]+ (getd(@pCDfee$[@CDwarpMenu])*@CDDepth[@CDWref]));
+			if (@warpprice != 0)&&($QW_MapUserShow == 0) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref]+" -> "+@warpprice;
+			if (@warpprice == 0)&&($QW_MapUserShow == 0) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref];
+			if (@warpprice != 0)&&($QW_MapUserShow == 1) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref]+" ["+getmapusers(@CDGat$[@CDWref])+"] -> "+@warpprice;
+			if (@warpprice == 0)&&($QW_MapUserShow == 1) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref]+" ["+getmapusers(@CDGat$[@CDWref])+"]";
+			set @CDWLmenuref[@CDWj],@CDWref;
+			set @CDWj,@CDWj+1;
+		}
+		set @CDWref, @CDWref+1;
+		set @CDWi,@CDWi+1;
+	} while (@CDWi < @CDLevels[@CDwarpMenu]);
+	set @CDWLmenulist$[@CDWj], "Exit";
+	set @CDWLmenuref[@CDWj],57005; // 57005='dead' in hex
+	return;
+}
+
+
 //====================Dungeon=Menu=Arrays==========================
 // Adding a dungeon:
 //	setarray @pDmenuitems$[@Di], "Abyss Lake";	// Name of Dungeon shown in Dungeon select Menu
@@ -1149,20 +1631,6 @@ function	script	QWS_Darray	{
 
 	QWS_Make_Dungeon_Menu 0;
 
-//----------------AMATSU DUNGEON
-	setarray @pDmenuitems$[@Di], "Amatsu Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "ama_dun01", "ama_dun02", "ama_dun03";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3";
-	setarray @DXcoords[@Dref], 228, 34, 119;
-	setarray @DYcoords[@Dref], 11, 41, 14;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 1;
-
 //----------------ANT HELL
 	setarray @pDmenuitems$[@Di], "Ant Hell Dungeon"; 
 	setarray @pDprice[@Di], 0;
@@ -1175,91 +1643,8 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 262, 170;
 	setarray @DDepth[@Dref], 0, 1;
 
-	QWS_Make_Dungeon_Menu 2;
+	QWS_Make_Dungeon_Menu 1;
 
-//----------------AYOTAYA
-	setarray @pDmenuitems$[@Di], "Ayothaya Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 2;
-
-	setarray @DGat$[@Dref], "ayo_dun01", "ayo_dun02";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2";
-	setarray @DXcoords[@Dref], 275, 24;
-	setarray @DYcoords[@Dref], 19, 26;
-	setarray @DDepth[@Dref], 0, 1;
-
-	QWS_Make_Dungeon_Menu 3;
-	
-//----------------Baldur Guild Dungeon
-	setarray @pDmenuitems$[@Di], "Baldur Guild Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "gld_dun01", "gld_dun01_2", "gld2_pay";
-	setarray @DLevelName$[@Dref], "Baldur", "Baldur", "Hall of Abyss";
-	setarray @DXcoords[@Dref], 119, 119, 120;
-	setarray @DYcoords[@Dref], 93, 93, 130;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 4;
-	
-//----------------Beach Dungeon
-	setarray @pDmenuitems$[@Di], "Beach Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "beach_dun", "beach_dun2", "beach_dun3";
-	setarray @DLevelName$[@Dref], "Beach Dungeon 1", "Beach Dungeon 2", "Beach Dungeon 3";
-	setarray @DXcoords[@Dref], 266, 255, 23;
-	setarray @DYcoords[@Dref], 67, 244, 260;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 5;
-	
-//----------------Britoniah Guild Dungeon
-	setarray @pDmenuitems$[@Di], "Britoniah Guild Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "gld_dun04", "gld_dun04_2", "gld2_gef";
-	setarray @DLevelName$[@Dref], "Britoniah", "Britoniah", "Hall of Abyss";
-	setarray @DXcoords[@Dref], 116, 116, 152;
-	setarray @DYcoords[@Dref], 45, 45, 118;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 6;
-
-//----------------BYALAN
-	setarray @pDmenuitems$[@Di], "Byalan Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 5;
-
-	setarray @DGat$[@Dref], "iz_dun00", "iz_dun01", "iz_dun02", "iz_dun03", "iz_dun04";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4", "Level 5";
-	setarray @DXcoords[@Dref], 168, 253, 236, 32, 26;
-	setarray @DYcoords[@Dref], 168, 252, 204, 63, 27;
-	setarray @DDepth[@Dref], 0, 1, 2, 3, 4;
-
-	QWS_Make_Dungeon_Menu 7;
-
-//----------------CLOCK TOWER
-	setarray @pDmenuitems$[@Di], "Clock Tower Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 8;
-
-	setarray @DGat$[@Dref], "c_tower1", "c_tower2", "c_tower3", "c_tower4", "alde_dun01", "alde_dun02", "alde_dun03", "alde_dun04";
-	setarray @DLevelName$[@Dref], "Clock Tower Level 1", "Clock Tower Level 2", "Clock Tower Level 3", "Clock Tower Level 4", "Basement 1F", "Basement 2F", "Basement 3F", "Basement 4F";
-	setarray @DXcoords[@Dref], 199, 148, 65, 56, 297, 127, 277, 268;
-	setarray @DYcoords[@Dref], 159, 283, 147, 155, 25, 169, 178, 74;
-	setarray @DDepth[@Dref], 0, 1, 2, 3, 1, 2, 3, 4;
-
-	QWS_Make_Dungeon_Menu 8;
 
 //----------------COAL MINE
 	setarray @pDmenuitems$[@Di], "Coal Mine Dungeon";
@@ -1273,22 +1658,9 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 17, 343, 262;
 	setarray @DDepth[@Dref], 0, 1, 2;
 
-	QWS_Make_Dungeon_Menu 10;
+	QWS_Make_Dungeon_Menu 2;
 
-//----------------CULVERT
-	setarray @pDmenuitems$[@Di], "Culvert Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 4;
 
-	setarray @DGat$[@Dref], "prt_sewb1", "prt_sewb2", "prt_sewb3", "prt_sewb4";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4";
-	setarray @DXcoords[@Dref], 131, 19, 180, 100;
-	setarray @DYcoords[@Dref], 247, 19, 169, 92;
-	setarray @DDepth[@Dref], 0, 1, 2, 3;
-
-	QWS_Make_Dungeon_Menu 11;
-	
 //----------------Cursed Abbey
 	setarray @pDmenuitems$[@Di], "Cursed Abbey";
 	setarray @pDprice[@Di], 0;
@@ -1301,21 +1673,8 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 67, 244, 260;
 	setarray @DDepth[@Dref], 0, 1, 2;
 
-	QWS_Make_Dungeon_Menu 12;
+	QWS_Make_Dungeon_Menu 3;
 
-//----------------EINBECH DUNGEON
-	setarray @pDmenuitems$[@Di], "Einbech Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 2;
-
-	setarray @DGat$[@Dref], "ein_dun01", "ein_dun02";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2";
-	setarray @DXcoords[@Dref], 22, 292;
-	setarray @DYcoords[@Dref], 14, 290;
-	setarray @DDepth[@Dref], 0, 1;
-
-	QWS_Make_Dungeon_Menu 13;
 
 //----------------GEFENIA DUNGEON
 	setarray @pDmenuitems$[@Di], "Gefenia Dungeon";
@@ -1329,27 +1688,14 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 103, 34, 168, 272;
 	setarray @DDepth[@Dref], 0, 1, 2, 3;
 
-	QWS_Make_Dungeon_Menu 14;
+	QWS_Make_Dungeon_Menu 5;
 
-//----------------GEFFEN DUNGEON
-	setarray @pDmenuitems$[@Di], "Geffen Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 4;
-
-	setarray @DGat$[@Dref], "gef_dun00", "gef_dun01", "gef_dun02", "gef_dun03";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4";
-	setarray @DXcoords[@Dref], 104, 115, 106, 203;
-	setarray @DYcoords[@Dref], 99, 236, 132, 200;
-	setarray @DDepth[@Dref], 0, 1, 2, 3;
-
-	QWS_Make_Dungeon_Menu 15;
 
 //----------------GLAST HEIM
 	setarray @pDmenuitems$[@Di], "Glast Heim Dungeon";
 	setarray @pDprice[@Di], 0;
 	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 17;
+	setarray @DLevels[@Di], 6;
 
 	setarray @DGat$[@Dref], "glast_01", "gl_church", "gl_chyard", "gl_in01", "gl_cas01", "gl_cas02", "gl_knt01", "gl_knt02", "gl_prison", "gl_prison1", "gl_step", "gl_sew01", "gl_sew02", "gl_sew03", "gl_sew04", "gl_dun01", "gl_dun02";
 	setarray @DLevelName$[@Dref], "Glast Heim Entrance", "St. Abbey", "Churchyard", "Inside Glast Heim", "Castle 1", "Castle 2", "Chivalry 1", "Chivalry 2", "Prison 1", "Prison 2", "Steps", "Sewers 1", "Sewers 2", "Sewers 3", "Sewers 4", "Lowest Cave 1", "Lowest Cave 2";
@@ -1357,21 +1703,8 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 304, 29, 25, 15, 287, 15, 255, 291, 283, 277, 7, 7, 271, 274, 70, 14;
 	setarray @DDepth[@Dref], 0, 1, 2, 1, 1, 2, 1, 2, 2, 3, 1, 4, 2, 3, 4, 5, 6;
 
-	QWS_Make_Dungeon_Menu 16;
+	QWS_Make_Dungeon_Menu 7;
 
-//----------------GONRYUN DUNGEON
-	setarray @pDmenuitems$[@Di], "Gonryun Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "gon_dun01", "gon_dun02", "gon_dun03";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3";
-	setarray @DXcoords[@Dref], 153, 28, 68;
-	setarray @DYcoords[@Dref], 53, 113, 16;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 17;
 
 //----------------HIDDEN DUNGEON
 	setarray @pDmenuitems$[@Di], "Hidden Dungeon";
@@ -1385,7 +1718,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 7, 20, 8;
 	setarray @DDepth[@Dref], 0, 1, 2;
 
-	QWS_Make_Dungeon_Menu 18;
+	QWS_Make_Dungeon_Menu 8;
 	
 //----------------Ice Dungeon
 	setarray @pDmenuitems$[@Di], "Ice Dungeon";
@@ -1399,7 +1732,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 14, 155, 22, 158;
 	setarray @DDepth[@Dref], 0, 1, 2, 3;
 
-	QWS_Make_Dungeon_Menu 19;
+	QWS_Make_Dungeon_Menu 9;
 
 //----------------JUPEROS CAVE
 	setarray @pDmenuitems$[@Di], "Juperos Cave";
@@ -1413,7 +1746,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 51, 247, 63, 285;
 	setarray @DDepth[@Dref], 0, 1, 2, 3;
 
-	QWS_Make_Dungeon_Menu 20;
+	QWS_Make_Dungeon_Menu 10;
 
 //----------------KIEL DUNGEON
 	setarray @pDmenuitems$[@Di], "Kiel Dungeon";
@@ -1427,49 +1760,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 226, 198;
 	setarray @DDepth[@Dref], 0, 1;
 
-	QWS_Make_Dungeon_Menu 21;
-
-//----------------LIGHTHALZEN BIO LAB
-	setarray @pDmenuitems$[@Di], "Lighthalzen Bio Lab";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 4;
-
-	setarray @DGat$[@Dref], "lhz_dun01", "lhz_dun02", "lhz_dun03", "lhz_dun04";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4";
-	setarray @DXcoords[@Dref], 150, 150, 140, 244;
-	setarray @DYcoords[@Dref], 288, 18, 134, 52;
-	setarray @DDepth[@Dref], 0, 1, 2, 3;
-
-	QWS_Make_Dungeon_Menu 22;
-
-//----------------LOUYANG DUNGEON
-	setarray @pDmenuitems$[@Di], "Louyang Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "lou_dun01", "lou_dun02", "lou_dun03";
-	setarray @DLevelName$[@Dref], "Royal Tomb Level 1", "Royal Tomb Level 2", "Royal Tomb Level 3";
-	setarray @DXcoords[@Dref], 218, 282, 165;
-	setarray @DYcoords[@Dref], 196, 20, 38;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 23;
-	
-//----------------Luina Guild Dungeon
-	setarray @pDmenuitems$[@Di], "Luina Guild Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "gld_dun02", "gld_dun02_2", "gld2_ald";
-	setarray @DLevelName$[@Dref], "Luina", "Luina", "Hall of Abyss";
-	setarray @DXcoords[@Dref], 39, 39, 147;
-	setarray @DYcoords[@Dref], 161, 161, 155;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 24;
+	QWS_Make_Dungeon_Menu 11;
 
 //----------------MAGMA DUNGEON
 	setarray @pDmenuitems$[@Di], "Magma Dungeon";
@@ -1483,7 +1774,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 68, 30;
 	setarray @DDepth[@Dref], 0, 1;
 
-	QWS_Make_Dungeon_Menu 25;
+	QWS_Make_Dungeon_Menu 12;
 	
 //----------------Nidhogg's Dungeon
 	setarray @pDmenuitems$[@Di], "Nidhogg's Dungeon";
@@ -1497,7 +1788,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 239, 271;
 	setarray @DDepth[@Dref], 0, 1;
 
-	QWS_Make_Dungeon_Menu 26;
+	QWS_Make_Dungeon_Menu 13;
 
 
 //----------------ODIN TEMPLE
@@ -1512,7 +1803,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 167, 149, 280;
 	setarray @DDepth[@Dref], 0, 1, 2;
 
-	QWS_Make_Dungeon_Menu 27;
+	QWS_Make_Dungeon_Menu 14;
 
 //----------------ORC DUNGEON
 	setarray @pDmenuitems$[@Di], "Orc Dungeon";
@@ -1526,49 +1817,8 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 170, 185;
 	setarray @DDepth[@Dref], 0, 1;
 
-	QWS_Make_Dungeon_Menu 28;
+	QWS_Make_Dungeon_Menu 15;
 
-//----------------PAYON DUNGEON
-	setarray @pDmenuitems$[@Di], "Payon Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 5;
-
-	setarray @DGat$[@Dref], "pay_dun00", "pay_dun01", "pay_dun02", "pay_dun03", "pay_dun04";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4", "Level 5";
-	setarray @DXcoords[@Dref], 21, 19, 19, 155, 201;
-	setarray @DYcoords[@Dref], 183, 33, 63, 159, 204;
-	setarray @DDepth[@Dref], 0, 1, 2, 3, 4;
-
-	QWS_Make_Dungeon_Menu 29;
-
-//----------------PYRAMIDS
-	setarray @pDmenuitems$[@Di], "Pyramids Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 6;
-
-	setarray @DGat$[@Dref], "moc_pryd01", "moc_pryd02", "moc_pryd03", "moc_pryd04", "moc_pryd05", "moc_pryd06";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4", "Basement 1", "Basement 2";
-	setarray @DXcoords[@Dref], 192, 10, 100, 181, 94, 192;
-	setarray @DYcoords[@Dref], 9, 192, 92, 11, 96, 8;
-	setarray @DDepth[@Dref], 0, 1, 2, 3, 1, 2;
-
-	QWS_Make_Dungeon_Menu 30;
-
-//----------------SPHINX
-	setarray @pDmenuitems$[@Di], "Sphinx Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 5;
-
-	setarray @DGat$[@Dref], "in_sphinx1", "in_sphinx2", "in_sphinx3", "in_sphinx4", "in_sphinx5";
-	setarray @DLevelName$[@Dref], "Level 1", "Level 2", "Level 3", "Level 4", "Level 5";
-	setarray @DXcoords[@Dref], 288, 149, 210, 10, 100;
-	setarray @DYcoords[@Dref], 9, 81, 54, 222, 99;
-	setarray @DDepth[@Dref], 0, 1, 2, 3, 4;
-
-	QWS_Make_Dungeon_Menu 31;
 
 //----------------SUNKEN SHIP
 	setarray @pDmenuitems$[@Di], "Sunken Ship Dungeon";
@@ -1582,7 +1832,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 24, 27;
 	setarray @DDepth[@Dref], 0, 1;
 
-	QWS_Make_Dungeon_Menu 32;
+	QWS_Make_Dungeon_Menu 16;
 
 //----------------THANATOS TOWER
 	setarray @pDmenuitems$[@Di], "Thanatos Tower";
@@ -1596,7 +1846,7 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 35, 136, 158, 143, 11, 8, 166, 44, 145, 138, 36, 83, 76;
 	setarray @DDepth[@Dref], 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
 
-	QWS_Make_Dungeon_Menu 33;
+	QWS_Make_Dungeon_Menu 17;
 	
 //----------------Thor Volcano
 	setarray @pDmenuitems$[@Di], "Thor Volcano";
@@ -1610,21 +1860,8 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 228, 205, 272;
 	setarray @DDepth[@Dref], 0, 1, 2;
 
-	QWS_Make_Dungeon_Menu 34;
+	QWS_Make_Dungeon_Menu 18;
 
-//----------------TOY FACTORY
-	setarray @pDmenuitems$[@Di], "Toy Factory Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 2;
-
-	setarray @DGat$[@Dref], "xmas_dun01", "xmas_dun02";
-	setarray @DLevelName$[@Dref], "Factory Warehouse", "Classifying Room";
-	setarray @DXcoords[@Dref], 205, 129;
-	setarray @DYcoords[@Dref], 15, 133;
-	setarray @DDepth[@Dref], 0, 1;
-
-	QWS_Make_Dungeon_Menu 35;
 
 //----------------TURTLE ISTLAND
 	setarray @pDmenuitems$[@Di], "Turtle Island Dungeon";
@@ -1638,35 +1875,8 @@ function	script	QWS_Darray	{
 	setarray @DYcoords[@Dref], 49, 261, 189, 192;
 	setarray @DDepth[@Dref], 0, 0, 1, 2;
 
-	QWS_Make_Dungeon_Menu 36;
+	QWS_Make_Dungeon_Menu 19;
 
-//----------------UMBALA
-	setarray @pDmenuitems$[@Di], "Umbala Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "um_dun01", "um_dun02", "yggdrasil01";;
-	setarray @DLevelName$[@Dref], "Carpenter's Shop in The Tree", "Passage to a Foreign World", "Hvergelmir's Fountain";
-	setarray @DXcoords[@Dref], 42, 48, 204;
-	setarray @DYcoords[@Dref], 31, 30, 78;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 37;
-	
-//----------------Valkyrie Guild Dungeon
-	setarray @pDmenuitems$[@Di], "Valkyrie Guild Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 3;
-
-	setarray @DGat$[@Dref], "gld_dun03", "gld_dun03_2", "gld2_prt";
-	setarray @DLevelName$[@Dref], "Valkyrie", "Valkyrie", "Hall of Abyss";
-	setarray @DXcoords[@Dref], 50, 50, 140;
-	setarray @DYcoords[@Dref], 44, 44, 132;
-	setarray @DDepth[@Dref], 0, 1, 2;
-
-	QWS_Make_Dungeon_Menu 38;
 
 //----------------Cancel
 	setarray @pDmenuitems$[@Di], "Cancel";
@@ -1745,6 +1955,54 @@ function	script	QWS_DLarray	{
 	set @DWLmenuref[@DWj],57005; // 57005='dead' in hex
 	return;
 }
+
+
+//================City=Dungeon=Warpras=That=Only=Unlock=================
+
+function	script	QWS_CityDungeon_Warpra	{
+	function QWS_CD_getbin;
+	function QWS_CD_setbin;
+	
+	if ((QWS_CD_getbin(getarg(0)) == 0) && (getarg(1) != "")) {
+		mes "[Warpra]";
+		mes getarg(1)+" unlocked!";
+		QWS_CD_setbin(getarg(0));
+		return;
+	} else if (QWS_CD_getbin(getarg(0)) == 1) {
+		mes "[Warpra]";
+		mes "Sorry, I can only unlock this location.";
+	} else
+		debugmes "QWS_CityDungeon_Warpra error, improper syntax?";
+	return;
+
+
+function	QWS_CD_setbin	{
+	set @tempsetbindata,1;
+	if (getarg(0) == 0) goto binset;
+	set @temploopsetbin,0;
+	do {
+		set @tempsetbindata, @tempsetbindata * 2;
+		set @temploopsetbin, @temploopsetbin + 1;
+	} while (getarg(0) > @temploopsetbin);
+binset:
+	set ##QWS_CD_Unlock,(##QWS_CD_Unlock | @tempsetbindata);
+	return;
+}
+
+function	QWS_CD_getbin	{
+	set @tempgetbindata,1;
+	if (getarg(0) == 0) goto binget;
+	set @temploopgetbin,0;
+	do {
+		set @tempgetbindata, @tempgetbindata * 2;
+		set @temploopgetbin, @temploopgetbin + 1;
+	} while (getarg(0) > @temploopgetbin);
+binget:
+	if ((@tempgetbindata & ##QWS_CD_Unlock) == @tempgetbindata) return 1;
+	return 0;
+}
+}
+
 
 //================Dungeon=Warpras=That=Only=Unlock=================
 
@@ -1885,88 +2143,55 @@ binget:
 //============================Warpras==============================
 
 -	script	Warpra#0	-1,{ callfunc "Q_Warpra",1; }
-/*
-alb2trea,73,101,4	duplicate(Warpra#0)	Warpra#1	403
-ama_fild01,178,325,1	duplicate(Warpra#0)	Warpra#2	403
-gef_fild10,71,339,4	duplicate(Warpra#0)	Warpra#3	403
-izlu2dun,104,82,4	duplicate(Warpra#0)	Warpra#4	403
-mjolnir_02,85,363,4	duplicate(Warpra#0)	Warpra#5	403
-moc_fild04,207,331,4	duplicate(Warpra#0)	Warpra#6	403
-moc_fild19,106,97,6	duplicate(Warpra#0)	Warpra#7	403
-moc_ruins,64,166,4	duplicate(Warpra#0)	Warpra#8	403
-niflheim,197,192,3	duplicate(Warpra#0)	Warpra#9	403
-pay_arche,39,135,4	duplicate(Warpra#0)	Warpra#10	403
-prt_fild05,273,215,4	duplicate(Warpra#0)	Warpra#11	403
-tur_dun01,148,239,4	duplicate(Warpra#0)	Warpra#12	403
-valkyrie,48,35,8	duplicate(Warpra#0)	Warpra#13	403
-yuno_fild03,37,135,4	duplicate(Warpra#0)	Warpra#14	403
-*/
 
-alberta,32,240,4	script	Warpra#15	403,{ callfunc "QWS_Town_Warpra",1,"Alberta Town";  close; }
-aldebaran,146,118,4	script	Warpra#16	403,{ callfunc "QWS_Town_Warpra",2,"Aldebaran Town"; callfunc "QWS_Field_Warpra",11,"Mjolnir Fields"; callfunc "QWS_Dungeon_Warpra",24,"Luina Guild Dungeon"; close; }
-ayothaya,216,171,5	script	Warpra#17	403,{ callfunc "QWS_Town_Warpra",4,"Ayotaya Town"; callfunc "QWS_Field_Warpra",1,"Ayothaya Field Field"; close; }
-amatsu,193,81,1	script	Warpra#18	403,{ callfunc "QWS_Town_Warpra",3,"Amatsu Town"; callfunc "QWS_Field_Warpra",0,"Amatsu Fields"; close; }
-comodo,195,158,4	script	Warpra#19	403,{ callfunc "QWS_Town_Warpra",5,"Comodo Town"; callfunc "QWS_Field_Warpra",2,"Comodo Fields"; callfunc "QWS_Dungeon_Warpra",5,"Beach Dungeon"; close; }
-einbroch,229,196,5	script	Warpra#20	403,{ callfunc "QWS_Town_Warpra",7,"Einbroch Town";  callfunc "QWS_Field_Warpra",3,"Einbroch Fields"; close; }
-einbech,173,131,5	script	Warpra#21	403,{ callfunc "QWS_Town_Warpra",6,"Einbech Town"; close; }
-geffen,116,66,4	script	Warpra#22	403,{ callfunc "QWS_Town_Warpra",8,"Geffen Town";  callfunc "QWS_Field_Warpra",4,"Geffen Fields"; callfunc "QWS_Dungeon_Warpra",6,"Britoniah Guild Dungeon"; close; }
-gonryun,152,130,4	script	Warpra#23	403,{ callfunc "QWS_Town_Warpra",9,"Gonryun Town";  callfunc "QWS_Field_Warpra",5,"Gonryun Fields"; close; }
-hugel,90,127,5	script	Warpra#24	403,{ callfunc "QWS_Town_Warpra",10,"Hugel Town";  callfunc "QWS_Field_Warpra",6,"Hugel Fields"; close; }
-jawaii,107,182,5	script	Warpra#25	403,{ callfunc "QWS_Town_Warpra",12,"Jawaii Town"; close; }
-izlude,132,116,4	script	Warpra#26	403,{ callfunc "QWS_Town_Warpra",11,"Izlude Town"; close; }
-lighthalzen,153,100,5	script	Warpra#27	403,{ callfunc "QWS_Town_Warpra",13,"Lighthalzen Town";  callfunc "QWS_Field_Warpra",7,"Lighthalzen Fields"; close; }
-louyang,211,106,4	script	Warpra#28	403,{ callfunc "QWS_Town_Warpra",14,"Louyang Town";  callfunc "QWS_Field_Warpra",8,"Louyang Fields"; close; }
-morocc,157,95,4	script	Warpra#29	403,{ callfunc "QWS_Town_Warpra",18,"Morroc Town";  callfunc "QWS_Field_Warpra",17,"Sograt Deserts"; close; }
-nif_fild01,319,77,1	script	Warpra#30	403,{ callfunc "QWS_Town_Warpra",20,"Niflheim Town";  callfunc "QWS_Field_Warpra",13,"Niflheim Fields"; close; }
-payon,183,110,4	script	Warpra#31	403,{ callfunc "QWS_Town_Warpra",21,"Payon Town";  callfunc "QWS_Field_Warpra",14,"Payon Forests"; callfunc "QWS_Dungeon_Warpra",4,"Baldur Guild Dungeon"; close; }
-prontera,147,172,5	script	Warpra#32	403,{ callfunc "QWS_Town_Warpra",0,"Prontera Town";  callfunc "QWS_Field_Warpra",15,"Prontera Fields";  callfunc "QWS_Dungeon_Warpra",38,"Valkyrie Guild Dungeon"; close; }
-umbala,133,130,4	script	Warpra#33	403,{ callfunc "QWS_Town_Warpra",25,"Umbala Town";  callfunc "QWS_Field_Warpra",19,"Umbala Fields"; close; }
-xmas,151,136,4	script	Warpra#34	403,{ callfunc "QWS_Town_Warpra",15,"Lutie Town";  callfunc "QWS_Field_Warpra",9,"Lutie Fields"; close; }
-yuno,138,162,4	script	Warpra#35	403,{ callfunc "QWS_Town_Warpra",27,"Yuno Town";  callfunc "QWS_Field_Warpra",21,"Yuno Fields"; close; }
-manuk,262,177,4	script	Warpra#38	403,{ callfunc "QWS_Town_Warpra",16,"Manuk Town";  callfunc "QWS_Field_Warpra",10,"Manuk Fields"; close; }
-moscovia,216,196,6	script	Warpra#40	403,{ callfunc "QWS_Town_Warpra",19,"Moscovia Town";  callfunc "QWS_Field_Warpra",12,"Moscovia Fields"; close; }
-rachel,135,116,4	script	Warpra#41	403,{ callfunc "QWS_Town_Warpra",22,"Rachel Town";  callfunc "QWS_Field_Warpra",16,"Rachel Fields"; close; }
-splendide,205,153,4	script	Warpra#42	403,{ callfunc "QWS_Town_Warpra",23,"Splendide Town";  callfunc "QWS_Field_Warpra",18,"Splendide Fields"; close; }
-veins,214,123,4	script	Warpra#43	403,{ callfunc "QWS_Town_Warpra",26,"Veins Town";  callfunc "QWS_Field_Warpra",20,"Veins Fields"; close; }
-thor_camp,249,76,4	script	Warpra#44	403,{ callfunc "QWS_Town_Warpra",24,"Thor Camp"; close; }
-mid_camp,216,288,4	script	Warpra#45	403,{ callfunc "QWS_Town_Warpra",17,"Midgard's Expedition Camp"; close; }
+alberta,28,240,4	script	Warpra#1	403,{ callfunc "QWS_Town_Warpra",1,"Alberta Town";  close; }
+aldebaran,145,118,4	script	Warpra#2	403,{ callfunc "QWS_Town_Warpra",2,"Aldebaran Town"; callfunc "QWS_Field_Warpra",11,"Mjolnir Fields"; callfunc "QWS_CityDungeon_Warpra",6,"Clock Tower Dungeon"; callfunc "QWS_CityDungeon_Warpra",13,"Luina Guild Dungeon"; close; }
+ayothaya,209,169,6	script	Warpra#3	403,{ callfunc "QWS_Town_Warpra",4,"Ayotaya Town"; callfunc "QWS_Field_Warpra",1,"Ayothaya Field Field"; callfunc "QWS_CityDungeon_Warpra",1,"Ayotaya Dungeon"; close; }
+amatsu,203,87,4	script	Warpra#4	403,{ callfunc "QWS_Town_Warpra",3,"Amatsu Town"; callfunc "QWS_Field_Warpra",0,"Amatsu Fields";  callfunc "QWS_CityDungeon_Warpra",0,"Amatsu Dungeon"; close; }
+comodo,194,158,4	script	Warpra#5	403,{ callfunc "QWS_Town_Warpra",5,"Comodo Town"; callfunc "QWS_Field_Warpra",2,"Comodo Fields"; callfunc "QWS_CityDungeon_Warpra",3,"Beach Dungeon"; close; }
+einbroch,69,202,4	script	Warpra#6	403,{ callfunc "QWS_Town_Warpra",7,"Einbroch Town";  callfunc "QWS_Field_Warpra",3,"Einbroch Fields"; close; }
+einbech,59,38,6	script	Warpra#7	403,{ callfunc "QWS_Town_Warpra",6,"Einbech Town"; callfunc "QWS_CityDungeon_Warpra",8,"Einbech Dungeon"; close; }
+geffen,124,72,4	script	Warpra#8	403,{ callfunc "QWS_Town_Warpra",8,"Geffen Town";  callfunc "QWS_Field_Warpra",4,"Geffen Fields"; callfunc "QWS_CityDungeon_Warpra",9,"Gefen Dungeon"; callfunc "QWS_CityDungeon_Warpra",4,"Britoniah Guild Dungeon"; close; }
+gonryun,162,122,4	script	Warpra#9	403,{ callfunc "QWS_Town_Warpra",9,"Gonryun Town";  callfunc "QWS_Field_Warpra",5,"Gonryun Fields"; callfunc "QWS_CityDungeon_Warpra",10,"Gonryun Dungeon"; close; }
+hugel,101,151,4	script	Warpra#10	403,{ callfunc "QWS_Town_Warpra",10,"Hugel Town";  callfunc "QWS_Field_Warpra",6,"Hugel Fields"; close; }
+jawaii,253,138,4	script	Warpra#11	403,{ callfunc "QWS_Town_Warpra",12,"Jawaii Town"; close; }
+izlude,132,120,4	script	Warpra#12	403,{ callfunc "QWS_Town_Warpra",11,"Izlude Town"; callfunc "QWS_CityDungeon_Warpra",5,"Byalan Dungeon"; close; }
+lighthalzen,162,102,4	script	Warpra#13	403,{ callfunc "QWS_Town_Warpra",13,"Lighthalzen Town";  callfunc "QWS_Field_Warpra",7,"Lighthalzen Fields"; callfunc "QWS_CityDungeon_Warpra",11,"Lighthalzen Bio Lab"; close; }
+louyang,208,103,6	script	Warpra#14	403,{ callfunc "QWS_Town_Warpra",14,"Louyang Town";  callfunc "QWS_Field_Warpra",8,"Louyang Fields"; callfunc "QWS_CityDungeon_Warpra",12,"Louyang Dungeon"; close; }
+morocc,159,97,4	script	Warpra#15	403,{ callfunc "QWS_Town_Warpra",18,"Morroc Town";  callfunc "QWS_Field_Warpra",17,"Sograt Deserts"; callfunc "QWS_CityDungeon_Warpra",15,"Pyramides Dungeon"; callfunc "QWS_CityDungeon_Warpra",17,"Sphinx Dungeon"; close; }
+niflheim,205,179,4	script	Warpra#16	403,{ callfunc "QWS_Town_Warpra",20,"Niflheim Town";  callfunc "QWS_Field_Warpra",13,"Niflheim Fields"; close; }
+payon,182,108,4	script	Warpra#17	403,{ callfunc "QWS_Town_Warpra",21,"Payon Town";  callfunc "QWS_Field_Warpra",14,"Payon Forests"; callfunc "QWS_CityDungeon_Warpra",14,"Payon Dungeon"; callfunc "QWS_CityDungeon_Warpra",2,"Baldur Guild Dungeon"; close; }
+prontera,159,192,4	script	Warpra#18	403,{ callfunc "QWS_Town_Warpra",0,"Prontera Town";  callfunc "QWS_Field_Warpra",15,"Prontera Fields"; callfunc "QWS_CityDungeon_Warpra",7,"Culvert Dungeon"; callfunc "QWS_CityDungeon_Warpra",20,"Valkyrie Guild Dungeon"; close; }
+umbala,106,150,3	script	Warpra#19	403,{ callfunc "QWS_Town_Warpra",25,"Umbala Town";  callfunc "QWS_Field_Warpra",19,"Umbala Fields"; close; }
+xmas,150,136,6	script	Warpra#20	403,{ callfunc "QWS_Town_Warpra",15,"Lutie Town";  callfunc "QWS_Field_Warpra",9,"Lutie Fields"; callfunc "QWS_CityDungeon_Warpra",18,"Toy Factory Dungeon"; close; }
+yuno,162,47,4	script	Warpra#21	403,{ callfunc "QWS_Town_Warpra",27,"Yuno Town";  callfunc "QWS_Field_Warpra",21,"Yuno Fields"; callfunc "QWS_CityDungeon_Warpra",19,"Umbala Dungeon"; close; }
+manuk,262,177,4	script	Warpra#22	403,{ callfunc "QWS_Town_Warpra",16,"Manuk Town";  callfunc "QWS_Field_Warpra",10,"Manuk Fields"; close; }
+moscovia,216,196,6	script	Warpra#23	403,{ callfunc "QWS_Town_Warpra",19,"Moscovia Town";  callfunc "QWS_Field_Warpra",12,"Moscovia Fields"; close; }
+rachel,135,116,4	script	Warpra#24	403,{ callfunc "QWS_Town_Warpra",22,"Rachel Town";  callfunc "QWS_Field_Warpra",16,"Rachel Fields"; callfunc "QWS_CityDungeon_Warpra",16,"Rachel Sanctuary"; close; }
+splendide,205,153,4	script	Warpra#25	403,{ callfunc "QWS_Town_Warpra",23,"Splendide Town";  callfunc "QWS_Field_Warpra",18,"Splendide Fields"; close; }
+veins,214,123,4	script	Warpra#26	403,{ callfunc "QWS_Town_Warpra",26,"Veins Town";  callfunc "QWS_Field_Warpra",20,"Veins Fields"; close; }
+thor_camp,249,76,4	script	Warpra#27	403,{ callfunc "QWS_Town_Warpra",24,"Thor Camp"; close; }
+mid_camp,216,288,4	script	Warpra#28	403,{ callfunc "QWS_Town_Warpra",17,"Midgard's Expedition Camp"; close; }
 
 
 
 abyss_01,264,267,2	script	Warpra Helper#0	403,{ callfunc "QWS_Dungeon_Warpra",0,"Abyss Lake"; close; }
-ama_dun01,229,14,4	script	Warpra Helper#1	403,{ callfunc "QWS_Dungeon_Warpra",1,"Amatsu Dungeon"; close; }
-anthell01,43,263,3	script	Warpra Helper#2	403,{ callfunc "QWS_Dungeon_Warpra",2,"Ant Hell Dungeon"; close; }
-ayo_dun01,280,13,0	script	Warpra Helper#3	403,{ callfunc "QWS_Dungeon_Warpra",3,"Ayotaya Dungeon"; close; }
-ein_dun01,19,17,6	script	Warpra Helper#4	403,{ callfunc "QWS_Dungeon_Warpra",13,"Einbech Dungeon"; close; }
-izlu2dun,104,82,0	script	Warpra Helper#5	403,{ callfunc "QWS_Dungeon_Warpra",7,"Byalan Dungeon"; close; }
-c_tower1,197,164,6	script	Warpra Helper#6	403,{ callfunc "QWS_Dungeon_Warpra",8,"Clock Tower Dungeon"; close; }
-mjo_dun01,49,23,6	script	Warpra Helper#7	403,{ callfunc "QWS_Dungeon_Warpra",10,"Coal Mine Dungeon"; close; }
-prt_sewb1,129,253,2	script	Warpra Helper#8	403,{ callfunc "QWS_Dungeon_Warpra",11,"Culvert Dungeon"; close; }
-gefenia01,50,100,0	script	Warpra Helper#9	403,{ callfunc "QWS_Dungeon_Warpra",14,"Gefenia Dungeon"; close; }
-gef_dun00,98,101,4	script	Warpra Helper#10	403,{ callfunc "QWS_Dungeon_Warpra",15,"Gefen Dungeon"; close; }
-glast_01,371,308,3	script	Warpra Helper#11	403,{ callfunc "QWS_Dungeon_Warpra",16,"Glast Heim Dungeon"; close; }
-gon_dun01,161,52,2	script	Warpra Helper#12	403,{ callfunc "QWS_Dungeon_Warpra",17,"Gonryun Dungeon"; close; }
-jupe_cave,144,56,3	script	Warpra Helper#13	403,{ callfunc "QWS_Dungeon_Warpra",20,"Juperos Cave"; close; }
-kh_dun01,14,224,6	script	Warpra Helper#14	403,{ callfunc "QWS_Dungeon_Warpra",21,"Kiel Dungeon"; close; }
-lhz_dun01,142,186,4	script	Warpra Helper#15	403,{ callfunc "QWS_Dungeon_Warpra",22,"Lighthalzen Bio Lab"; close; }
-lou_dun01,221,200,2	script	Warpra Helper#16	403,{ callfunc "QWS_Dungeon_Warpra",23,"Louyang Dungeon"; close; }
-mag_dun01,122,66,0	script	Warpra Helper#17	403,{ callfunc "QWS_Dungeon_Warpra",25,"Magma Dungeon"; close; }
-odin_tem01,115,148,3	script	Warpra Helper#18	403,{ callfunc "QWS_Dungeon_Warpra",27,"Odin Temple"; close; }
-in_orcs01,37,173,3	script	Warpra Helper#19	403,{ callfunc "QWS_Dungeon_Warpra",28,"Orc Dungeon"; close; }
-pay_arche,39,135,4	script	Warpra Helper#20	403,{ callfunc "QWS_Dungeon_Warpra",29,"Payon Dungeon"; close; }
-moc_fild19,106,97,6	script	Warpra Helper#21	403,{ callfunc "QWS_Dungeon_Warpra",31,"Sphinx Dungeon"; close; }
-moc_ruins,64,166,4	script	Warpra Helper#22	403,{ callfunc "QWS_Dungeon_Warpra",30,"Pyramides Dungeon"; close; }
-tha_t01,154,34,1	script	Warpra Helper#23	403,{ callfunc "QWS_Dungeon_Warpra",33,"Thanatos Tower"; close; }
-alb2trea,73,101,4	script	Warpra Helper#24	403,{ callfunc "QWS_Dungeon_Warpra",32,"Sunken Ship Dungeon"; close; }
-xmas_dun01,198,14,0	script	Warpra Helper#25	403,{ callfunc "QWS_Dungeon_Warpra",35,"Toy Factory Dungeon"; close; }
-um_dun01,36,29,5	script	Warpra Helper#26	403,{ callfunc "QWS_Dungeon_Warpra",37,"Umbala Dungeon"; close; }
-tur_dun01,147,53,5	script	Warpra Helper#27	403,{ callfunc "QWS_Dungeon_Warpra",36,"Turtle Island Dungeon"; close; }
-prt_maze01,180,9,3	script	Warpra Helper#28	403,{ callfunc "QWS_Dungeon_Warpra",18,"Hidden Dungeon"; close; }
-nameless_n,259,213,4	script	Warpra Helper#29	403,{ callfunc "QWS_Dungeon_Warpra",12,"Cursed Abbey"; close; }
-ice_dun01,154,17,6	script	Warpra Helper#30	403,{ callfunc "QWS_Dungeon_Warpra",19,"Ice Dungeon"; close; }
-thor_v01,18,229,6	script	Warpra Helper#31	403,{ callfunc "QWS_Dungeon_Warpra",34,"Thor Volcano"; close; }
-
-
-
+anthell01,43,263,3	script	Warpra Helper#1	403,{ callfunc "QWS_Dungeon_Warpra",1,"Ant Hell Dungeon"; close; }
+mjo_dun01,49,23,6	script	Warpra Helper#2	403,{ callfunc "QWS_Dungeon_Warpra",2,"Coal Mine Dungeon"; close; }
+gefenia01,50,100,0	script	Warpra Helper#3	403,{ callfunc "QWS_Dungeon_Warpra",5,"Gefenia Dungeon"; close; }
+glast_01,371,308,3	script	Warpra Helper#4	403,{ callfunc "QWS_Dungeon_Warpra",7,"Glast Heim Dungeon"; close; }
+jupe_cave,144,56,3	script	Warpra Helper#5	403,{ callfunc "QWS_Dungeon_Warpra",10,"Juperos Cave"; close; }
+kh_dun01,14,224,6	script	Warpra Helper#6	403,{ callfunc "QWS_Dungeon_Warpra",11,"Kiel Dungeon"; close; }
+mag_dun01,122,66,0	script	Warpra Helper#7	403,{ callfunc "QWS_Dungeon_Warpra",12,"Magma Dungeon"; close; }
+odin_tem01,115,148,3	script	Warpra Helper#8	403,{ callfunc "QWS_Dungeon_Warpra",14,"Odin Temple"; close; }
+in_orcs01,37,173,3	script	Warpra Helper#9	403,{ callfunc "QWS_Dungeon_Warpra",15,"Orc Dungeon"; close; }
+tha_t01,154,34,1	script	Warpra Helper#10	403,{ callfunc "QWS_Dungeon_Warpra",13,"Thanatos Tower"; close; }
+alb2trea,73,101,4	script	Warpra Helper#11	403,{ callfunc "QWS_Dungeon_Warpra",16,"Sunken Ship Dungeon"; close; }
+um_dun01,36,29,5	script	Warpra Helper#12	403,{ callfunc "QWS_Dungeon_Warpra",37,"Umbala Dungeon"; close; }
+tur_dun01,147,53,5	script	Warpra Helper#13	403,{ callfunc "QWS_Dungeon_Warpra",19,"Turtle Island Dungeon"; close; }
+prt_maze01,180,9,3	script	Warpra Helper#14	403,{ callfunc "QWS_Dungeon_Warpra",8,"Hidden Dungeon"; close; }
+nameless_n,259,213,4	script	Warpra Helper#15	403,{ callfunc "QWS_Dungeon_Warpra",3,"Cursed Abbey"; close; }
+ice_dun01,154,17,6	script	Warpra Helper#16	403,{ callfunc "QWS_Dungeon_Warpra",9,"Ice Dungeon"; close; }
+thor_v01,18,229,6	script	Warpra Helper#17	403,{ callfunc "QWS_Dungeon_Warpra",18,"Thor Volcano"; close; }
 
 
