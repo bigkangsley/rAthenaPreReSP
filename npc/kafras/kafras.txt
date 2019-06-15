@@ -121,7 +121,7 @@ aldebaran,143,119,4	script	Kafra Employee::kaf_aldebaran	113,{
 	mes "you with convenient services.";
 	mes "How may I be of assistance?";
 	callfunc "F_Kafra",5,0,1,20,600;
-	savepoint "aldebaran",143,109,1,1;
+	savepoint "aldebaran",140,113,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Al De Baran";
 }
 
@@ -166,7 +166,7 @@ morocc,156,97,4	script	Kafra Employee::kaf_morocc	113,{
 	mes "you with convenient services.";
 	mes "How may I be of assistance?";
 	callfunc "F_Kafra",5,0,0,60,930;
-	savepoint "morocc",156,46,1,1;
+	savepoint "morocc",156,93,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Morroc";
 }
 
@@ -196,7 +196,7 @@ payon,181,104,4	script	Kafra Employee::kaf_payon	113,{
 	mes "you with convenient services.";
 	mes "How may I be of assistance?";
 	callfunc "F_Kafra",5,0,1,60,930;
-	savepoint "payon",160,58,1,1;
+	savepoint "payon",179,100,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Payon";
 }
 
@@ -286,7 +286,7 @@ prontera,282,200,2	script	Kafra Employee::kaf_prontera4	114,{
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }
 
-prontera,157,193,4	script	Kafra Employee::kaf_prontera5	117,{
+prontera,157,187,4	script	Kafra Employee::kaf_prontera5	117,{
 	cutin "kafra_01",2;
 	callfunc "F_KafSet";
 	mes "[Kafra Employee]";
@@ -415,9 +415,9 @@ cmd_fild07,136,134,4	script	Kafra Employee::kaf_cmd_fild07	721,{
 	mes "How may I assist you?";
 	callfunc "F_Kafra",5,0,1,40,820;
 	if (checkre(0))
-		savepoint strnpcinfo(4),129,97,1,1;
+		savepoint strnpcinfo(4),128,113,1,1;
 	else
-		savepoint "izlude",94,103,1,1;
+		savepoint "izlude",128,114,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Izlude";
 }
 

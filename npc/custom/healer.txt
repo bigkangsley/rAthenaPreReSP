@@ -21,10 +21,12 @@
 	if (Zeny < 1000) {
 	message strcharinfo(0), "Healing costs 1000 Zeny.";
 			end; }
+
 	specialeffect2 EF_HEAL2;
 	percentheal 100,100;
 	message strcharinfo(0), "Healing costs 1000 Zeny.";
 	Zeny -= 1000;
+
 
 	/*
 	.@Price = 0;	// Zeny required for heal
@@ -58,42 +60,42 @@
 
 // Duplicates
 //============================================================
-alberta,25,240,6	duplicate(Healer)	Healer#alb	465
-aldebaran,135,118,6	duplicate(Healer)	Healer#alde	465
-amatsu,200,79,4	duplicate(Healer)	Healer#ama	465
-ayothaya,207,169,6	duplicate(Healer)	Healer#ayo	465
-comodo,184,158,6	duplicate(Healer)	Healer#com	465
-einbech,57,36,6	duplicate(Healer)	Healer#einbe	465
-einbroch,57,202,6	duplicate(Healer)	Healer#einbr	465
-geffen,115,72,6	duplicate(Healer)	Healer#gef	465
-gonryun,156,122,6	duplicate(Healer)	Healer#gon	465
-hugel,89,150,6	duplicate(Healer)	Healer#hug	465
-izlude,121,150,6	duplicate(Healer)	Healer#izl	465	//Pre-RE: (125,118)
-jawaii,250,139,4	duplicate(Healer)	Healer#jaw	465
-lighthalzen,152,100,6	duplicate(Healer)	Healer#lhz	465
-louyang,226,103,4	duplicate(Healer)	Healer#lou	465
-manuk,272,144,6	duplicate(Healer)	Healer#man	465
-mid_camp,203,289,6	duplicate(Healer)	Healer#mid	465
-moc_ruins,72,164,4	duplicate(Healer)	Healer#moc	465
-morocc,153,97,6	duplicate(Healer)	Healer#mor	465
-moscovia,220,191,4	duplicate(Healer)	Healer#mos	465
-niflheim,212,182,5	duplicate(Healer)	Healer#nif	465
-payon,179,106,4	duplicate(Healer)	Healer#pay	465
-prontera,162,193,4	duplicate(Healer)	Healer#prt	465
-rachel,125,116,6	duplicate(Healer)	Healer#rac	465
-splendide,201,153,4	duplicate(Healer)	Healer#spl	465
-thor_camp,249,74,4	duplicate(Healer)	Healer#thor	465
-umbala,105,148,3	duplicate(Healer)	Healer#umb	465
-veins,217,121,4	duplicate(Healer)	Healer#ve	465
-xmas,143,136,4	duplicate(Healer)	Healer#xmas	465
-yuno,164,45,4	duplicate(Healer)	Healer#yuno	465
+alberta,25,240,6	duplicate(Healer)	Healer#alb	811
+aldebaran,135,118,6	duplicate(Healer)	Healer#alde	811
+amatsu,200,79,4	duplicate(Healer)	Healer#ama	811
+ayothaya,207,169,6	duplicate(Healer)	Healer#ayo	811
+comodo,184,158,6	duplicate(Healer)	Healer#com	811
+einbech,57,36,6	duplicate(Healer)	Healer#einbe	811
+einbroch,57,202,6	duplicate(Healer)	Healer#einbr	811
+geffen,115,72,6	duplicate(Healer)	Healer#gef	811
+gonryun,156,122,6	duplicate(Healer)	Healer#gon	811
+hugel,89,150,6	duplicate(Healer)	Healer#hug	811
+izlude,122,121,5	duplicate(Healer)	Healer#izl	811	//Pre-RE: (125,118)
+jawaii,250,139,4	duplicate(Healer)	Healer#jaw	811
+lighthalzen,152,100,6	duplicate(Healer)	Healer#lhz	811
+louyang,226,103,4	duplicate(Healer)	Healer#lou	811
+manuk,272,144,6	duplicate(Healer)	Healer#man	811
+mid_camp,203,289,6	duplicate(Healer)	Healer#mid	811
+moc_ruins,72,164,4	duplicate(Healer)	Healer#moc	811
+morocc,153,97,6	duplicate(Healer)	Healer#mor	811
+moscovia,220,191,4	duplicate(Healer)	Healer#mos	811
+niflheim,212,182,5	duplicate(Healer)	Healer#nif	811
+payon,179,106,4	duplicate(Healer)	Healer#pay	811
+prontera,162,193,4	duplicate(Healer)	Healer#prt	811
+rachel,125,116,6	duplicate(Healer)	Healer#rac	811
+splendide,201,153,4	duplicate(Healer)	Healer#spl	811
+thor_camp,249,74,4	duplicate(Healer)	Healer#thor	811
+umbala,105,148,3	duplicate(Healer)	Healer#umb	811
+veins,217,121,4	duplicate(Healer)	Healer#ve	811
+xmas,143,136,4	duplicate(Healer)	Healer#xmas	811
+yuno,164,45,4	duplicate(Healer)	Healer#yuno	811
 
 // Duplicates (Renewal)
 //============================================================
-brasilis,194,221,6	duplicate(Healer)	Healer#bra	465
-dewata,195,187,4	duplicate(Healer)	Healer#dew	465
-dicastes01,201,194,4	duplicate(Healer)	Healer#dic	465
-ecl_in01,45,60,4	duplicate(Healer)	Healer#ecl	465
-malangdo,132,114,6	duplicate(Healer)	Healer#mal	465
-malaya,227,204,6	duplicate(Healer)	Healer#ma	465
-mora,55,152,4	duplicate(Healer)	Healer#mora	465
+brasilis,194,221,6	duplicate(Healer)	Healer#bra	811
+dewata,195,187,4	duplicate(Healer)	Healer#dew	811
+dicastes01,201,194,4	duplicate(Healer)	Healer#dic	811
+ecl_in01,45,60,4	duplicate(Healer)	Healer#ecl	811
+malangdo,132,114,6	duplicate(Healer)	Healer#mal	811
+malaya,227,204,6	duplicate(Healer)	Healer#ma	811
+mora,55,152,4	duplicate(Healer)	Healer#mora	811
