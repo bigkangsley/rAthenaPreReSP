@@ -61,8 +61,10 @@ yuno_fild03,0,0	monster	Poring	1002,30
 yuno_fild03,0,0	monster	Marin	1242,20
 yuno_fild03,0,0	monster	Geographer	1368,15
 yuno_fild03,62,131,44,15	monster	Side Winder	1037,1,300000,240000
-yuno_fild03,0,0	monster	Angeling	1096,1,3600000,1800000
-yuno_fild03,0,0	monster	Deviling	1582,1,3600000,1800000
+yuno_fild03,0,0	monster	Mastering	1090,1,36000,18000
+yuno_fild03,0,0	monster	Angeling	1096,1,36000,18000
+yuno_fild03,0,0	monster	Deviling	1582,1,36000,18000
+yuno_fild03,0,0	monster	Arc Angeling	1388,1,36000,18000
 yuno_fild03,0,0	monster	Red Plant	1078,15,1800000,900000
 yuno_fild03,0,0	monster	Yellow Plant	1081,15,1800000,900000
 yuno_fild03,0,0	monster	Green Plant	1080,15,1800000,900000
@@ -74,9 +76,9 @@ yuno_fild03,358,215,10,10	monster	Blue Plant	1079,4,1800000,900000
 //==================================================
 yuno_fild04,0,0	monster	Poring	1002,60
 yuno_fild04,0,0	monster	Drops	1113,40
+yuno_fild04,0,0	monster	Mastering	1090,1,36000,18000
 yuno_fild04,0,0	monster	Condor	1009,20
 yuno_fild04,0,0	monster	Pupa	1008,10
-yuno_fild04,0,0	monster	Mastering	1090,1,3600000,1800000
 yuno_fild04,0,0	monster	Red Plant	1078,10,1800000,900000
 yuno_fild04,0,0	monster	Yellow Plant	1081,10,1800000,900000
 yuno_fild04,0,0	monster	Green Plant	1080,10,1800000,900000
@@ -88,7 +90,7 @@ yuno_fild05,0,0	monster	Rafflesia	1162,70
 yuno_fild05,0,0	monster	Dustiness	1114,30
 yuno_fild05,0,0	monster	Horn	1128,30
 yuno_fild05,0,0	monster	Beetle King	1494,10
-yuno_fild05,0,0	monster	Arc Angeling	1388,1,3600000,180000
+yuno_fild05,0,0	monster	Arc Angeling	1388,1,360000,18000
 yuno_fild05,0,0	monster	Red Plant	1078,10,180000,90000
 yuno_fild05,0,0	monster	Green Plant	1080,10,180000,90000
 yuno_fild05,0,0	monster	Yellow Plant	1081,10,180000,90000

@@ -18,14 +18,16 @@
 	if (Hp == MaxHp && Sp == MaxSp)
 			end; 
 
-	if (Zeny < 1000) {
-	message strcharinfo(0), "Healing costs 1000 Zeny.";
+	@Price = (MaxHp - Hp)/10 + (MaxSp - Sp)/5;
+
+	if (Zeny < @Price) {
+	message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",@Price) + " Zeny.";
 			end; }
 
 	specialeffect2 EF_HEAL2;
 	percentheal 100,100;
-	message strcharinfo(0), "Healing costs 1000 Zeny.";
-	Zeny -= 1000;
+	message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",@Price) + " Zeny.";
+	Zeny -= @Price;
 
 
 	/*

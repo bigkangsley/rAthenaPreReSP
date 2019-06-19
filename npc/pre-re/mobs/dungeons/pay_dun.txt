@@ -27,8 +27,8 @@ pay_dun00,140,140,5,5	monster	Black Mushroom	1084,3,360000,180000
 //==================================================
 pay_dun01,0,0	monster	Drainliar	1111,5
 pay_dun01,0,0	monster	Eggyra	1116,15
-pay_dun01,0,0	monster	Soldier Skeleton	1028,50,300000,150000
-pay_dun01,0,0	monster	Archer Skeleton	1016,30,300000,150000
+pay_dun01,0,0	monster	Soldier Skeleton	1028,60,300000,150000
+pay_dun01,0,0	monster	Archer Skeleton	1016,40,300000,150000
 pay_dun01,235,54,10,10	monster	Black Mushroom	1084,7,900000,450000
 pay_dun01,0,0	monster	Red Plant	1078,10,180000,90000
 
@@ -36,7 +36,7 @@ pay_dun01,0,0	monster	Red Plant	1078,10,180000,90000
 // pay_dun02 - Payon Cave F3
 //==================================================
 pay_dun02,0,0	monster	Soldier Skeleton	1028,15,180000,90000
-pay_dun02,0,0	monster	Munak	1026,40
+pay_dun02,0,0	monster	Munak	1026,60
 pay_dun02,0,0	monster	Bongun	1188,30
 pay_dun02,0,0	monster	Poporing	1031,10
 pay_dun02,0,0	monster	Archer Skeleton	1016,20,180000,90000
@@ -95,7 +95,7 @@ pay_dun03,154,112	monster	Whisper	1185,1,1800000
 pay_dun03,161,117	monster	Whisper	1185,1,1800000
 pay_dun03,81,61	monster	Whisper	1185,1,1800000
 pay_dun03,84,63	monster	Whisper	1185,1,1800000
-pay_dun03,89,147	monster	Giant Whisper	1186,1,14400000
+pay_dun03,89,147	monster	Giant Whisper	1186,10
 pay_dun03,66,73	monster	Hydra	1068,1,600000,300000
 pay_dun03,68,72	monster	Hydra	1068,1,600000,300000
 pay_dun03,67,71	monster	Hydra	1068,1,600000,300000
@@ -153,7 +153,7 @@ pay_dun04,0,0	monster	Archer Skeleton	1016,15
 pay_dun04,0,0	monster	Nine Tail	1180,30,60000,30000
 pay_dun04,0,0	monster	Skeleton General	1290,1
 pay_dun04,0,0	monster	Am Mut	1301,1
-pay_dun04,120,115	monster	Cat o' Nine Tails	1307,1,3600000,7200000,1
+pay_dun04,120,115	monster	Cat o' Nine Tails	1307,1,360000,720000,1
 pay_dun04,120,120,10,10	monster	Shining Plant	1083,1,1800000,900000
 pay_dun04,28,110,5,5	monster	Shining Plant	1083,1,1800000,900000
 pay_dun04,0,0	monster	Red Plant	1078,10,180000,90000

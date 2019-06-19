@@ -29,9 +29,9 @@ mjolnir_01,311,271,25,25	monster	Blue Plant	1079,5,360000,180000
 //==================================================
 mjolnir_02,0,0	monster	Hornet	1004,30
 mjolnir_02,0,0	monster	Creamy	1018,20
-mjolnir_02,0,0	monster	Petite	1155,50
+mjolnir_02,0,0	monster	Petite	1155,40
 mjolnir_02,0,0	monster	Poporing	1031,10
-mjolnir_02,0,0	monster	Flora	1118,30
+mjolnir_02,0,0	monster	Flora	1118,40
 mjolnir_02,86,270	monster	Green Plant	1080,1,180000,90000
 mjolnir_02,80,211	monster	Green Plant	1080,1,180000,90000
 mjolnir_02,86,270	monster	Green Plant	1080,1,180000,90000
@@ -70,12 +70,12 @@ mjolnir_02,188,192,10,10	monster	Blue Plant	1079,2,360000,180000
 //==================================================
 // mjolnir_03 - Mt.Mjolnir
 //==================================================
-mjolnir_03,0,0	monster	Mantis	1139,30
+mjolnir_03,0,0	monster	Mantis	1139,10
 mjolnir_03,0,0	monster	Creamy	1018,10
-mjolnir_03,0,0	monster	Petite	1156,70
+mjolnir_03,0,0	monster	Petite	1156,100
 mjolnir_03,0,0	monster	Poporing	1031,10
 mjolnir_03,0,0	monster	Flora	1118,10
-mjolnir_03,0,0	monster	Argos	1100,20
+mjolnir_03,0,0	monster	Argos	1100,10
 mjolnir_03,211,216,10,10	monster	Shining Plant	1083,1,1800000,900000
 mjolnir_03,280,252,10,10	monster	Shining Plant	1083,1,1800000,900000
 mjolnir_03,135,94	monster	Green Plant	1080,1,180000,90000
@@ -96,7 +96,7 @@ mjolnir_03,91,161	monster	Green Plant	1080,1,180000,90000
 // mjolnir_04 - Mt.Mjolnir
 //==================================================
 mjolnir_04,0,0	monster	Mantis	1139,20
-mjolnir_04,0,0	monster	Hornet	1004,70
+mjolnir_04,0,0	monster	Hornet	1004,100
 mjolnir_04,0,0	monster	Poporing	1031,10
 mjolnir_04,0,0	monster	Flora	1118,30
 mjolnir_04,0,0	monster	Argiope	1099,20
@@ -123,11 +123,11 @@ mjolnir_04,205,33	monster	Green Plant	1080,1,180000,90000
 //==================================================
 // mjolnir_05 - Mt.Mjolnir
 //==================================================
-mjolnir_05,0,0	monster	Mantis	1139,40
+mjolnir_05,0,0	monster	Mantis	1139,10
 mjolnir_05,0,0	monster	Poporing	1031,10
-mjolnir_05,0,0	monster	Flora	1118,20
-mjolnir_05,0,0	monster	Argiope	1099,100
-mjolnir_05,0,0	monster	Argos	1100,20
+mjolnir_05,0,0	monster	Flora	1118,10
+mjolnir_05,0,0	monster	Argiope	1099,120
+mjolnir_05,0,0	monster	Argos	1100,10
 mjolnir_05,200,240,40,40	monster	Blue Plant	1079,3,360000,180000
 mjolnir_05,200,240,40,40	monster	Shining Plant	1083,1,1800000,900000
 mjolnir_05,134,103,20,20	monster	Blue Plant	1079,3,360000,180000
@@ -212,10 +212,10 @@ mjolnir_09,125,82	monster	Red Mushroom	1085,1,180000,90000
 //==================================================
 // mjolnir_10 - Mt.Mjolnir
 //==================================================
-mjolnir_10,0,0	monster	Mantis	1139,20
-mjolnir_10,0,0	monster	Flora	1118,30
-mjolnir_10,0,0	monster	Argos	1100,60
-mjolnir_10,0,0	monster	Poporing	1031,20
+mjolnir_10,0,0	monster	Mantis	1139,10
+mjolnir_10,0,0	monster	Flora	1118,10
+mjolnir_10,0,0	monster	Argos	1100,100
+mjolnir_10,0,0	monster	Poporing	1031,10
 mjolnir_10,0,0	monster	Petite	1155,10
 mjolnir_10,123,331,10,10	monster	Shining Plant	1083,1,1800000,900000
 mjolnir_10,0,0	monster	Green Plant	1080,10,180000,90000
@@ -224,10 +224,10 @@ mjolnir_10,0,0	monster	Green Plant	1080,10,180000,90000
 // mjolnir_11 - Mt.Mjolnir
 //==================================================
 mjolnir_11,0,0	monster	Argiope	1099,10
-mjolnir_11,0,0	monster	Mandragora	1020,50
-mjolnir_11,0,0	monster	Flora	1118,60
+mjolnir_11,0,0	monster	Mandragora	1020,60
+mjolnir_11,0,0	monster	Flora	1118,80
 mjolnir_11,0,0	monster	Poporing	1031,10
-mjolnir_11,0,0	monster	Thief Bug Male	1054,30
+mjolnir_11,0,0	monster	Thief Bug Male	1054,20
 mjolnir_11,112,276	monster	Green Plant	1080,1,180000,90000
 mjolnir_11,159,283	monster	Green Plant	1080,1,180000,90000
 mjolnir_11,116,240	monster	Green Plant	1080,1,180000,90000
@@ -246,5 +246,5 @@ mjolnir_11,295,271	monster	Green Plant	1080,1,180000,90000
 // mjolnir_12 - Mt.Mjolnir
 //==================================================
 mjolnir_12,0,0	monster	Stem Worm	1215,20
-mjolnir_12,0,0	monster	Dustiness	1114,50
+mjolnir_12,0,0	monster	Dustiness	1114,80
 mjolnir_12,0,0	monster	Thief Bug Female	1053,20

@@ -1,0 +1,144 @@
+//Made by zero84ena[meru]
+//v1.0 [release]
+//v1.05 [Bug fixes!]
+//v1.1 [added zeny cost] [needs waight chek!]
+//v1.15 [refine items are now the same as the official eli/ori refiners + reneval refiner material]
+
+prt_in,52,56,7	script	Advanced Refiner	86,{
+
+	//Configuration
+	set .npc_name$,"^0000FF[Advanced Refiner]^000000";
+	setarray .inputt[0],756,757,984,985,6224;
+	setarray .output[0],984,985,6224,6223,6223;
+	setarray .rate[0],5,5,3,3,1;
+	setarray .zeny[0],0,0,50000,50000,500000;
+	set .term$, "refine";
+	//end of Configuraton
+	
+	
+	set .itemsss,0;
+	mes .npc_name$;
+	mes "I can "+.term$+" the following:";
+	for(set .i,0; .i < getarraysize(.inputt); set .i, .i +1){
+		set .c, .i+1;
+		setarray .names$[.i],getitemname(.inputt[.i]);
+		setarray .nameso$[.i],getitemname(.output[.i]);
+		set .zs$, (.zeny[.i]>0?"^754020"+.zeny[.i]+"z^000000":"");
+		mes "^000099"+.names$[.i]+"^000000 ^900090("+ .rate[.i]+" /1)^000000 "+.zs$;
+	}
+	next;
+
+	//chking if u have some of the items?!
+	for(set .ch,0; .ch < getarraysize(.inputt); set .ch,.ch+1) {
+		if(countitem(.inputt[.ch]) >= .rate[.ch]) set .itemsss, .itemsss+1;
+	}
+	
+	if(.itemsss == 0) goto No_res;
+			
+	set .menu$, "";
+	//generating menu;
+	set .kk,0; //identifying the 1st menu element;
+	for(set .ko,0; .ko < getarraysize(.inputt); set .ko,.ko+1) {
+		if(countitem(.inputt[.ko]) >= .rate[.ko] && Zeny >= .zeny[.ko]) {
+			if(.kk == 0) {
+				set .menu$,.menu$ + " Make"+getitemname(.output[.ko])+" ^00a000["+(countitem(.inputt[.ko]) / .rate[.ko])+"]^000000";
+				set .kk,1;
+			}else{
+				set .menu$,.menu$ + ":Make " + getitemname(.output[.ko])+" ^00a000["+(countitem(.inputt[.ko]) / .rate[.ko])+"]^000000";
+				}
+		}
+		if(countitem(.inputt[.ko]) < .rate[.ko] || Zeny < .zeny[.ko]) {
+			set .error$, (Zeny < .zeny[.ko]?"^754020[Nzeny]^000000":"^900090[Nmater]^000000");
+			if(.kk == 0) {
+				set .menu$,.menu$ + "Cannot Make "+getitemname(.output[.ko]) + " " + .error$;
+				set .kk,1;
+			}else{
+				set .menu$,.menu$ + ":Cannot Make " + getitemname(.output[.ko]) + " " + .error$;
+				}
+			}
+	}
+
+set .id,(select(.menu$)-1);
+
+		if(Zeny < .zeny[.id]) goto E_needzeny;
+		if(.zeny[.id] != 0) set .makez, Zeny / .zeny[.id];
+		else set .makez, Zeny;
+		set .make,(countitem(.inputt[.id]) / .rate[.id]);
+		if (.zeny[.id] > 0 && .make > .makez) set .maxx,.makez; 
+		else set .maxx,.make;
+		if (.make == 0) goto No_res;
+		mes .npc_name$;
+		mes "I can make:^000099 "+.maxx+" - "+.nameso$[.id]+"^000000";
+		mes "Materials required: ";
+		mes "^000099"+.names$[.id]+"^000000 ^900090[" + .maxx * .rate[.id] + "]^000000";
+		mes "You have: ^900090["+ countitem(.inputt[.id]) +"]^000000";
+		if (.zeny[.id] > 0) {
+			mes "It costs: ["+.zeny[.id]+"] z/ea";
+			mes "Total: ["+.zeny[.id]*.maxx+"z] z";
+		}
+		mes "Do you vant me to make them?";
+		next;
+		switch(select("Yes:Yes But Not All:Dont need it")){
+			case 1:
+			mes .npc_name$;
+			mes "Here is your ^000099"+.maxx+" "+.nameso$[.id]+"^000000";
+			getitem .output[.id],.maxx;
+			delitem .inputt[.id],.maxx*.rate[.id];
+			set Zeny, Zeny-(.maxx*.zeny[.id]);
+			close;
+			
+			case 2:
+			anew:
+			mes .npc_name$;
+			mes "You have: ^009000"+countitem(.inputt[.id])+" "+.names$[.id]+"^000000";
+			mes "You have: ^500050"+Zeny+"^000000 Z";
+			mes "The rate is: ^900090"+.rate[.id]+"^000000";
+			if (.zeny[.id] > 0)
+			mes "The price is: ^900090"+.zeny[.id]+"^000000 z/ea!";
+			mes "Max is: ^0000FF"+.maxx+"^000000";
+			mes "Ok. How Much?";
+			next;
+			input .offer;
+			
+			if(Zeny < (.offer*.zeny[.id])) {
+				mes .npc_name$;
+				mes "Zeny requierd:^909000"+.offer*.zeny[.id]+"^000000";
+				next;
+				goto anew;
+			}
+			if(.offer > .maxx) {
+				mes .npc_name$;
+				mes "You only have material for ^FF0000"+.maxx+"^000000";
+				next;
+				goto anew;
+			}
+			if (.offer == 0) goto Seeya;
+			mes .npc_name$;
+			mes "Here is your ^000099"+.offer+" "+.nameso$[.id]+"^000000";
+			if(.zeny[.id] > 0) set Zeny,Zeny-(.offer*.zeny[.id]);
+			getitem .output[.id],.offer;
+			delitem .inputt[.id],.offer*.rate[.id];
+			close;
+			
+			case 3:
+			goto Seeya;
+		}
+		close;
+			
+	Seeya:
+	mes .npc_name$;
+	mes "Seeya...";
+	close;
+	
+	No_res:
+	mes .npc_name$;
+	mes "You dont have enough items!";
+	close;
+		
+	E_needzeny:
+	mes .npc_name$;
+	mes "You dont have enough zeny!";
+	close;
+	end;
+
+}

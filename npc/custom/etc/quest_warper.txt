@@ -126,10 +126,12 @@ GM_Menu:
 
 Last_Warp:
 	next;
-	if(Zeny< 0) callsub L_Short_on_zeny,1;
+	set @warpprice, 25 * BaseLevel;
+	if(Zeny < @warpprice) callsub L_Short_on_zeny,1;
 	warp lastwarp$,lastwarpx,lastwarpy;
+	message strcharinfo(0), "Warping costs " + callfunc("F_InsertComma",@warpprice) + " Zeny.";
+	set Zeny, Zeny-(@warpprice);
 	close2;
-	set Zeny, Zeny-(0);
 	end;
 
 
@@ -146,8 +148,9 @@ L_town:
 
 	if (@Tmenuref[@TWMenu-1] == 57005) goto L_end; // 57005='dead' in hex
 
-	set @warpprice, 1000;
+	set @warpprice, 25 * BaseLevel;
 	if(Zeny<@warpprice) callsub L_Short_on_zeny,0;
+	message strcharinfo(0), "Warping costs " + callfunc("F_InsertComma",@warpprice) + " Zeny.";
 	set Zeny, Zeny-(@warpprice);
 
 	set lastwarp$, @pTmap$[@Tmenuref[@TWMenu-1]];
@@ -187,10 +190,10 @@ L_field:
 
 	set @Farrayref, @FWLmenuref[@FWLMenu-1];
 
-	set @warpprice, 1000;
+	set @warpprice, 25 * BaseLevel;
 	if(Zeny<@warpprice) callsub L_Short_on_zeny,1;
+	message strcharinfo(0), "Warping costs " + callfunc("F_InsertComma",@warpprice) + " Zeny.";
 	set Zeny, Zeny-(@warpprice);
-
 	set lastwarp$, @FGat$[@Farrayref];
 	set lastwarpx, @FXcoords[@Farrayref];
 	set lastwarpy, @FYcoords[@Farrayref];
@@ -228,8 +231,9 @@ L_citydungeon:
 
 	set @CDarrayref, @CDWLmenuref[@CDWLMenu-1];
 	
-	set @warpprice, 1000;
+	set @warpprice, 25 * BaseLevel;
 	if(Zeny<@warpprice) callsub L_Short_on_zeny,2;
+	message strcharinfo(0), "Warping costs " + callfunc("F_InsertComma",@warpprice) + " Zeny.";
 	set Zeny, Zeny-(@warpprice);
 
 	set lastwarp$, @CDGat$[@CDarrayref];
@@ -269,8 +273,9 @@ L_dungeon:
 
 	set @Darrayref, @DWLmenuref[@DWLMenu-1];
 	
-	set @warpprice, 1000;
+	set @warpprice, 25 * BaseLevel;
 	if(Zeny<@warpprice) callsub L_Short_on_zeny,3;
+	message strcharinfo(0), "Warping costs " + callfunc("F_InsertComma",@warpprice) + " Zeny.";
 	set Zeny, Zeny-(@warpprice);
 
 	set lastwarp$, @DGat$[@Darrayref];
@@ -304,10 +309,10 @@ L_FewWarps:
 L_Short_on_zeny:
 	next;
 	switch(getarg(0)) {
-	case 0: mes "You don't seem to have the zeny to pay for the warp to "+@pTmenuitems$[@Tmenuref[@TWMenu-1]]+"."; break;
-	case 1: mes "You don't seem to have the zeny to pay for the warp to "+@FLevelName$[@FWLmenuref[@FWLMenu-1]]+" at "+@pFmenuitems$[@Fmenuref[@FWMenu-1]]+"."; break;
-	case 2: mes "You don't seem to have the zeny to pay for the warp to "+@CDLevelName$[@CDWLmenuref[@CDWLMenu-1]]+" at "+@pCDmenuitems$[@CDmenuref[@CDWMenu-1]]+"."; break;
-	case 3: mes "You don't seem to have the zeny to pay for the warp to "+@DLevelName$[@DWLmenuref[@DWLMenu-1]]+" at "+@pDmenuitems$[@Dmenuref[@DWMenu-1]]+"."; break;
+	case 0: mes "You don't seem to have the"+25 * BaseLevel +" zeny to pay for the warp to "+@pTmenuitems$[@Tmenuref[@TWMenu-1]]+"."; break;
+	case 1: mes "You don't seem to have the "+25 * BaseLevel +" zeny to pay for the warp to "+@FLevelName$[@FWLmenuref[@FWLMenu-1]]+" at "+@pFmenuitems$[@Fmenuref[@FWMenu-1]]+"."; break;
+	case 2: mes "You don't seem to have the "+25 * BaseLevel +" zeny to pay for the warp to "+@CDLevelName$[@CDWLmenuref[@CDWLMenu-1]]+" at "+@pCDmenuitems$[@CDmenuref[@CDWMenu-1]]+"."; break;
+	case 3: mes "You don't seem to have the "+25 * BaseLevel +" zeny to pay for the warp to "+@DLevelName$[@DWLmenuref[@DWLMenu-1]]+" at "+@pDmenuitems$[@Dmenuref[@DWMenu-1]]+"."; break;
 	}
 	close;
 	end;
@@ -344,7 +349,7 @@ stampcard:
 
 function	script	QWS_TownStamps	{
 	set @Tstamp,0;
-	set @MaxTstamp,30; //maximum number of towns
+	set @MaxTstamp,28; //maximum number of towns
 	set @binvalue,1;
 	set @Tstamploop,0;
 	do {
@@ -357,7 +362,7 @@ function	script	QWS_TownStamps	{
 
 function	script	QWS_FieldStamps	{
 	set @Fstamp,0;
-	set @MaxFstamp,30; //maximum number of fields
+	set @MaxFstamp,22; //maximum number of fields
 	set @binvalue,1;
 	set @Fstamploop,0;
 	do {
@@ -370,7 +375,7 @@ function	script	QWS_FieldStamps	{
 
 function	script	QWS_CityDungeonStamps	{
 	set @CDstamp,0;
-	set @MaxCDstamp,30; //maximum number of dungeons
+	set @MaxCDstamp,21; //maximum number of dungeons
 	set @binvalue,1;
 	set @CDstamploop,0;
 	do {
@@ -383,7 +388,7 @@ function	script	QWS_CityDungeonStamps	{
 
 function	script	QWS_DungeonStamps	{
 	set @Dstamp,0;
-	set @MaxDstamp,30; //maximum number of dungeons
+	set @MaxDstamp,20; //maximum number of dungeons
 	set @binvalue,1;
 	set @Dstamploop,0;
 	do {
@@ -464,7 +469,7 @@ function	script	QWS_MMarray	{
 //======================Town=Menu=Array============================
 // Adding a town:
 //	setarray @pTmenuitems$[@Ti], "Prontera";// Name of Town shown in Town select Menu
-//	setarray @pTprice[@Ti], 0;	// Warp prices: Basic (0), Advanced (0), Overseas (0)
+//	// Warp prices: Basic (0), Advanced (0), Overseas (0)
 //
 //	setarray @pTmap$[@Ti], "prontera";	// Map name
 //	setarray @pTXcoords[@Ti], 156;		// X warp coords
@@ -488,7 +493,7 @@ function	script	QWS_Tarray	{
 
 //----------------Prontera
 	setarray @pTmenuitems$[@Ti], "Prontera";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "prontera";
 	setarray @pTXcoords[@Ti], 155;
@@ -497,7 +502,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 0;
 //----------------Alberta
 	setarray @pTmenuitems$[@Ti], "Alberta";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "alberta";
 	setarray @pTXcoords[@Ti], 28;
@@ -506,7 +511,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 1;
 //----------------Aldebaran
 	setarray @pTmenuitems$[@Ti], "Aldebaran";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "aldebaran";
 	setarray @pTXcoords[@Ti], 140;
@@ -515,7 +520,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 2;
 //----------------Amatsu:
 	setarray @pTmenuitems$[@Ti], "Amatsu";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "amatsu";
 	setarray @pTXcoords[@Ti], 198;
@@ -524,7 +529,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 3;
 //----------------Ayothaya:
 	setarray @pTmenuitems$[@Ti], "Ayothaya";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "ayothaya";
 	setarray @pTXcoords[@Ti], 208;
@@ -533,7 +538,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 4;
 //----------------Comodo:
 	setarray @pTmenuitems$[@Ti], "Comodo";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "comodo";
 	setarray @pTXcoords[@Ti], 189;
@@ -543,7 +548,7 @@ function	script	QWS_Tarray	{
 
 //----------------Einbech:
 	setarray @pTmenuitems$[@Ti], "Einbech";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "einbech";
 	setarray @pTXcoords[@Ti], 63;
@@ -553,7 +558,7 @@ function	script	QWS_Tarray	{
 
 //----------------Einbroch:
 	setarray @pTmenuitems$[@Ti], "Einbroch";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "einbroch";
 	setarray @pTXcoords[@Ti], 64;
@@ -563,7 +568,7 @@ function	script	QWS_Tarray	{
 
 //----------------Geffen:
 	setarray @pTmenuitems$[@Ti], "Geffen";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "geffen";
 	setarray @pTXcoords[@Ti], 119;
@@ -572,7 +577,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 8;
 //----------------Gonryun:
 	setarray @pTmenuitems$[@Ti], "Gonryun";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "gonryun";
 	setarray @pTXcoords[@Ti], 160;
@@ -581,7 +586,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 9;
 //----------------Hugel:
 	setarray @pTmenuitems$[@Ti], "Hugel";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "hugel";
 	setarray @pTXcoords[@Ti], 96;
@@ -590,7 +595,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 10;
 //----------------Izlude:
 	setarray @pTmenuitems$[@Ti], "Izlude";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "izlude";
 	setarray @pTXcoords[@Ti], 128;
@@ -599,7 +604,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 11;
 //----------------Jawaii:
 	setarray @pTmenuitems$[@Ti], "Jawaii";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "jawaii";
 	setarray @pTXcoords[@Ti], 251;
@@ -608,7 +613,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 12;
 //----------------Lighthalzen:
 	setarray @pTmenuitems$[@Ti], "Lighthalzen";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "lighthalzen";
 	setarray @pTXcoords[@Ti], 158;
@@ -617,7 +622,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 13;
 //----------------Louyang:
 	setarray @pTmenuitems$[@Ti], "Louyang";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "louyang";
 	setarray @pTXcoords[@Ti], 217;
@@ -626,7 +631,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 14;
 //----------------Lutie
 	setarray @pTmenuitems$[@Ti], "Lutie";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "xmas";
 	setarray @pTXcoords[@Ti], 147;
@@ -635,7 +640,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 15;
 //----------------Manuk
 	setarray @pTmenuitems$[@Ti], "Manuk";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "manuk";
 	setarray @pTXcoords[@Ti], 282;
@@ -645,7 +650,7 @@ function	script	QWS_Tarray	{
 
 //----------------Midgard's Expedition Camp:
 	setarray @pTmenuitems$[@Ti], "Midgard's Expedition Camp";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "mid_camp";
 	setarray @pTXcoords[@Ti], 210;
@@ -655,7 +660,7 @@ function	script	QWS_Tarray	{
 
 //----------------Morroc:
 	setarray @pTmenuitems$[@Ti], "Morroc";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "morocc";
 	setarray @pTXcoords[@Ti], 156;
@@ -664,7 +669,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 18;
 //----------------Moscovia
 	setarray @pTmenuitems$[@Ti], "Moscovia";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "moscovia";
 	setarray @pTXcoords[@Ti], 223;
@@ -673,7 +678,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 19;
 //----------------Niflheim:
 	setarray @pTmenuitems$[@Ti], "Niflheim";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "niflheim";
 	setarray @pTXcoords[@Ti], 202;
@@ -682,7 +687,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 20;
 //----------------Payon:
 	setarray @pTmenuitems$[@Ti], "Payon";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "payon";
 	setarray @pTXcoords[@Ti], 179;
@@ -691,7 +696,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 21;
 //----------------Rachel
 	setarray @pTmenuitems$[@Ti], "Rachel";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "rachel";
 	setarray @pTXcoords[@Ti], 130;
@@ -700,7 +705,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 22;
 //----------------Splendide
 	setarray @pTmenuitems$[@Ti], "Splendide";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "splendide";
 	setarray @pTXcoords[@Ti], 201;
@@ -709,7 +714,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 23;
 //----------------Thor Camp:
 	setarray @pTmenuitems$[@Ti], "Thor Camp";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "thor_camp";
 	setarray @pTXcoords[@Ti], 246;
@@ -718,7 +723,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 24;
 //----------------Umbala:
 	setarray @pTmenuitems$[@Ti], "Umbala";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "umbala";
 	setarray @pTXcoords[@Ti], 97;
@@ -727,7 +732,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 25;
 //----------------Veins
 	setarray @pTmenuitems$[@Ti], "Veins";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "veins";
 	setarray @pTXcoords[@Ti], 216;
@@ -736,7 +741,7 @@ function	script	QWS_Tarray	{
 	QWS_Make_Town_Menu 26;
 //----------------Yuno:
 	setarray @pTmenuitems$[@Ti], "Yuno";
-	setarray @pTprice[@Ti], 0;
+
 
 	setarray @pTmap$[@Ti], "yuno";
 	setarray @pTXcoords[@Ti], 157;
@@ -746,7 +751,7 @@ function	script	QWS_Tarray	{
 
 //----------------Cancel
 	setarray @pTmenuitems$[@Ti], "Cancel";
-	setarray @pTprice[@Ti], 0;
+
 
 	set @Tmenulist$[@Tj],@pTmenuitems$[@Ti];
 	set @Tmenuref[@Tj],57005; // 57005='dead' in hex
@@ -783,8 +788,8 @@ menu_item:
 //====================Field=Menu=Arrays==========================
 // Adding a field:
 //	setarray @pFmenuitems$[@Fi], "Abyss Lake";	// Name of Field shown in Field select Menu
-//	setarray @pFprice[@Fi], 0;		// Warp prices: Basic (0), Advanced (0), Overseas (0)
-//	setarray @pFfee$[@Fi], 0;		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
+//		// Warp prices: Basic (0), Advanced (0), Overseas (0)
+//		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
 //	setarray @FLevels[@Fi], 3;			// Number of levels in Field
 //
 //	setarray @FGat$[@Fref], "abyss_01", "abyss_02", "abyss_03";	// Map names of Field levels
@@ -812,8 +817,8 @@ function	script	QWS_Farray	{
 
 //----------------AMATSU FIELDS
 	setarray @pFmenuitems$[@Fi], "Amatsu Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 1;
 
 	setarray @FGat$[@Fref], "ama_fild01";
@@ -826,8 +831,8 @@ function	script	QWS_Farray	{
 
 //----------------Ayothaya Fields
 	setarray @pFmenuitems$[@Fi], "Ayothaya Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 2;
 	setarray @FGat$[@Fref], "ayo_fild01", "ayo_fild02";
 	setarray @FLevelName$[@Fref], "Ayothaya Field 1", "Ayothaya Field 2";
@@ -839,8 +844,8 @@ function	script	QWS_Farray	{
 
 //----------------Comodo Field
 	setarray @pFmenuitems$[@Fi], "Comodo Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 9;
 	setarray @FGat$[@Fref], "cmd_fild01", "cmd_fild02", "cmd_fild03",  "cmd_fild04", "cmd_fild05", "cmd_fild06", "cmd_fild07", "cmd_fild08", "cmd_fild09";
 	setarray @FLevelName$[@Fref], "Comodo Field 1", "Comodo Field 2", "Comodo Field 3", "Comodo Field 4", "Comodo Field 5", "Comodo Field 6", "Comodo Field 7", "Comodo Field 8", "Comodo Field 9";
@@ -853,8 +858,8 @@ function	script	QWS_Farray	{
 
 //----------------Einbroch Field
 	setarray @pFmenuitems$[@Fi], "Einbroch Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 10;
 	setarray @FGat$[@Fref], "ein_fild01", "ein_fild02", "ein_fild03",  "ein_fild04", "ein_fild05", "ein_fild06", "ein_fild07", "ein_fild08", "ein_fild09", "ein_fild10";
 	setarray @FLevelName$[@Fref], "Einbroch Field 1", "Einbroch Field 2", "Einbroch Field 3", "Einbroch Field 4", "Einbroch Field 5", "Einbroch Field 6", "Einbroch Field 7", "Einbroch Field 8", "Einbroch Field 9", "Einbroch Field 10";
@@ -867,21 +872,21 @@ function	script	QWS_Farray	{
 
 //----------------Geffen Field
 	setarray @pFmenuitems$[@Fi], "Geffen Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 14;
-	setarray @FGat$[@Fref], "gef_fild01", "gef_fild02", "gef_fild03",  "gef_fild04", "gef_fild05", "gef_fild06", "gef_fild07", "gef_fild08", "gef_fild09", "gef_fild10","gef_fild11","gef_fild12","gef_fild13","gef_fild14";
-	setarray @FLevelName$[@Fref], "Geffen Field 1", "Geffen Field 2", "Geffen Field 3", "Geffen Field 4", "Geffen Field 5", "Geffen Field 6", "Geffen Field 7", "Geffen Field 8", "Geffen Field 9", "Geffen Field 10","Geffen Field 11","Geffen Field 12","Geffen Field 13","Geffen Field 14";
+	setarray @FGat$[@Fref], "gef_fild00", "gef_fild01", "gef_fild02", "gef_fild03",  "gef_fild04", "gef_fild05", "gef_fild06", "gef_fild07", "gef_fild08", "gef_fild09", "gef_fild10","gef_fild11","gef_fild12","gef_fild13","gef_fild14";
+	setarray @FLevelName$[@Fref], "Geffen Field 0", "Geffen Field 1", "Geffen Field 2", "Geffen Field 3", "Geffen Field 4", "Geffen Field 5", "Geffen Field 6", "Geffen Field 7", "Geffen Field 8", "Geffen Field 9", "Geffen Field 10","Geffen Field 11","Geffen Field 12","Geffen Field 13","Geffen Field 14";
 	setarray @FXcoords[@Fref], 46, 213, 195, 257, 188, 166, 248, 195, 186, 221, 178, 136, 240, 235, 211;
 	setarray @FYcoords[@Fref], 199, 204, 212, 192, 171, 263, 158, 191, 183, 117, 218, 328, 181, 235, 185;
-	setarray @FDepth[@Fref], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+	setarray @FDepth[@Fref], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 
 	QWS_Make_Field_Menu 4;
 
 //----------------Gonryun Field
 	setarray @pFmenuitems$[@Fi], "Gonryun Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 1;
 	setarray @FGat$[@Fref], "gon_fild01";
 	setarray @FLevelName$[@Fref], "Gonryun Field 1";
@@ -893,8 +898,8 @@ function	script	QWS_Farray	{
 
 //----------------Hugel Field
 	setarray @pFmenuitems$[@Fi], "Hugel Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 7;
 	setarray @FGat$[@Fref], "hu_fild01", "hu_fild02", "hu_fild03",  "hu_fild04", "hu_fild05", "hu_fild06", "hu_fild07";
 	setarray @FLevelName$[@Fref], "Hugel Field 1", "Hugel Field 2", "Hugel Field 3", "Hugel Field 4", "Hugel Field 5", "Hugel Field 6", "Hugel Field 7";
@@ -906,8 +911,8 @@ function	script	QWS_Farray	{
 
 //----------------Lighthalzen Field
 	setarray @pFmenuitems$[@Fi], "Lighthalzen Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 3;
 	setarray @FGat$[@Fref], "hu_fild01", "hu_fild02", "hu_fild03";
 	setarray @FLevelName$[@Fref], "Lighthalzen Field 1", "Lighthalzen Field 2", "Lighthalzen Field 3";
@@ -919,8 +924,8 @@ function	script	QWS_Farray	{
 
 //----------------Louyang Field
 	setarray @pFmenuitems$[@Fi], "Louyang Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 1;
 	setarray @FGat$[@Fref], "lou_fild01";
 	setarray @FLevelName$[@Fref], "Louyang Field 1";
@@ -932,8 +937,8 @@ function	script	QWS_Farray	{
 
 //----------------Lutie Field
 	setarray @pFmenuitems$[@Fi], "Lutie Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 1;
 	setarray @FGat$[@Fref], "xmas_fild01";
 	setarray @FLevelName$[@Fref], "Lutie Field 1";
@@ -945,8 +950,8 @@ function	script	QWS_Farray	{
 
 //----------------Manuk Field
 	setarray @pFmenuitems$[@Fi], "Manuk Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 3;
 	setarray @FGat$[@Fref], "man_fild01", "man_fild02", "man_fild03";
 	setarray @FLevelName$[@Fref], "Manuk Field 1", "Manuk Field 2", "Manuk Field 3";
@@ -958,8 +963,8 @@ function	script	QWS_Farray	{
 
 //----------------Mjolnir Field
 	setarray @pFmenuitems$[@Fi], "Mjolnir Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 12;
 	setarray @FGat$[@Fref], "mjolnir_01", "mjolnir_02", "mjolnir_03",  "mjolnir_04", "mjolnir_05", "mjolnir_06", "mjolnir_07", "mjolnir_08", "mjolnir_09", "mjolnir_10","mjolnir_11","mjolnir_12";
 	setarray @FLevelName$[@Fref], "Mjolnir Field 1", "Mjolnir Field 2", "Mjolnir Field 3", "Mjolnir Field 4", "Mjolnir Field 5", "Mjolnir Field 6", "Mjolnir Field 7", "Mjolnir Field 8", "Mjolnir Field 9", "Mjolnir Field 10","Mjolnir Field 11","Mjolnir Field 12";
@@ -971,8 +976,8 @@ function	script	QWS_Farray	{
 
 //----------------Moscovia Field
 	setarray @pFmenuitems$[@Fi], "Moscovia Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 2;
 	setarray @FGat$[@Fref], "mosk_fild01", "mosk_fild02";
 	setarray @FLevelName$[@Fref], "Moscovia Field 1", "Moscovia Field 2";
@@ -984,8 +989,8 @@ function	script	QWS_Farray	{
 
 //----------------Niflheim Field
 	setarray @pFmenuitems$[@Fi], "Niflheim Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 2;
 	setarray @FGat$[@Fref], "nif_fild01", "nif_fild02";
 	setarray @FLevelName$[@Fref], "Niflheim Field 1", "Niflheim Field 2";
@@ -997,8 +1002,8 @@ function	script	QWS_Farray	{
 
 //----------------Payon Forest
 	setarray @pFmenuitems$[@Fi], "Payon Forests";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 11;
 	setarray @FGat$[@Fref], "pay_fild01", "pay_fild02", "pay_fild03",  "pay_fild04", "pay_fild05", "pay_fild06", "pay_fild07", "pay_fild08", "pay_fild09", "pay_fild10","pay_fild11";
 	setarray @FLevelName$[@Fref], "Payon Forest 1", "Payon Forest 2", "Payon Forest 3", "Payon Forest 4", "Payon Forest 5", "Payon Forest 6", "Payon Forest 7", "Payon Forest 8", "Payon Forest 9", "Payon Forest 10","Payon Forest 11";
@@ -1010,8 +1015,8 @@ function	script	QWS_Farray	{
 
 //----------------Prontera Field
 	setarray @pFmenuitems$[@Fi], "Prontera Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 12;
 	setarray @FGat$[@Fref], "prt_fild00", "prt_fild01", "prt_fild02", "prt_fild03",  "prt_fild04", "prt_fild05", "prt_fild06", "prt_fild07", "prt_fild08", "prt_fild09", "prt_fild10","prt_fild11";
 	setarray @FLevelName$[@Fref], "Prontera Field 0", "Prontera Field 1", "Prontera Field 2", "Prontera Field 3", "Prontera Field 4", "Prontera Field 5", "Prontera Field 6", "Prontera Field 7", "Prontera Field 8", "Prontera Field 9", "Prontera Field 10","Prontera Field 11";
@@ -1023,8 +1028,8 @@ function	script	QWS_Farray	{
 
 //----------------Rachel Field
 	setarray @pFmenuitems$[@Fi], "Rachel Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 13;
 	setarray @FGat$[@Fref], "ra_fild01", "ra_fild02", "ra_fild03",  "ra_fild04", "ra_fild05", "ra_fild06", "ra_fild07", "ra_fild08", "ra_fild09", "ra_fild10","ra_fild11","ra_fild12","ra_fild13";
 	setarray @FLevelName$[@Fref], "Rachel Field 1", "Rachel Field 2", "Rachel Field 3", "Rachel Field 4", "Rachel Field 5", "Rachel Field 6", "Rachel Field 7", "Rachel Field 8", "Rachel Field 9", "Rachel Field 10","Rachel Field 11","Rachel Field 12","Rachel Field 13";
@@ -1045,12 +1050,12 @@ function	script	QWS_Farray	{
 	setarray @FYcoords[@Fref], 205, 206, 182, 170, 216, 187, 263, 228, 238, 223, 97, 202, 195, 195;
 	setarray @FDepth[@Fref], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
 
-	QWS_Make_Field_Menu 17;
+QWS_Make_Field_Menu 17;
 
 //----------------Splendide Field
 	setarray @pFmenuitems$[@Fi], "Splendide Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 3;
 	setarray @FGat$[@Fref], "spl_fild01", "spl_fild02", "spl_fild03";
 	setarray @FLevelName$[@Fref], "Splendide Field 1", "Splendide Field 2", "Splendide Field 3";
@@ -1062,8 +1067,8 @@ function	script	QWS_Farray	{
 
 //----------------Umbala Field
 	setarray @pFmenuitems$[@Fi], "Umbala Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 4;
 	setarray @FGat$[@Fref], "um_fild01", "um_fild02", "um_fild03",  "um_fild04";
 	setarray @FLevelName$[@Fref], "Umbala Field 1", "Umbala Field 2", "Umbala Field 3", "Umbala Field 4";
@@ -1075,8 +1080,8 @@ function	script	QWS_Farray	{
 
 //----------------Veins Field
 	setarray @pFmenuitems$[@Fi], "Veins Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 7;
 	setarray @FGat$[@Fref], "ve_fild01", "ve_fild02", "ve_fild03",  "ve_fild04", "ve_fild05", "ve_fild06", "ve_fild07";
 	setarray @FLevelName$[@Fref], "Veins Field 1", "Veins Field 2", "Veins Field 3", "Veins Field 4", "Veins Field 5", "Veins Field 6", "Veins Field 7";
@@ -1088,8 +1093,8 @@ function	script	QWS_Farray	{
 
 //----------------Yuno Field
 	setarray @pFmenuitems$[@Fi], "Yuno Fields";
-	setarray @pFprice[@Fi], 0;
-	setarray @pFfee$[@Fi], 0;
+
+
 	setarray @FLevels[@Fi], 12;
 	setarray @FGat$[@Fref], "yuno_fild01", "yuno_fild02", "yuno_fild03",  "yuno_fild04", "yuno_fild05", "yuno_fild06", "yuno_fild07", "yuno_fild08", "yuno_fild09", "yuno_fild10","yuno_fild11","yuno_fild12";
 	setarray @FLevelName$[@Fref], "Yuno Field' 1", "Yuno Field' 2", "Yuno Field' 3", "Yuno Field' 4", "Yuno Field' 5", "Yuno Field' 6", "Yuno Field' 7", "Yuno Field' 8", "Yuno Field' 9", "Yuno Field' 10","Yuno Field' 11", "Yuno Field' 12";
@@ -1101,7 +1106,7 @@ function	script	QWS_Farray	{
 
 //----------------Cancel
 	setarray @pFmenuitems$[@Fi], "Cancel";
-	setarray @pFprice[@Fi], 0;
+
 
 	set @Fmenulist$[@Fj],@pFmenuitems$[@Fi];
 	set @Fmenuref[@Fj],57005; // 57005='dead' in hex
@@ -1161,7 +1166,7 @@ function	script	QWS_FLarray	{
 	cleararray @FWLmenulist$[0],"",20; // Clearing the array to get rid off ghost items in menu
 	do {
 		if ($QW_FL == 0)||($QW_FDL >= @FDepth[@FWref]) {
-			set @warpprice, (@pFprice[@FwarpMenu]+ (getd(@pFfee$[@FwarpMenu])*@FDepth[@FWref]));
+			set @warpprice, 25 * BaseLevel;
 			if (@warpprice != 0)&&($QW_MapUserShow == 0) set @FWLmenulist$[@FWj], @FLevelName$[@FWref]+" -> "+@warpprice;
 			if (@warpprice == 0)&&($QW_MapUserShow == 0) set @FWLmenulist$[@FWj], @FLevelName$[@FWref];
 			if (@warpprice != 0)&&($QW_MapUserShow == 1) set @FWLmenulist$[@FWj], @FLevelName$[@FWref]+" ["+getmapusers(@FGat$[@FWref])+"] -> "+@warpprice;
@@ -1181,8 +1186,8 @@ function	script	QWS_FLarray	{
 //====================City=Dungeon=Menu=Arrays==========================
 // Adding a dungeon:
 //	setarray @pCDmenuitems$[@CDi], "Abyss Lake";	// Name of Dungeon shown in Dungeon select Menu
-//	setarray @pCDprice[@CDi], 0;		// Warp prices: Basic (0), Advanced (0), Overseas (0)
-//	setarray @pCDfee$[@CDi], 0;		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
+//		// Warp prices: Basic (0), Advanced (0), Overseas (0)
+//		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
 //	setarray @CDLevels[@CDi], 3;			// Number of levels in dungeon
 //
 //	setarray @CDGat$[@CDref], "abyss_01", "abyss_02", "abyss_03";	// Map names of dungeon levels
@@ -1211,8 +1216,8 @@ function	script	QWS_CDarray	{
 
 //----------------AMATSU DUNGEON
 	setarray @pCDmenuitems$[@CDi], "Amatsu Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "ama_dun01", "ama_dun02", "ama_dun03";
@@ -1225,8 +1230,8 @@ function	script	QWS_CDarray	{
 
 //----------------AYOTAYA
 	setarray @pCDmenuitems$[@CDi], "Ayothaya Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 2;
 
 	setarray @CDGat$[@CDref], "ayo_dun01", "ayo_dun02";
@@ -1239,8 +1244,8 @@ function	script	QWS_CDarray	{
 	
 //----------------Baldur Guild Dungeon
 	setarray @pCDmenuitems$[@CDi], "Baldur Guild Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "gld_dun01", "gld_dun01_2", "gld2_pay";
@@ -1253,8 +1258,8 @@ function	script	QWS_CDarray	{
 	
 //----------------Beach Dungeon
 	setarray @pCDmenuitems$[@CDi], "Beach Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "beach_dun", "beach_dun2", "beach_dun3";
@@ -1267,8 +1272,8 @@ function	script	QWS_CDarray	{
 	
 //----------------Britoniah Guild Dungeon
 	setarray @pCDmenuitems$[@CDi], "Britoniah Guild Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "gld_dun04", "gld_dun04_2", "gld2_gef";
@@ -1281,8 +1286,8 @@ function	script	QWS_CDarray	{
 
 //----------------BYALAN
 	setarray @pCDmenuitems$[@CDi], "Byalan Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 5;
 
 	setarray @CDGat$[@CDref], "iz_dun00", "iz_dun01", "iz_dun02", "iz_dun03", "iz_dun04";
@@ -1295,8 +1300,8 @@ function	script	QWS_CDarray	{
 
 //----------------CLOCK TOWER
 	setarray @pCDmenuitems$[@CDi], "Clock Tower Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 8;
 
 	setarray @CDGat$[@CDref], "c_tower1", "c_tower2", "c_tower3", "c_tower4", "alde_dun01", "alde_dun02", "alde_dun03", "alde_dun04";
@@ -1310,8 +1315,8 @@ function	script	QWS_CDarray	{
 
 //----------------CULVERT
 	setarray @pCDmenuitems$[@CDi], "Culvert Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 4;
 
 	setarray @CDGat$[@CDref], "prt_sewb1", "prt_sewb2", "prt_sewb3", "prt_sewb4";
@@ -1324,8 +1329,8 @@ function	script	QWS_CDarray	{
 	
 //----------------EINBECH DUNGEON
 	setarray @pCDmenuitems$[@CDi], "Einbech Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 2;
 
 	setarray @CDGat$[@CDref], "ein_dun01", "ein_dun02";
@@ -1339,8 +1344,8 @@ function	script	QWS_CDarray	{
 
 //----------------GEFFEN DUNGEON
 	setarray @pCDmenuitems$[@CDi], "Geffen Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 4;
 
 	setarray @CDGat$[@CDref], "gef_dun00", "gef_dun01", "gef_dun02", "gef_dun03";
@@ -1354,8 +1359,8 @@ function	script	QWS_CDarray	{
 
 //----------------GONRYUN DUNGEON
 	setarray @pCDmenuitems$[@CDi], "Gonryun Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "gon_dun01", "gon_dun02", "gon_dun03";
@@ -1369,8 +1374,8 @@ function	script	QWS_CDarray	{
 
 //----------------LIGHTHALZEN BIO LAB
 	setarray @pCDmenuitems$[@CDi], "Lighthalzen Bio Lab";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 4;
 
 	setarray @CDGat$[@CDref], "lhz_dun01", "lhz_dun02", "lhz_dun03", "lhz_dun04";
@@ -1383,8 +1388,8 @@ function	script	QWS_CDarray	{
 
 //----------------LOUYANG DUNGEON
 	setarray @pCDmenuitems$[@CDi], "Louyang Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "lou_dun01", "lou_dun02", "lou_dun03";
@@ -1397,8 +1402,8 @@ function	script	QWS_CDarray	{
 	
 //----------------Luina Guild Dungeon
 	setarray @pCDmenuitems$[@CDi], "Luina Guild Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "gld_dun02", "gld_dun02_2", "gld2_ald";
@@ -1411,8 +1416,8 @@ function	script	QWS_CDarray	{
 
 //----------------PAYON DUNGEON
 	setarray @pCDmenuitems$[@CDi], "Payon Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 5;
 
 	setarray @CDGat$[@CDref], "pay_dun00", "pay_dun01", "pay_dun02", "pay_dun03", "pay_dun04";
@@ -1425,8 +1430,8 @@ function	script	QWS_CDarray	{
 
 //----------------PYRAMIDS
 	setarray @pCDmenuitems$[@CDi], "Pyramids Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 6;
 
 	setarray @CDGat$[@CDref], "moc_pryd01", "moc_pryd02", "moc_pryd03", "moc_pryd04", "moc_pryd05", "moc_pryd06";
@@ -1439,8 +1444,8 @@ function	script	QWS_CDarray	{
 	
 //----------------Rachel Sanctuary
 	setarray @pCDmenuitems$[@CDi], "Rachel Sanctuary";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 5;
 
 	setarray @CDGat$[@CDref], "ra_san01", "ra_san02", "ra_san03", "ra_san04", "ra_san05";
@@ -1453,8 +1458,8 @@ function	script	QWS_CDarray	{
 
 //----------------SPHINX
 	setarray @pCDmenuitems$[@CDi], "Sphinx Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 5;
 
 	setarray @CDGat$[@CDref], "in_sphinx1", "in_sphinx2", "in_sphinx3", "in_sphinx4", "in_sphinx5";
@@ -1468,8 +1473,8 @@ function	script	QWS_CDarray	{
 
 //----------------TOY FACTORY
 	setarray @pCDmenuitems$[@CDi], "Toy Factory Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 2;
 
 	setarray @CDGat$[@CDref], "xmas_dun01", "xmas_dun02";
@@ -1482,8 +1487,8 @@ function	script	QWS_CDarray	{
 
 //----------------UMBALA
 	setarray @pCDmenuitems$[@CDi], "Umbala Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "um_dun01", "um_dun02", "yggdrasil01";;
@@ -1496,8 +1501,8 @@ function	script	QWS_CDarray	{
 	
 //----------------Valkyrie Guild Dungeon
 	setarray @pCDmenuitems$[@CDi], "Valkyrie Guild Dungeon";
-	setarray @pCDprice[@CDi], 0;
-	setarray @pCDfee$[@CDi], 0;
+
+
 	setarray @CDLevels[@CDi], 3;
 
 	setarray @CDGat$[@CDref], "gld_dun03", "gld_dun03_2", "gld2_prt";
@@ -1510,7 +1515,7 @@ function	script	QWS_CDarray	{
 
 //----------------Cancel
 	setarray @pCDmenuitems$[@CDi], "Cancel";
-	setarray @pCDprice[@CDi], 0;
+
 
 	set @CDmenulist$[@CDj],@pCDmenuitems$[@CDi];
 	set @CDmenuref[@CDj],57005; // 57005='dead' in hex
@@ -1570,7 +1575,7 @@ function	script	QWS_CDLarray	{
 	cleararray @CDWLmenulist$[0],"",15; // Clearing the array to get rid off ghost items in menu
 	do {
 		if ($QW_CDL == 0)||($QW_CDDL >= @CDDepth[@CDWref]) {
-			set @warpprice, (@pCDprice[@CDwarpMenu]+ (getd(@pCDfee$[@CDwarpMenu])*@CDDepth[@CDWref]));
+			set @warpprice, 25 * BaseLevel;
 			if (@warpprice != 0)&&($QW_MapUserShow == 0) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref]+" -> "+@warpprice;
 			if (@warpprice == 0)&&($QW_MapUserShow == 0) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref];
 			if (@warpprice != 0)&&($QW_MapUserShow == 1) set @CDWLmenulist$[@CDWj], @CDLevelName$[@CDWref]+" ["+getmapusers(@CDGat$[@CDWref])+"] -> "+@warpprice;
@@ -1590,8 +1595,8 @@ function	script	QWS_CDLarray	{
 //====================Dungeon=Menu=Arrays==========================
 // Adding a dungeon:
 //	setarray @pDmenuitems$[@Di], "Abyss Lake";	// Name of Dungeon shown in Dungeon select Menu
-//	setarray @pDprice[@Di], 0;		// Warp prices: Basic (0), Advanced (0), Overseas (0)
-//	setarray @pDfee$[@Di], 0;		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
+//		// Warp prices: Basic (0), Advanced (0), Overseas (0)
+//		// Identifier for fee caluclation: Basic (0), Advanced (0), Overseas (0)
 //	setarray @DLevels[@Di], 3;			// Number of levels in dungeon
 //
 //	setarray @DGat$[@Dref], "abyss_01", "abyss_02", "abyss_03";	// Map names of dungeon levels
@@ -1619,8 +1624,8 @@ function	script	QWS_Darray	{
 
 //----------------ABYSS LAKE
 	setarray @pDmenuitems$[@Di], "Abyss Lake";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 3;
 
 	setarray @DGat$[@Dref], "abyss_01", "abyss_02", "abyss_03";
@@ -1633,8 +1638,8 @@ function	script	QWS_Darray	{
 
 //----------------ANT HELL
 	setarray @pDmenuitems$[@Di], "Ant Hell Dungeon"; 
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 2;
 
 	setarray @DGat$[@Dref], "anthell01", "anthell02";
@@ -1648,8 +1653,8 @@ function	script	QWS_Darray	{
 
 //----------------COAL MINE
 	setarray @pDmenuitems$[@Di], "Coal Mine Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 3;
 
 	setarray @DGat$[@Dref], "mjo_dun01", "mjo_dun02", "mjo_dun03";
@@ -1663,8 +1668,8 @@ function	script	QWS_Darray	{
 
 //----------------Cursed Abbey
 	setarray @pDmenuitems$[@Di], "Cursed Abbey";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 3;
 
 	setarray @DGat$[@Dref], "abbey01", "abbey02", "abbey03";
@@ -1678,8 +1683,8 @@ function	script	QWS_Darray	{
 
 //----------------GEFENIA DUNGEON
 	setarray @pDmenuitems$[@Di], "Gefenia Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 4;
 
 	setarray @DGat$[@Dref], "gefenia01", "gefenia02", "gefenia03", "gefenia04";
@@ -1693,23 +1698,23 @@ function	script	QWS_Darray	{
 
 //----------------GLAST HEIM
 	setarray @pDmenuitems$[@Di], "Glast Heim Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
-	setarray @DLevels[@Di], 6;
 
-	setarray @DGat$[@Dref], "glast_01", "gl_church", "gl_chyard", "gl_in01", "gl_cas01", "gl_cas02", "gl_knt01", "gl_knt02", "gl_prison", "gl_prison1", "gl_step", "gl_sew01", "gl_sew02", "gl_sew03", "gl_sew04", "gl_dun01", "gl_dun02";
-	setarray @DLevelName$[@Dref], "Glast Heim Entrance", "St. Abbey", "Churchyard", "Inside Glast Heim", "Castle 1", "Castle 2", "Chivalry 1", "Chivalry 2", "Prison 1", "Prison 2", "Steps", "Sewers 1", "Sewers 2", "Sewers 3", "Sewers 4", "Lowest Cave 1", "Lowest Cave 2";
-	setarray @DXcoords[@Dref], 370, 199, 104, 150, 157, 147, 258, 108, 171, 68, 156, 12, 133, 224, 14, 150;
-	setarray @DYcoords[@Dref], 304, 29, 25, 15, 287, 15, 255, 291, 283, 277, 7, 7, 271, 274, 70, 14;
-	setarray @DDepth[@Dref], 0, 1, 2, 1, 1, 2, 1, 2, 2, 3, 1, 4, 2, 3, 4, 5, 6;
+
+	setarray @DLevels[@Di], 17;
+
+	setarray @DGat$[@Dref], "glast_01",  "gl_cas01", "gl_cas02", "gl_knt01", "gl_knt02", "gl_chyard", "gl_sew01", "gl_sew02", "gl_sew03", "gl_sew04", "gl_church", "gl_step", "gl_dun01", "gl_dun02", "gl_prison", "gl_prison1", "gl_in01";
+	setarray @DLevelName$[@Dref], "Glast Heim Entrance", "Castle 1", "Castle 2", "Chivalry 1", "Chivalry 2", "Churchyard", "Sewers 1", "Sewers 2", "Sewers 3", "Sewers 4", "St. Abbey", "Steps", "Lowest Cave 1", "Lowest Cave 2", "Prison 1", "Prison 2", "Inside Glast Heim";
+	setarray @DXcoords[@Dref], 370, 199, 104, 150, 157, 147, 258, 108, 171, 68, 156, 12, 133, 224, 14, 150, 121;
+	setarray @DYcoords[@Dref], 304, 29, 25, 15, 287, 15, 255, 291, 283, 277, 7, 7, 271, 274, 70, 14, 59;
+	setarray @DDepth[@Dref], 0, 1, 2, 1, 1, 2, 1, 2, 2, 3, 1, 4, 2, 3, 4, 5, 6, 1;
 
 	QWS_Make_Dungeon_Menu 7;
 
 
 //----------------HIDDEN DUNGEON
 	setarray @pDmenuitems$[@Di], "Hidden Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 3;
 
 	setarray @DGat$[@Dref], "prt_maze01", "prt_maze02", "prt_maze03";
@@ -1722,8 +1727,8 @@ function	script	QWS_Darray	{
 	
 //----------------Ice Dungeon
 	setarray @pDmenuitems$[@Di], "Ice Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 4;
 
 	setarray @DGat$[@Dref], "ice_dun01", "ice_dun02", "ice_dun03", "ice_dun04";
@@ -1736,8 +1741,8 @@ function	script	QWS_Darray	{
 
 //----------------JUPEROS CAVE
 	setarray @pDmenuitems$[@Di], "Juperos Cave";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 4;
 
 	setarray @DGat$[@Dref], "jupe_cave", "juperos_01", "juperos_02", "jupe_core";
@@ -1750,8 +1755,8 @@ function	script	QWS_Darray	{
 
 //----------------KIEL DUNGEON
 	setarray @pDmenuitems$[@Di], "Kiel Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 2;
 
 	setarray @DGat$[@Dref], "kh_dun01", "kh_dun02";
@@ -1764,8 +1769,8 @@ function	script	QWS_Darray	{
 
 //----------------MAGMA DUNGEON
 	setarray @pDmenuitems$[@Di], "Magma Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 2;
 
 	setarray @DGat$[@Dref], "mag_dun01", "mag_dun02";
@@ -1778,8 +1783,8 @@ function	script	QWS_Darray	{
 	
 //----------------Nidhogg's Dungeon
 	setarray @pDmenuitems$[@Di], "Nidhogg's Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 2;
 
 	setarray @DGat$[@Dref], "nyd_dun01", "nyd_dun02";
@@ -1793,8 +1798,8 @@ function	script	QWS_Darray	{
 
 //----------------ODIN TEMPLE
 	setarray @pDmenuitems$[@Di], "Odin Temple";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 3;
 
 	setarray @DGat$[@Dref], "odin_tem01", "odin_tem02", "odin_tem03";
@@ -1807,8 +1812,8 @@ function	script	QWS_Darray	{
 
 //----------------ORC DUNGEON
 	setarray @pDmenuitems$[@Di], "Orc Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 2;
 
 	setarray @DGat$[@Dref], "orcsdun01", "orcsdun02";
@@ -1822,8 +1827,8 @@ function	script	QWS_Darray	{
 
 //----------------SUNKEN SHIP
 	setarray @pDmenuitems$[@Di], "Sunken Ship Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 2;
 
 	setarray @DGat$[@Dref], "treasure01", "treasure02";
@@ -1836,8 +1841,8 @@ function	script	QWS_Darray	{
 
 //----------------THANATOS TOWER
 	setarray @pDmenuitems$[@Di], "Thanatos Tower";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 13;
 
 	setarray @DGat$[@Dref], "tha_t01", "tha_t02", "tha_t03", "tha_t04", "tha_t05", "tha_t06", "tha_t07", "tha_t08", "tha_t09", "tha_t10", "tha_t11", "tha_t12", "thana_boss";
@@ -1850,8 +1855,8 @@ function	script	QWS_Darray	{
 	
 //----------------Thor Volcano
 	setarray @pDmenuitems$[@Di], "Thor Volcano";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 3;
 
 	setarray @DGat$[@Dref], "thor_v01", "thor_v02", "thor_v03";
@@ -1865,8 +1870,8 @@ function	script	QWS_Darray	{
 
 //----------------TURTLE ISTLAND
 	setarray @pDmenuitems$[@Di], "Turtle Island Dungeon";
-	setarray @pDprice[@Di], 0;
-	setarray @pDfee$[@Di], 0;
+
+
 	setarray @DLevels[@Di], 4;
 
 	setarray @DGat$[@Dref], "tur_dun01", "tur_dun02", "tur_dun03", "tur_dun04";
@@ -1880,7 +1885,7 @@ function	script	QWS_Darray	{
 
 //----------------Cancel
 	setarray @pDmenuitems$[@Di], "Cancel";
-	setarray @pDprice[@Di], 0;
+
 
 	set @Dmenulist$[@Dj],@pDmenuitems$[@Di];
 	set @Dmenuref[@Dj],57005; // 57005='dead' in hex
@@ -1940,7 +1945,7 @@ function	script	QWS_DLarray	{
 	cleararray @DWLmenulist$[0],"",15; // Clearing the array to get rid off ghost items in menu
 	do {
 		if ($QW_DL == 0)||($QW_DDL >= @DDepth[@DWref]) {
-			set @warpprice, (@pDprice[@DwarpMenu]+ (getd(@pDfee$[@DwarpMenu])*@DDepth[@DWref]));
+			set @warpprice, 25 * BaseLevel;
 			if (@warpprice != 0)&&($QW_MapUserShow == 0) set @DWLmenulist$[@DWj], @DLevelName$[@DWref]+" -> "+@warpprice;
 			if (@warpprice == 0)&&($QW_MapUserShow == 0) set @DWLmenulist$[@DWj], @DLevelName$[@DWref];
 			if (@warpprice != 0)&&($QW_MapUserShow == 1) set @DWLmenulist$[@DWj], @DLevelName$[@DWref]+" ["+getmapusers(@DGat$[@DWref])+"] -> "+@warpprice;

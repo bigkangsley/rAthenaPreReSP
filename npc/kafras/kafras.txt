@@ -513,7 +513,7 @@ gonryun,159,122,4	script	Kafra Employee::kaf_gonryun	116,{
 	mes "always ready to serve you.";
 	mes "How can I help you today?";
 	callfunc "F_Kafra",5,3,1,50,700;
-	savepoint "gonryun",160,62,1,1;
+	savepoint "gonryun",150,120,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Kunlun";
 }
 

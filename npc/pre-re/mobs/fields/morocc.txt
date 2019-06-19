@@ -165,10 +165,10 @@ moc_fild11,197,216	monster	Shining Plant	1083,1,1800000,900000
 //==================================================
 // moc_fild12 - Sograt Desert
 //==================================================
-moc_fild12,0,0	monster	Picky	1050,50
-moc_fild12,0,0	monster	Picky	1049,50
-moc_fild12,0,0	monster	Peco Peco Egg	1047,35
-moc_fild12,0,0	monster	Drops	1113,35
+moc_fild12,0,0	monster	Picky	1050,30
+moc_fild12,0,0	monster	Picky	1049,30
+moc_fild12,0,0	monster	Peco Peco Egg	1047,180
+moc_fild12,0,0	monster	Drops	1113,15
 moc_fild12,181,336,40,20	monster	Yellow Plant	1081,10,180000,90000
 
 //==================================================

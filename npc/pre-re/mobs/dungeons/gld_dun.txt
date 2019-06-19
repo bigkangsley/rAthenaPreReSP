@@ -16,10 +16,10 @@
 //==================================================
 gld_dun01,0,0	monster	Skeleton General	1290,10
 gld_dun01,0,0	monster	Am Mut	1301,20
-gld_dun01,0,0	monster	Cat o' Nine Tails	1307,3,1200000,0,0
+gld_dun01,0,0	monster	Cat o' Nine Tails	1307,3
 gld_dun01,0,0	monster	Gajomart	1309,10
 gld_dun01,0,0,0,0	boss_monster	Eddga	1115,1,28800000,600000,1
-gld_dun01,0,0	monster	Vagabond Wolf	1092,1,14400000,7200000
+gld_dun01,0,0	monster	Vagabond Wolf	1092,1
 
 //==================================================
 // gld_dun02 - Luina Guild Dungeon
@@ -34,7 +34,7 @@ gld_dun02,0,0,0,0	boss_monster	Doppelganger	1046,1,28800000,600000,1
 //==================================================
 // gld_dun03 - Valkyrie Guild Dungeon
 //==================================================
-gld_dun03,0,0	monster	Maya Purple	1289,3,1200000,600000
+gld_dun03,0,0	monster	Maya Purple	1289,3
 gld_dun03,0,0	monster	Caterpillar	1300,20
 gld_dun03,0,0	monster	Gullinbursti	1311,10
 gld_dun03,0,0	monster	Creamy Fear	1293,20
@@ -47,6 +47,6 @@ gld_dun03,0,0,0,0	boss_monster	Maya	1147,1,28800000,600000,1
 gld_dun04,0,0	monster	Wraith Dead	1291,40
 gld_dun04,0,0	monster	Mini Demon	1292,20
 gld_dun04,0,0	monster	Zombie Master	1298,40
-gld_dun04,0,0	monster	Dark Illusion	1302,1,1200000
+gld_dun04,0,0	monster	Dark Illusion	1302,1
 gld_dun04,0,0,0,0	boss_monster	Dark Lord	1272,1,28800000,600000,1
-gld_dun04,0,0	monster	Ghostring	1120,1,14400000,7200000
+gld_dun04,0,0	monster	Ghostring	1120,1
