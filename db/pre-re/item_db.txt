@@ -210,9 +210,9 @@
 712,Flower,Flower,3,2,,10,,,,,,,,,,,,,{},{},{}
 713,Empty_Bottle,Empty Bottle,3,6,,20,,,,,,,,,,,,,{},{},{}
 714,Emperium,Emperium,3,2,,1000,,,,,,,,,,,,,{},{},{}
-715,Yellow_Gemstone,Yellow Gemstone,3,600,,30,,,,,,,,,,,,,{},{},{}
-716,Red_Gemstone,Red Gemstone,3,600,,30,,,,,,,,,,,,,{},{},{}
-717,Blue_Gemstone,Blue Gemstone,3,600,,30,,,,,,,,,,,,,{},{},{}
+715,Yellow_Gemstone,Yellow Gemstone,3,600,,3,,,,,,,,,,,,,{},{},{}
+716,Red_Gemstone,Red Gemstone,3,600,,3,,,,,,,,,,,,,{},{},{}
+717,Blue_Gemstone,Blue Gemstone,3,600,,3,,,,,,,,,,,,,{},{},{}
 718,Dark_Red_Jewel,Garnet,3,6000,,100,,,,,,,,,,,,,{},{},{}
 719,Violet_Jewel,Amethyst,3,6000,,100,,,,,,,,,,,,,{},{},{}
 720,Skyblue_Jewel,Aquamarine,3,6000,,100,,,,,,,,,,,,,{},{},{}

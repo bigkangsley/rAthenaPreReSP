@@ -183,7 +183,7 @@ cmd_fild08,326,258,50,110	monster	Kobold Archer	1282,10
 cmd_fild08,326,258,50,110	monster	Side Winder	1037,2
 cmd_fild08,0,0	monster	Side Winder	1037,3
 cmd_fild08,130,192,110,150	monster	Side Winder	1037,15
-cmd_fild08,0,0	monster	Gryphon	1259,1,3600000,1800000
+cmd_fild08,0,0	monster	Gryphon	1259,1
 cmd_fild08,60,143,10,10	monster	Yellow Plant	1081,4,1800000,900000
 cmd_fild08,130,201,10,10	monster	Yellow Plant	1081,4,1800000,900000
 

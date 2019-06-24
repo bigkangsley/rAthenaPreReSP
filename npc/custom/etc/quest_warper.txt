@@ -874,7 +874,7 @@ function	script	QWS_Farray	{
 	setarray @pFmenuitems$[@Fi], "Geffen Fields";
 
 
-	setarray @FLevels[@Fi], 14;
+	setarray @FLevels[@Fi], 15;
 	setarray @FGat$[@Fref], "gef_fild00", "gef_fild01", "gef_fild02", "gef_fild03",  "gef_fild04", "gef_fild05", "gef_fild06", "gef_fild07", "gef_fild08", "gef_fild09", "gef_fild10","gef_fild11","gef_fild12","gef_fild13","gef_fild14";
 	setarray @FLevelName$[@Fref], "Geffen Field 0", "Geffen Field 1", "Geffen Field 2", "Geffen Field 3", "Geffen Field 4", "Geffen Field 5", "Geffen Field 6", "Geffen Field 7", "Geffen Field 8", "Geffen Field 9", "Geffen Field 10","Geffen Field 11","Geffen Field 12","Geffen Field 13","Geffen Field 14";
 	setarray @FXcoords[@Fref], 46, 213, 195, 257, 188, 166, 248, 195, 186, 221, 178, 136, 240, 235, 211;
@@ -2190,7 +2190,7 @@ kh_dun01,14,224,6	script	Warpra Helper#6	403,{ callfunc "QWS_Dungeon_Warpra",11,
 mag_dun01,122,66,0	script	Warpra Helper#7	403,{ callfunc "QWS_Dungeon_Warpra",12,"Magma Dungeon"; close; }
 odin_tem01,115,148,3	script	Warpra Helper#8	403,{ callfunc "QWS_Dungeon_Warpra",14,"Odin Temple"; close; }
 in_orcs01,37,173,3	script	Warpra Helper#9	403,{ callfunc "QWS_Dungeon_Warpra",15,"Orc Dungeon"; close; }
-tha_t01,154,34,1	script	Warpra Helper#10	403,{ callfunc "QWS_Dungeon_Warpra",13,"Thanatos Tower"; close; }
+tha_t01,154,34,1	script	Warpra Helper#10	403,{ callfunc "QWS_Dungeon_Warpra",17,"Thanatos Tower"; close; }
 alb2trea,73,101,4	script	Warpra Helper#11	403,{ callfunc "QWS_Dungeon_Warpra",16,"Sunken Ship Dungeon"; close; }
 um_dun01,36,29,5	script	Warpra Helper#12	403,{ callfunc "QWS_Dungeon_Warpra",37,"Umbala Dungeon"; close; }
 tur_dun01,147,53,5	script	Warpra Helper#13	403,{ callfunc "QWS_Dungeon_Warpra",19,"Turtle Island Dungeon"; close; }

@@ -20,7 +20,7 @@ ra_fild01,0,0	monster	Muscipular	1780,60
 ra_fild01,173,170,106,80	monster	Geographer	1368,30,300000,120000
 ra_fild01,0,0	monster	Drosera	1781,20
 ra_fild01,0,0	monster	Galion	1783,5
-ra_fild01,0,0	monster	Gryphon	1259,3,3600000
+ra_fild01,0,0	monster	Gryphon	1259,3
 
 //==================================================
 // ra_fild02 - Rachel Field

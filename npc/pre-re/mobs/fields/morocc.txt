@@ -112,10 +112,10 @@ moc_fild07,162,333,12,12	monster	Yellow Plant	1081,5,360000,180000
 //==================================================
 // moc_fild08 - Sograt Desert
 //==================================================
-//moc_fild08,0,0	monster	Magnolia	1138,30
-//moc_fild08,0,0	monster	Scorpion	1001,80
-//moc_fild08,0,0	monster	Desert Wolf	1106,30
-//moc_fild08,0,0	monster	Anacondaq	1030,30
+//moc_fild08,0,0	monster	Magnolia	1138,20
+//moc_fild08,0,0	monster	Scorpion	1001,100
+//moc_fild08,0,0	monster	Desert Wolf	1106,20
+//moc_fild08,0,0	monster	Anacondaq	1030,20
 //moc_fild08,0,0	monster	Baby Desert Wolf	1107,10
 //moc_fild08,0,0	monster	Drops	1113,10
 
@@ -277,7 +277,7 @@ moc_fild18,0,0	monster	Muka	1055,80
 moc_fild18,0,0	monster	Metaller	1058,10
 moc_fild18,0,0	monster	Ant Egg	1097,5
 moc_fild18,0,0	monster	Dragon Fly	1091,1,3600000,1800000
-moc_fild18,0,0	monster	Hunter Fly	1035,1,7200000,3600000
+moc_fild18,0,0	monster	Hunter Fly	1035,1
 moc_fild18,143,352	monster	Yellow Plant	1081,1,180000,90000
 moc_fild18,72,333	monster	Yellow Plant	1081,1,180000,90000
 moc_fild18,119,285	monster	Yellow Plant	1081,1,180000,90000
@@ -310,16 +310,16 @@ moc_fild20,0,0	monster	Morroc's Shadow	1921,1,30000,0,0
 moc_fild21,0,0	monster	Golem	1040,61
 moc_fild21,0,0	monster	Stalactic Golem	1278,46
 moc_fild21,0,0	monster	Lava Golem	1366,46
-moc_fild21,0,0	monster	Morroc's Shadow	1918,46,30000,0,0
-moc_fild21,0,0	monster	Morroc's Shadow	1919,46,30000,0,0
-moc_fild21,0,0	monster	Morroc's Shadow	1920,46,30000,0,0
-moc_fild21,0,0	monster	Morroc's Shadow	1921,34,30000,0,0
+moc_fild21,0,0	monster	Morroc's Shadow	1918,36,30000,0,0
+moc_fild21,0,0	monster	Morroc's Shadow	1919,36,30000,0,0
+moc_fild21,0,0	monster	Morroc's Shadow	1920,36,30000,0,0
+moc_fild21,0,0	monster	Morroc's Shadow	1921,24,30000,0,0
 
 //==================================================
 // moc_fild22 - Dimensional Gorge
 //==================================================
-moc_fild22,0,0	monster	Morroc's Shadow	1918,60,30000,0,0
-moc_fild22,0,0	monster	Morroc's Shadow	1919,60,30000,0,0
-moc_fild22,0,0	monster	Morroc's Shadow	1920,60,30000,0,0
-moc_fild22,0,0	monster	Morroc's Shadow	1921,25,30000,0,0
+moc_fild22,0,0	monster	Morroc's Shadow	1918,30,30000,0,0
+moc_fild22,0,0	monster	Morroc's Shadow	1919,30,30000,0,0
+moc_fild22,0,0	monster	Morroc's Shadow	1920,30,30000,0,0
+moc_fild22,0,0	monster	Morroc's Shadow	1921,15,30000,0,0
 moc_fild22,0,0	monster	Wounded Satan Morroc	1917,1,43200000,3600000

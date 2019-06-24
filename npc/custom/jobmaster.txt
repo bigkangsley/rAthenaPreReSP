@@ -15,7 +15,7 @@
 //= 1.9 Migrate/Integrate to Global Functions Platinum Skills. [mazvi]
 //============================================================
 
-prontera,152,192,4	script	Job Master	735,{
+prontera,152,192,5	script	Job Master	735,{
 function Get_Job_Equip;
 // Checks if the Player has the required level.
 // closes if not, returns if yes
@@ -128,7 +128,8 @@ function	Job_Options	{
 	// initialisation
 	deletearray .@job_opt[0],getarraysize(.@job_opt);
 	.@eac = eaclass();
-	.@third_possible = Can_Change_Third();
+//	.@third_possible = Can_Change_Third();
+	.@third_possible = 0;		// Hard-code no third level jobs allowed
 	.@rebirth_possible = Can_Rebirth();
 	.@first_eac = .@eac&EAJ_BASEMASK;
 	.@second_eac = .@eac&EAJ_UPPERMASK;

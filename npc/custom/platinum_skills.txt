@@ -17,7 +17,7 @@
 //= 3.0 Migrate/Integrate to Global Functions. [mazvi]
 //============================================================
 
-prontera,149,193,4	script	Platinum Skill NPC	754,{
+prontera,149,193,5	script	Platinum Skill NPC	754,{
 	mes "[Platinum Skill NPC]";
 	mes "I can give you the special skills available to your job.";
 	mes "Would you like these skills now?";
