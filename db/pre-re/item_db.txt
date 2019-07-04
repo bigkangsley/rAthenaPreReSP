@@ -413,7 +413,7 @@
 1062,Pumpkin_Head,Jack o' Pumpkin,3,374,,10,,,,,,,,,,,,,{},{},{}
 1063,Sharpened_Cuspid,Fang,3,680,,10,,,,,,,,,,,,,{},{},{}
 1064,Reins,Reins,3,802,,10,,,,,,,,,,,,,{},{},{}
-1065,Booby_Trap,Trap,3,100,,10,,,,,,,,,,,,,{},{},{}
+1065,Booby_Trap,Trap,3,100,,1,,,,,,,,,,,,,{},{},{}
 1066,Tree_Of_Archer_1,Fine-grained Trunk,3,2,,10,,,,,,,,,,,,,{},{},{}
 1067,Tree_Of_Archer_2,Solid Trunk,3,2,,10,,,,,,,,,,,,,{},{},{}
 1068,Tree_Of_Archer_3,Barren Trunk,3,2,,10,,,,,,,,,,,,,{},{},{}

@@ -227,7 +227,7 @@
 // Hunter
 115,3,6,2,0,0x1,0,5,1,no,0,0x80,0,misc,6:7:8:9:10,0x3000,	HT_SKIDTRAP,Skid Trap
 116,3,6,2,2,0xC0,0,5,1,no,0,0x80,0,misc,0,0x3800,	HT_LANDMINE,Land Mine
-117,3,6,2,0,0x1,0,5,1,no,0,0x80,0,misc,0,0x3000,	HT_ANKLESNARE,Ankle Snare
+117,3,6,2,0,0x1,0,25,1,no,0,0x80,0,misc,0,0x3000,	HT_ANKLESNARE,Ankle Snare
 118,3,6,2,0,0x3,1,5,1,no,0,0x80,0,misc,0,0x3000,	HT_SHOCKWAVE,Shockwave Trap
 119,3,6,2,0,0x3,2,5,1,no,0,0x80,0,misc,0,0x3000,	HT_SANDMAN,Sandman
 120,3,6,2,0,0x3,1,5,1,no,0,0x80,0,misc,0,0x3000,	HT_FLASHER,Flasher

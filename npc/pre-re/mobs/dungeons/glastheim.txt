@@ -179,7 +179,7 @@ gl_knt01,0,0	monster	Raydric Archer	1276,20
 gl_knt01,0,0	monster	Khalitzburg	1132,10
 gl_knt01,0,0	monster	Abysmal Knight	1219,10
 gl_knt01,0,0	monster	Alice	1275,1
-gl_knt01,21,278	monster	Giant Whisper	1186,20
+gl_knt01,0,0	monster	Giant Whisper	1186,20
 gl_knt01,122,266	monster	Rideword	1195,1,120000,60000
 gl_knt01,33,120,30,30	monster	Rideword	1195,5,120000,60000
 gl_knt01,26,223,20,20	monster	Rideword	1195,5,120000,60000

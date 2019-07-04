@@ -667,6 +667,7 @@ bat_b02	mapflag	nomemo
 bat_a01	mapflag	nomemo
 bat_a02	mapflag	nomemo
 
+/*
 // Episode 13 ====================
 mid_campin	mapflag	nomemo
 man_fild01	mapflag	nomemo
@@ -689,6 +690,8 @@ splendide	mapflag	nomemo
 spl_fild01	mapflag	nomemo
 spl_in01	mapflag	nomemo
 spl_in02	mapflag	nomemo
+
+*/
 
 //evt_zombie	mapflag	nomemo
 

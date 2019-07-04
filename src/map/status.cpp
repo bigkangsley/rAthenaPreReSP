@@ -8183,7 +8183,8 @@ t_tick status_get_sc_def(struct block_list *src, struct block_list *bl, enum sc_
 			break;
 		case SC_ANKLE:
 			if(status_has_mode(status,MD_STATUS_IMMUNE)) // Lasts 5 times less on bosses
-				tick /= 5;
+//				tick /= 5;
+				tick /= 1;
 			sc_def = status->agi*50;
 			break;
 		case SC_DEEPSLEEP:

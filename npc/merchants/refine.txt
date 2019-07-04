@@ -615,10 +615,10 @@ function	script	refinemain	{
 
 	switch (getequipweaponlv(.@part)) {
 		case 1: .@safe = 7; break;
-		case 2: .@safe = 6; break;
-		case 3: .@safe = 5; break;
+		case 2: .@safe = 7; break;
+		case 3: .@safe = 7; break;
 		case 4:
-		default: .@safe = 4; break;
+		default: .@safe = 7; break;
 	}
 
 	// If the VIP system is enabled, the prices for non-VIP players are considerably higher.

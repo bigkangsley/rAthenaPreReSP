@@ -13,28 +13,28 @@
 //============================================================
 
 // Nameless Island
-nameless_n,93,211,51,62	monster	Zombie Slaughter	1864,3,15000
-nameless_n,93,211,51,62	monster	Ragged Zombie	1865,3,15000
-nameless_n,93,211,51,62	monster	Hell Poodle	1866,5,15000
-nameless_n,93,211,51,62	monster	Banshee	1867,4,15000
-nameless_n,93,211,51,62	monster	Flame Skull	1869,1,30000
-nameless_n,93,211,51,62	monster	Ghoul	1036,10,30000
-nameless_n,204,225,57,70	monster	Zombie Slaughter	1864,5,15000
-nameless_n,204,225,57,70	monster	Ragged Zombie	1865,5,15000
-nameless_n,204,225,57,70	monster	Hell Poodle	1866,5,15000
+nameless_n,93,211,51,62	monster	Zombie Slaughter	1864,3,1500
+nameless_n,93,211,51,62	monster	Ragged Zombie	1865,3,1500
+nameless_n,93,211,51,62	monster	Hell Poodle	1866,5,1500
+nameless_n,93,211,51,62	monster	Banshee	1867,4,1500
+nameless_n,93,211,51,62	monster	Flame Skull	1869,1,3000
+nameless_n,93,211,51,62	monster	Ghoul	1036,10,3000
+nameless_n,204,225,57,70	monster	Zombie Slaughter	1864,5,1500
+nameless_n,204,225,57,70	monster	Ragged Zombie	1865,5,1500
+nameless_n,204,225,57,70	monster	Hell Poodle	1866,5,1500
 nameless_n,204,225,57,70	monster	Banshee	1867,4,15000
-nameless_n,204,225,57,70	monster	Flame Skull	1869,1,30000
-nameless_n,204,225,57,70	monster	Ghoul	1036,10,30000
-nameless_n,127,103,59,46	monster	Zombie Slaughter	1864,2,15000
-nameless_n,127,103,59,46	monster	Ragged Zombie	1865,2,15000
-nameless_n,127,103,59,46	monster	Hell Poodle	1866,5,15000
+nameless_n,204,225,57,70	monster	Flame Skull	1869,1,3000
+nameless_n,204,225,57,70	monster	Ghoul	1036,10,3000
+nameless_n,127,103,59,46	monster	Zombie Slaughter	1864,2,1500
+nameless_n,127,103,59,46	monster	Ragged Zombie	1865,2,1500
+nameless_n,127,103,59,46	monster	Hell Poodle	1866,5,1500
 nameless_n,127,103,59,46	monster	Banshee	1867,4,15000
-nameless_n,127,103,59,46	monster	Flame Skull	1869,1,30000
-nameless_n,127,103,59,46	monster	Ghoul	1036,10,30000
-nameless_n,234,95,40,58	monster	Zombie Slaughter	1864,2,15000
-nameless_n,234,95,40,58	monster	Ragged Zombie	1865,2,15000
-nameless_n,234,95,40,58	monster	Hell Poodle	1866,2,15000
-nameless_n,234,95,40,58	monster	Banshee	1867,4,15000
+nameless_n,127,103,59,46	monster	Flame Skull	1869,1,3000
+nameless_n,127,103,59,46	monster	Ghoul	1036,10,3000
+nameless_n,234,95,40,58	monster	Zombie Slaughter	1864,2,1500
+nameless_n,234,95,40,58	monster	Ragged Zombie	1865,2,1500
+nameless_n,234,95,40,58	monster	Hell Poodle	1866,2,1500
+nameless_n,234,95,40,58	monster	Banshee	1867,4,1500
 nameless_n,234,95,40,58	monster	Ghoul	1036,10,30000
 
 // Cursed Abbey Dungeon 1
@@ -86,32 +86,32 @@ abbey01,260,100,35,30	monster	Flame Skull	1869,1
 abbey01,260,100,35,30	monster	Ghoul	1036,4
 
 // Cursed Abbey Dungeon 2
-abbey02,150,66,36,64	monster	Zombie Slaughter	1864,30,60000
+abbey02,150,66,36,64	monster	Zombie Slaughter	1864,30,600
 abbey02,150,66,36,64	monster	Ragged Zombie	1865,10
 abbey02,150,66,36,64	monster	Flame Skull	1869,3
 abbey02,150,66,36,64	monster	Necromancer	1870,1
-abbey02,67,75,46,54	monster	Zombie Slaughter	1864,30,124000
+abbey02,67,75,46,54	monster	Zombie Slaughter	1864,30,1240
 abbey02,67,75,46,54	monster	Ragged Zombie	1865,10
 abbey02,67,75,46,54	monster	Flame Skull	1869,3
 abbey02,67,75,46,54	monster	Necromancer	1870,1
-abbey02,232,76,46,54	monster	Zombie Slaughter	1864,30,63000
+abbey02,232,76,46,54	monster	Zombie Slaughter	1864,30,630
 abbey02,232,76,46,54	monster	Ragged Zombie	1865,10
 abbey02,232,76,46,54	monster	Flame Skull	1869,3
 abbey02,232,76,46,54	monster	Necromancer	1870,1
 abbey02,236,78,21,18	boss_monster	Fallen Bishop Hibram	1871,1,7200000,600000,1
-abbey02,150,153,142,23	monster	Zombie Slaughter	1864,30,122000
+abbey02,150,153,142,23	monster	Zombie Slaughter	1864,30,1220
 abbey02,150,153,142,23	monster	Ragged Zombie	1865,10
 abbey02,150,153,142,23	monster	Flame Skull	1869,3
 abbey02,150,153,142,23	monster	Necromancer	1870,1
-abbey02,68,220,46,58	monster	Zombie Slaughter	1864,30,6000
+abbey02,68,220,46,58	monster	Zombie Slaughter	1864,30,60
 abbey02,68,220,46,58	monster	Ragged Zombie	1865,10
 abbey02,68,220,46,58	monster	Flame Skull	1869,3
 abbey02,68,220,46,58	monster	Necromancer	1870,1
-abbey02,150,240,35,44	monster	Zombie Slaughter	1864,30,120000
+abbey02,150,240,35,44	monster	Zombie Slaughter	1864,30,1200
 abbey02,150,240,35,44	monster	Ragged Zombie	1865,10
 abbey02,150,240,35,44	monster	Flame Skull	1869,3
 abbey02,150,240,35,44	monster	Necromancer	1870,1
-abbey02,232,220,46,58	monster	Zombie Slaughter	1864,30,60000
+abbey02,232,220,46,58	monster	Zombie Slaughter	1864,30,600
 abbey02,232,220,46,58	monster	Ragged Zombie	1865,10
 abbey02,232,220,46,58	monster	Flame Skull	1869,3
 abbey02,232,220,46,58	monster	Necromancer	1870,1

@@ -14,7 +14,7 @@
 //==================================================
 // cmd_fild01 - Papuchicha Forest
 //==================================================
-cmd_fild01,0,0	monster	Alligator	1271,80
+cmd_fild01,0,0	monster	Alligator	1271,100
 cmd_fild01,0,0	monster	Savage	1166,30
 cmd_fild01,0,0	monster	Poporing	1031,30
 cmd_fild01,0,0	monster	Poison Spore	1077,20

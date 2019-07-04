@@ -19,3 +19,8 @@ nyd_dun01,0,0	monster	Aqua Elemental	2016,20
 nyd_dun01,0,0	monster	Dark Pinguicula	2015,10
 nyd_dun01,0,0	monster	Rata	2017,2,900000
 nyd_dun01,0,0	monster	Duneyrr	2018,2,900000
+
+//==================================================
+// nyd_dun02 - Yggdrasil Root Dungeon
+//==================================================
+nyd_dun02,0,0	boss_monster	Nidhoggr's Shadow	2022,1,3600000,600000,0

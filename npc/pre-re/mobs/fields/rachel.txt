@@ -51,7 +51,7 @@ ra_fild04,0,0,0,0	boss_monster	Atroce	1785,1,18000000,600000,1
 //==================================================
 // ra_fild05 - Rachel Field
 //==================================================
-ra_fild05,0,0	monster	Hill Wind	1680,70
+ra_fild05,0,0	monster	Hill Wind	1680,100
 ra_fild05,0,0	monster	Drosera	1781,20
 ra_fild05,170,200,106,115	monster	Geographer	1368,10
 

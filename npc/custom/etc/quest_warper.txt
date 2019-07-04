@@ -1376,13 +1376,13 @@ function	script	QWS_CDarray	{
 	setarray @pCDmenuitems$[@CDi], "Lighthalzen Bio Lab";
 
 
-	setarray @CDLevels[@CDi], 4;
+	setarray @CDLevels[@CDi], 3;
 
-	setarray @CDGat$[@CDref], "lhz_dun01", "lhz_dun02", "lhz_dun03", "lhz_dun04";
-	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3", "Level 4";
-	setarray @CDXcoords[@CDref], 150, 150, 140, 244;
-	setarray @CDYcoords[@CDref], 288, 18, 134, 52;
-	setarray @CDDepth[@CDref], 0, 1, 2, 3;
+	setarray @CDGat$[@CDref], "lhz_dun01", "lhz_dun02", "lhz_dun03";
+	setarray @CDLevelName$[@CDref], "Level 1", "Level 2", "Level 3";
+	setarray @CDXcoords[@CDref], 150, 150, 140;
+	setarray @CDYcoords[@CDref], 288, 18, 134;
+	setarray @CDDepth[@CDref], 0, 1, 2;
 
 	QWS_Make_CityDungeon_Menu 11;
 
@@ -1881,7 +1881,6 @@ function	script	QWS_Darray	{
 	setarray @DDepth[@Dref], 0, 0, 1, 2;
 
 	QWS_Make_Dungeon_Menu 19;
-
 
 //----------------Cancel
 	setarray @pDmenuitems$[@Di], "Cancel";

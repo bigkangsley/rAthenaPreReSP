@@ -31,7 +31,7 @@ moc_fild01,194,51,10,10	monster	Yellow Plant	1081,10,900000,450000
 //==================================================
 // moc_fild02 - Sograt Desert
 //==================================================
-moc_fild02,0,0	monster	Peco Peco	1019,70
+moc_fild02,0,0	monster	Peco Peco	1019,100
 moc_fild02,0,0	monster	Ant Egg	1097,10
 moc_fild02,0,0	monster	Peco Peco Egg	1047,40
 moc_fild02,0,0	monster	Picky	1049,10

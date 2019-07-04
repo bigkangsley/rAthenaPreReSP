@@ -58,7 +58,7 @@ nguild_gef	mapflag	nowarpto
 nguild_pay	mapflag	nowarpto
 nguild_prt	mapflag	nowarpto
 //Lighthalzen Bio-Lab 3F
-lhz_dun03	mapflag	nowarpto
+//lhz_dun03	mapflag	nowarpto
 // Special Quests Places =======
 ama_test	mapflag	nowarpto
 gon_test	mapflag	nowarpto
@@ -139,8 +139,8 @@ schg_que01	mapflag	nowarpto
 schg_dun01	mapflag	nowarpto
 arug_que01	mapflag	nowarpto
 arug_dun01	mapflag	nowarpto
-nyd_dun01	mapflag	nowarpto
-nyd_dun02	mapflag	nowarpto
+//nyd_dun01	mapflag	nowarpto
+//nyd_dun02	mapflag	nowarpto
 manuk	mapflag	nowarpto
 man_fild02	mapflag	nowarpto
 man_in01	mapflag	nowarpto
@@ -153,8 +153,8 @@ spl_in01	mapflag	nowarpto
 2@orcs	mapflag	nowarpto
 
 // Nidhoggr's Instance ===========
-1@nyd	mapflag	nowarpto
-2@nyd	mapflag	nowarpto
+//1@nyd	mapflag	nowarpto
+//2@nyd	mapflag	nowarpto
 
 // Bossnia (custom) ==============
 bossnia_01	mapflag	nowarpto

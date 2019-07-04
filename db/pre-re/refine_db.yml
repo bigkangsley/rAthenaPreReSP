@@ -31,20 +31,20 @@ Armor:
       Material: 7619
   Rates:
     - Level: 5
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 60
-      EventEnrichedChance: 95
+      EventNormalChance: 100
+      EventEnrichedChance: 10
     - Level: 6
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 40
-      EventEnrichedChance: 80
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 7
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 40
-      EventEnrichedChance: 80
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 8
       NormalChance: 40
       EnrichedChance: 80
@@ -100,10 +100,10 @@ WeaponLv2:
       Material: 7620
   Rates:
     - Level: 7
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 60
-      EventEnrichedChance: 95
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 8
       NormalChance: 80
       EnrichedChance: 100
@@ -132,15 +132,15 @@ WeaponLv3:
       Material: 7620
   Rates:
     - Level: 6
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 60
-      EventEnrichedChance: 95
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 7
-      NormalChance: 70
-      EnrichedChance: 90
-      EventNormalChance: 50
-      EventEnrichedChance: 90
+      NormalChance: 100
+      EnrichedChance: 100
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 8
       NormalChance: 40
       EnrichedChance: 80
@@ -169,20 +169,20 @@ WeaponLv4:
       Material: 7620
   Rates:
     - Level: 5
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 60
-      EventEnrichedChance: 95
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 6
-      NormalChance: 80
-      EnrichedChance: 90
-      EventNormalChance: 40
-      EventEnrichedChance: 80
+      NormalChance: 100
+      EnrichedChance: 100
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 7
-      NormalChance: 80
-      EnrichedChance: 90
-      EventNormalChance: 40
-      EventEnrichedChance: 80
+      NormalChance: 100
+      EnrichedChance: 100
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 8
       NormalChance: 40
       EnrichedChance: 80
@@ -204,20 +204,20 @@ Shadow:
   RandomBonusValue: 0
   Rates:
     - Level: 5
-      NormalChance: 80
+      NormalChance: 100
       EnrichedChance: 100
-      EventNormalChance: 60
-      EventEnrichedChance: 95
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 6
-      NormalChance: 80
-      EnrichedChance: 90
-      EventNormalChance: 40
-      EventEnrichedChance: 80
+      NormalChance: 100
+      EnrichedChance: 100
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 7
-      NormalChance: 80
-      EnrichedChance: 90
-      EventNormalChance: 40
-      EventEnrichedChance: 80
+      NormalChance: 100
+      EnrichedChance: 100
+      EventNormalChance: 100
+      EventEnrichedChance: 100
     - Level: 8
       NormalChance: 40
       EnrichedChance: 80
